@@ -40,7 +40,7 @@ export default function PouchiiPhone() {
             damping: 20,
             duration: 0.3,
           }}
-          src="/phone.png"
+          src="https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LMK0kwouYBft3HAjvzbU9WcRXPJSTnlapMxhK"
           alt="Pouchii Phone"
           width={400}
           height={500}

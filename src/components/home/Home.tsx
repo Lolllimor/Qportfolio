@@ -9,7 +9,7 @@ export default function HomeComponent() {
         <div className="flex flex-col sm:gap-14 gap-8 md:w-[648px] sm:mb-[78px] mb-8 -mt-[10px]">
           <div className="sm:w-[458px] h-[88px] w-full  flex  items-center gap-2 justify-start">
             <img
-              src="/profile.png"
+              src="https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LDGGXtGE9wORVMloSC65udj4AkUINXZQEiWDt"
               alt=""
               width={38}
               height={69}
@@ -52,8 +52,6 @@ export default function HomeComponent() {
           <PouchiiPhone />
           <InterswitchPhone />
         </div>
-
-     
       </div>
     </main>
   );

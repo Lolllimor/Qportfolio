@@ -30,7 +30,7 @@ export default function ChangersLaptop() {
             hover: {
               scale: 1.15,
               rotate: 14.482,
-              x: -80,
+              x: 10,
               y: -100,
             },
           }}
@@ -40,7 +40,7 @@ export default function ChangersLaptop() {
             damping: 20,
             duration: 0.3,
           }}
-          src="/laptop.png"
+          src="https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LIND1ga7vi0SXWVrujJ6LzK4mMPUbdcYf95Qh"
           alt="Changers Laptop"
           width={400}
           height={500}

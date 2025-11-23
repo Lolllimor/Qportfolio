@@ -9,7 +9,8 @@ export const caseStudies: CaseStudy[] = [
     imageAlt: 'Changers Website Design',
     title: 'Changers Website Design',
     linkText: 'Read Case Study',
-    imageSrc: '/changers.png',
+    imageSrc:
+      'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LKUz8yg5Pje3usvNlw1nqRtQd0x6XDaZpWhB2',
     role: 'LEAD UX DESIGNER',
     reverseLayout: false,
     year: '2025',
@@ -23,7 +24,8 @@ export const caseStudies: CaseStudy[] = [
     title: 'Parking Management Companion App',
     role: 'LEAD RESEARCHER & UX DESIGNER',
     linkText: 'Read Case Study',
-    imageSrc: '/PMCA.png',
+    imageSrc:
+      'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0L5SLuzS8ltFbLikoK7EwW6RaJHmQC8xG0NvcT',
     reverseLayout: true,
     year: '2025',
   },
@@ -51,7 +53,8 @@ export const caseStudies: CaseStudy[] = [
     linkText: 'READ CASE STUDY',
     specialImageRender: true,
     role: 'LEAD UX DESIGNER',
-    imageSrc: '/MAD.png',
+    imageSrc:
+      'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LaUiJv60b2uAxe3zSj8JvYk5hOTCQG9ylwdKc',
     reverseLayout: true,
     year: '2024',
   },
@@ -78,7 +81,8 @@ export const caseStudies: CaseStudy[] = [
     imageClass: 'w-full h-auto rounded-2xl',
     linkText: 'Read Case Study',
     role: 'LEAD UX DESIGNER',
-    imageSrc: '/ERA.png',
+    imageSrc:
+      'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LJjHdWRzBfg68sRqzw4duE5YHMPiyT7rnkbmV',
     reverseLayout: true,
   },
   {
@@ -87,7 +91,8 @@ export const caseStudies: CaseStudy[] = [
     title: 'Design System Case Study',
     description:
       'A design system built on the principle of inclusivity, embedding accessibility (A11y) standards into its very foundation. From WCAG-compliant color tokens and accessible component patterns to clear documentation & usage guidelines, the system ensures that every product team starts with inclusive defaults rather than retrofitting fixes.',
-    imageSrc: '/DSC.png',
+    imageSrc:
+      'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LAqfWVJdfOSAKuXkyNQsjatoB6iZCrHJTIe8h',
     imageAlt: 'Design System Case Study',
     linkText: 'Coming soon',
     reverseLayout: false,
@@ -170,74 +175,74 @@ export const gallery = [
   {
     name: 'Fvck Love',
     date: 'Feb, 2025',
-    src: '/fuckLove.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LrHHiTemJKVx791W2ngaewvd0AErMkYsDPyiT',
   },
   {
     name: 'Shine',
     date: 'Dec, 2023',
-    src: '/bitc.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0Ld1YWz5P0ZHMRU1j2JzPpKwcoYbG8WEhsuf3S',
   },
   {
     name: 'Stroke',
     date: 'Mar, 2024',
-    src: '/gun.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0L30eceRS2TefcYIdpyM7HmxP9OhnzX5ur08ZD',
   },
   {
     name: 'Mother',
     date: 'Mar, 2024',
-    src: '/flower.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LSClqbZNnwJXZrzj0b7NCeqEHsc6LKWkOimd5',
   },
   {
     name: 'Fat Mondo',
-    src: '/fatMondo.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0Ld2KN2QP0ZHMRU1j2JzPpKwcoYbG8WEhsuf3S',
     date: 'Aug, 2023',
   },
   {
     name: 'On Form',
-    src: '/form.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LBqh5QUisG5HaZJ4dczlgnojeYMmAFEi1LDP2',
     date: 'Jan, 2025',
   },
   {
     name: 'Tripping',
-    src: '/tripping.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0Lj6SKoh4Mk5NLcodICTxbYeAtH70nUvJ6wGlp',
     date: 'Mar, 2024',
   },
   {
     name: 'Apple',
-    src: '/apple.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LKycfCB5Pje3usvNlw1nqRtQd0x6XDaZpWhB2',
     date: 'Mar, 2024',
   },
   {
     name: 'Bazuka',
-    src: '/bazuka.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LH3Falcpycq0LimIsOJUD576hfzurv1oWBjZN',
     date: 'Mar, 2024',
   },
   {
     name: 'Fingers',
-    src: '/fingers.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0Le3XKuCiS0sOMNfCv9l5IEQRXhinyBV8dptTP',
     date: 'Mar, 2024',
   },
   {
     name: 'Golden Boy ',
-    src: '/goldenBoy.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LodDpjLKRN8MlyCpgbu9rkajWxfV4TLUP57Qe',
     date: 'Mar, 2024',
   },
 
   {
     name: 'Moon Girl',
-    src: '/mirage.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LU6hGHrjBfBe26QZNXiSWrylK0VnkmIaxpTEc',
     date: 'Mar, 2025',
   },
 
   {
     name: 'Action Figure',
-    src: '/red.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LNiqp8MaLgfzjGT4E5qX1VPoWUtBx0wDKYm3k',
     date: 'Mar, 2023',
   },
 
   {
     name: 'Fighting Rabbit',
-    src: '/fight.png',
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LnZ2sMQLLjxH0BFoIsbhZYSEP6VMpWdtzO9ik',
     date: 'Mar, 2024',
   },
 ];

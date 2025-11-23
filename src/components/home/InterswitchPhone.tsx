@@ -37,7 +37,7 @@ export default function InterswitchPhone() {
             damping: 20,
             duration: 0.3,
           }}
-          src="/interswitch.png"
+          src="https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LYBqZlKofS2I805isUVR9oqgHn1AxXKTBwpOQ"
           alt="Interswitch Phone"
           width={400}
           height={500}
