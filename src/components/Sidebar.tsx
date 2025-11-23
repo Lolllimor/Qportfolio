@@ -17,19 +17,33 @@ import { HomeIcon } from './icons/active/HomeIcon';
 import { ArtIcon } from './icons/active/ArtIcon';
 import { Tooltip } from './common/Tooltip';
 import { useState } from 'react';
+import { useIsLargeScreen } from '@/hooks/useIsLargeScreen';
 
 export default function Sidebar() {
   const { activeTab, setActiveTab } = useActiveTab();
   const [hoverTab, setHoverTab] = useState('');
+  const isLargeScreen = useIsLargeScreen();
   const isActive = (tab: string) => activeTab === tab;
   const isHover = (tab: string) => hoverTab === tab;
+
+  const handleMouseEnter = (tab: string) => {
+    if (isLargeScreen) {
+      setHoverTab(tab);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (isLargeScreen) {
+      setHoverTab('');
+    }
+  };
   return (
     <aside className=" mt-[56px] sm:mt-[162px] flex lg:flex-col flex-row fixed lg:relative bottom-0 items-center justify-center lg:gap-8 sm:gap-16 gap-8 z-10  bg-white/80 py-5 lg:py-0 w-full mx-auto lg:mx-0 lg:w-auto shadow-[0_-6px_16px_rgba(0,0,0,0.04)] lg:shadow-none h-fit">
       <Tooltip description="Home">
         <button
           className="w-6 h-6 flex items-center justify-center cursor-pointer"
-          onMouseEnter={() => setHoverTab('home')}
-          onMouseLeave={() => setHoverTab('')}
+          onMouseEnter={() => handleMouseEnter('home')}
+          onMouseLeave={handleMouseLeave}
           onClick={() => setActiveTab('home')}
         >
           <div className="w-6 h-6 flex items-center justify-center cursor-pointer">
@@ -47,8 +61,8 @@ export default function Sidebar() {
       <Tooltip description="Product Design">
         <button
           className="w-6 h-6 flex items-center justify-center cursor-pointer"
-          onMouseEnter={() => setHoverTab('product')}
-          onMouseLeave={() => setHoverTab('')}
+          onMouseEnter={() => handleMouseEnter('product')}
+          onMouseLeave={handleMouseLeave}
           onClick={() => setActiveTab('product')}
         >
           {isActive('product') ? (
@@ -64,8 +78,8 @@ export default function Sidebar() {
       <Tooltip description="Graphic Design">
         <button
           className="w-6 h-6 flex items-center justify-center cursor-pointer"
-          onMouseEnter={() => setHoverTab('graphics')}
-          onMouseLeave={() => setHoverTab('')}
+          onMouseEnter={() => handleMouseEnter('graphics')}
+          onMouseLeave={handleMouseLeave}
           onClick={() => setActiveTab('graphics')}
         >
           {isActive('graphics') ? (
@@ -80,8 +94,8 @@ export default function Sidebar() {
       <Tooltip description="Art Works">
         <button
           className="w-6 h-6 flex items-center justify-center cursor-pointer"
-          onMouseEnter={() => setHoverTab('gallery')}
-          onMouseLeave={() => setHoverTab('')}
+          onMouseEnter={() => handleMouseEnter('gallery')}
+          onMouseLeave={handleMouseLeave}
           onClick={() => setActiveTab('gallery')}
         >
           {isActive('gallery') ? (
@@ -94,11 +108,13 @@ export default function Sidebar() {
         </button>
       </Tooltip>
       <Tooltip description="Article">
-        <button
+        <a
           className="w-6 h-6 flex items-center justify-center cursor-pointer"
-          onMouseEnter={() => setHoverTab('article')}
-          onMouseLeave={() => setHoverTab('')}
-          onClick={() => setActiveTab('article')}
+          onMouseEnter={() => handleMouseEnter('article')}
+          onMouseLeave={handleMouseLeave}
+          href="https://medium.com/@quadmor009"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {isActive('article') ? (
             <ArticleIcon />
@@ -107,7 +123,7 @@ export default function Sidebar() {
           ) : (
             <InactiveArticleIcon />
           )}
-        </button>
+        </a>
       </Tooltip>
     </aside>
   );
