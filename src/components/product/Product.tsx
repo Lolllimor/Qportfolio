@@ -16,7 +16,7 @@ export const ProductComponent = () => {
         {navItems.map((item: { label: string; value: string }) => (
           <div
             key={item.value}
-            className="flex flex-col items-center gap-1"
+            className="flex flex-col items-center gap-1 cursor-pointer"
             onClick={() => setActiveTab(item.value)}
           >
             <span

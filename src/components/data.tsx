@@ -18,7 +18,7 @@ export const caseStudies: CaseStudy[] = [
   {
     description:
       'I led the usability testing and redesign of the parking management companion app, identifying friction points in navigation and onboarding through moderated sessions and user feedback. Using these insights, I redesigned key flows and interface elements, improving clarity, reducing task time, and delivering a more intuitive, user-centred experience for the next product release.',
-    url: 'https://drive.google.com/file/d/1JqFp6UDPv49VyWxwWrgDizJ3f8mGL9MO/view?usp=sharing',
+    url: 'https://www.dropbox.com/scl/fi/6841qmgky4yzy0s0c7xjl/PMP-Usability-Test-Case-Study.pdf?rlkey=b3dwgrripbuol0k7a5nomfm0n&st=a8994uwc&dl=0',
     imageClass: 'w-full h-auto rounded-2xl border border-[#D8D8D8]',
     imageAlt: 'Parking Management Companion App',
     title: 'Parking Management Companion App',
@@ -68,7 +68,8 @@ export const caseStudies: CaseStudy[] = [
     linkText: 'Read Case Study',
     role: 'LEAD UX DESIGNER',
     reverseLayout: false,
-    imageSrc: '/BWS.png',
+    imageSrc:
+      'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LOV6ZSLEXcjT3wnqM45mak9DURPeGLNgB0Cip',
     year: '2024',
   },
   {

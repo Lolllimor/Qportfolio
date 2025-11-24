@@ -21,12 +21,12 @@ export const metadata: Metadata = {
   title: 'Quadri Morin',
   description: 'Quadri Morin',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/logo.png',
   },
   openGraph: {
     title: 'Quadri Morin',
     description: 'Quadri Morin',
-    images: ['/og-image.png'],
+    images: ['/logo.png'],
   },
 };
 

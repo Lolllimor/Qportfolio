@@ -7,7 +7,10 @@ export default function InterswitchPhone() {
 
   return (
     <div className="flex flex-col items-center gap-2 lg:w-auto w-full">
-      <motion.div
+      <motion.a
+        href="https://www.dropbox.com/scl/fi/6841qmgky4yzy0s0c7xjl/PMP-Usability-Test-Case-Study.pdf?rlkey=b3dwgrripbuol0k7a5nomfm0n&st=a8994uwc&dl=0"
+        target="_blank"
+        rel="noreferrer"
         whileHover={isLargeScreen ? 'hover' : undefined}
         initial="initial"
         className={`cursor-pointer xl:w-[333px] xl:h-[472px] lg:w-[284px] lg:h-[384px] w-full h-[320px]  rounded-lg relative overflow-hidden flex justify-center`}
@@ -43,7 +46,7 @@ export default function InterswitchPhone() {
           height={500}
           className="w-[378px] h-[376px] lg:left-[55px] lg:top-[264px] left-[35px] mt-[10px] lg:absolute "
         />
-      </motion.div>
+      </motion.a>
       <div className="flex flex-col items-center gap-1 w-[284px]">
         <div className="flex h-6 items-center justify-center gap-1 self-stretch">
           <span className="text-[#353F50] text-center text-base font-normal leading-10">
