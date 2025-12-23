@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import client from '@/lib/strapiClient';
+import client, { STRAPI_BASE_URL_WITHOUT_API } from '@/lib/strapiClient';
 import { CaseStudy } from '@/types';
 
 export interface UseFetchCaseStudiesReturn {
@@ -36,7 +36,7 @@ export function useFetchCaseStudies(): UseFetchCaseStudiesReturn {
                 ? data.image.data[0]
                 : data.image.data;
               if (imageData?.attributes?.url) {
-                const baseUrl = client.baseURLWithoutApi;
+                const baseUrl = STRAPI_BASE_URL_WITHOUT_API;
                 imageUrl = imageData.attributes.url.startsWith('http')
                   ? imageData.attributes.url
                   : `${baseUrl}${imageData.attributes.url}`;
@@ -46,7 +46,7 @@ export function useFetchCaseStudies(): UseFetchCaseStudiesReturn {
                 ? data.image[0]
                 : data.image;
               if (imageData?.url) {
-                const baseUrl = client.baseURLWithoutApi;
+                const baseUrl = STRAPI_BASE_URL_WITHOUT_API;
                 imageUrl = imageData.url.startsWith('http')
                   ? imageData.url
                   : `${baseUrl}${imageData.url}`;

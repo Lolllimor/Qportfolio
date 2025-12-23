@@ -6,6 +6,11 @@
   --font-campton: 'Campton', sans-serif;
   --font-apple-garamond: 'Apple Garamond', sans-serif;
   --font-apple-garamond-light: 'Apple Garamond Light', sans-serif;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-barbra: var(--font-barbra);
+  --font-montserrat: var(--font-montserrat);
+  --font-long-shot: var(--font-long-shot);
 }
 
 :root {
@@ -26,4 +31,18 @@ body {
   font-family: 'Campton', sans-serif;
   font-family: 'Apple Garamond', sans-serif;
   font-family: 'Apple Garamond Light', sans-serif;
+}
+
+@keyframes breathing {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.animate-breathing {
+  animation: breathing 2s ease-in-out infinite;
 }

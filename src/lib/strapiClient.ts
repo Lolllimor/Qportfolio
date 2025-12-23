@@ -1,53 +1,32 @@
-export interface StrapiResponse<T> {
-  data: T;
+import { strapi } from '@strapi/client';
+
+const STRAPI_BASE_URL = process.env.NEXT_PUBLIC_STRAPI_BASE_URL;
+const STRAPI_BASE_URL_WITHOUT_API =
+  process.env.NEXT_PUBLIC_STRAPI_BASE_URL_WITHOUT_API;
+const STRAPI_AUTH_TOKEN = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+
+if (!STRAPI_BASE_URL) {
+  throw new Error(
+    'NEXT_PUBLIC_STRAPI_BASE_URL environment variable is required'
+  );
 }
 
-export interface StrapiCollectionItem {
-  id: number;
-  attributes: Record<string, any>;
+if (!STRAPI_BASE_URL_WITHOUT_API) {
+  throw new Error(
+    'NEXT_PUBLIC_STRAPI_BASE_URL_WITHOUT_API environment variable is required'
+  );
 }
 
-const baseURL =
-  process.env.NEXT_PUBLIC_STRAPI_BASE_URL ||
-  process.env.NEXT_PUBLIC_STRAPI_URL ||
-  '';
+if (!STRAPI_AUTH_TOKEN) {
+  throw new Error(
+    'NEXT_PUBLIC_STRAPI_API_TOKEN environment variable is required'
+  );
+}
 
-const getUrl = (endpoint: string) => {
-  const clean = baseURL.replace(/\/$/, '');
-  const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  return clean.endsWith('/api') ? `${clean}${path}` : `${clean}/api${path}`;
-};
-
-const collection = (name: string) => ({
-  find: async (params?: { populate?: string | string[] | '*' }) => {
-    const query = new URLSearchParams();
-    if (params?.populate) {
-      query.append(
-        'populate',
-        Array.isArray(params.populate)
-          ? params.populate.join(',')
-          : params.populate
-      );
-    }
-    const qs = query.toString();
-    const res = await fetch(getUrl(`/${name}${qs ? `?${qs}` : ''}`), {
-      headers: {
-        'Content-Type': 'application/json',
-        ...(process.env.NEXT_PUBLIC_STRAPI_API_TOKEN && {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
-        }),
-      },
-    });
-    if (!res.ok) throw new Error(`Strapi error: ${res.statusText}`);
-    return res.json() as Promise<StrapiResponse<StrapiCollectionItem[]>>;
-  },
+const client = strapi({
+  baseURL: STRAPI_BASE_URL,
+  auth: STRAPI_AUTH_TOKEN,
 });
 
-const client = {
-  collection,
-  get baseURLWithoutApi() {
-    return baseURL.replace(/\/api\/?$/, '').replace(/\/$/, '');
-  },
-};
-
 export default client;
+export { STRAPI_BASE_URL_WITHOUT_API };
