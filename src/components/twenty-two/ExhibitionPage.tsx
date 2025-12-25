@@ -74,12 +74,12 @@ const ExhibitionPage = () => {
     <div className="w-full min-h-screen bg-white">
       {/* Hero Section */}
       <div className="relative w-full xl:h-[708px] h-fit overflow-hidden bg-[url('/bg.png')] bg-cover bg-center lg:px-[75px] py-[40px] xl:px-[120px] xl:py-[57px] px-6">
-        <h2
+        <a href="/twenty-two"
           className="font-barbra text-[#57D791] text-[32px] mb-[28px]
         xl:text-5xl"
         >
           Twenty- <span className="text-[#EB5D1D]">II</span>
-        </h2>
+        </a>
 
         <div className="flex md:flex-row flex-col w-full justify-between items-center">
           <div className=""></div>

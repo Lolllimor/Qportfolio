@@ -2,14 +2,19 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
+import { HamburgerMenu } from '../icons/hamburger-menu';
 import { ArrowRightIcon } from '../icons/arrow-right';
 import { InstagramIcon } from '../icons/instagram';
 import { LocationIcon } from '../icons/location';
 import { EntryPortal } from './EntryPortal';
+import { XIcon } from '../icons/x';
+
+// 
 
 const LandingPage = () => {
   const [isEntryPortalOpen, setIsEntryPortalOpen] = useState(false);
-
+  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
+  const [openContact, setOpenContact] = useState(false);
   const handleEntryPortalOpen = () => {
     setIsEntryPortalOpen(true);
   };
@@ -17,12 +22,68 @@ const LandingPage = () => {
   const handleEntryPortalClose = () => {
     setIsEntryPortalOpen(false);
   };
+  const handleHamburgerMenuOpen = () => {
+    setIsHamburgerMenuOpen(true);
+  };
+  const handleHamburgerMenuClose = () => {
+    setIsHamburgerMenuOpen(false);
+  };
   return (
     <div className="flex font-montserrat flex-col min-h-screen  bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat md:px-[75px] py-[40px] xl:px-[120px] xl:py-[57px] px-6 text-white">
       <header className=" flex justify-between items-center w-full max-w-[1440px] mx-auto">
         <h2 className="font-barbra text-[#57D791] text-3xl xl:text-5xl">
           Twenty- <span className="text-[#EB5D1D]">II</span>
         </h2>
+        <button onClick={handleHamburgerMenuOpen} className="md:hidden block">
+          <HamburgerMenu />
+        </button>
+        {isHamburgerMenuOpen && (
+          <div className="absolute top-20 right-0 w-[249px] h-[132px] bg-black ">
+            <button
+              onClick={handleHamburgerMenuClose}
+              className="absolute flex flex-col items-start  p-[14px] gap-4"
+            >
+              <a href="" className="font-semibold">
+                Back to Main Website
+              </a>
+              <span
+                onClick={() => setOpenContact(true)}
+                className="font-semibold"
+              >
+                Contact
+              </span>
+              <a href="">
+                <InstagramIcon />
+              </a>
+            </button>
+          </div>
+        )}
+        {openContact && (
+          <div className=" absolute flex justify-center items-center h-full w-full inset-0 bg-black/50 z-99999">
+            <div className=" bg-black flex flex-col items-start py-[40px] px-[29px] md:px-[48px] gap-4 relative w-[276px] md:w-[374px]">
+              <button
+                onClick={() => setOpenContact(false)}
+                className="absolute md:top-4 md:right-4 top-[14px] right-[14px]"
+              >
+                <div className="md:w-8 md:h-8 h-6 w-6">
+                  <XIcon />
+                </div>
+              </button>
+              <a href="" className="font-semibold">
+                Back to Main Website
+              </a>
+              <span
+                onClick={() => setOpenContact(true)}
+                className="font-semibold"
+              >
+                Contact
+              </span>
+              <a href="">
+                <InstagramIcon />
+              </a>
+            </div>
+          </div>
+        )}
         <nav className="hidden md:flex items-center gap-4 font-semibold text-sm xl:text-base">
           <a href="">Back to Main Website</a>
           <a href="">Contact</a>

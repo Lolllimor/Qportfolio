@@ -80,12 +80,12 @@ const DetailsPage = () => {
       {/* Hero Section */}
       <div className="relative w-full h-fit overflow-hidden lg:px-[75px] py-[40px] xl:px-[120px] xl:py-[57px] px-6">
         <div className="flex items-center justify-between md:mb-[69px] mb-3">
-          <h2
+          <a href="/twenty-two"
             className="font-barbra text-[#57D791] text-[32px] 
         lg:text-5xl"
           >
             Twenty- <span className="text-[#EB5D1D]">II</span>
-          </h2>
+          </a>
           <Link
             href="/twenty-two/artworks"
             className="text-[#E3591C] font-semibold text-base hidden md:block"
