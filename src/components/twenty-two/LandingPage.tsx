@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { HamburgerMenu } from '../icons/hamburger-menu';
 import { ArrowRightIcon } from '../icons/arrow-right';
@@ -8,6 +10,8 @@ import { InstagramIcon } from '../icons/instagram';
 import { LocationIcon } from '../icons/location';
 import { EntryPortal } from './EntryPortal';
 import { XIcon } from '../icons/x';
+import { CallIcon } from '../icons/call';
+import { EmailIcon } from '../icons/email';
 
 //
 
@@ -27,6 +31,21 @@ const LandingPage = () => {
   };
   const handleHamburgerMenuClose = () => {
     setIsHamburgerMenuOpen(false);
+  };
+  const handleCopyPhoneNumber = async () => {
+    try {
+      await navigator.clipboard.writeText('08198475894');
+      toast.success('Phone number copied to clipboard', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    } catch (err) {
+      console.error('Failed to copy phone number:', err);
+    }
   };
   return (
     <div className="flex font-montserrat flex-col min-h-screen  bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat md:px-[75px] py-[40px] xl:px-[120px] xl:py-[57px] px-6 text-white">
@@ -52,7 +71,11 @@ const LandingPage = () => {
               >
                 Contact
               </span>
-              <a href="">
+              <a
+                href="https://www.instagram.com/twentyiiart/"
+                target="_blank"
+                rel="noopener noreferrerz"
+              >
                 <InstagramIcon />
               </a>
             </button>
@@ -60,7 +83,7 @@ const LandingPage = () => {
         )}
         {openContact && (
           <div className=" absolute flex justify-center items-center h-full w-full inset-0 bg-black/50 z-99999">
-            <div className=" bg-black flex flex-col items-start py-[40px] px-[29px] md:px-[48px] gap-4 relative w-[276px] md:w-[374px]">
+            <div className=" bg-black flex flex-col items-start py-[40px] px-[20px] md:px-[48px] gap-4 relative w-[276px] md:w-[374px]">
               <button
                 onClick={() => setOpenContact(false)}
                 className="absolute md:top-4 md:right-4 top-[14px] right-[14px]"
@@ -69,25 +92,46 @@ const LandingPage = () => {
                   <XIcon />
                 </div>
               </button>
-              <a href="/" className="font-semibold">
-                Back to Main Website
-              </a>
-              <span
-                onClick={() => setOpenContact(true)}
-                className="font-semibold"
+              <button
+                onClick={handleCopyPhoneNumber}
+                className="flex gap-2 items-center"
               >
-                Contact
-              </span>
-              <a href="">
-                <InstagramIcon />
-              </a>
+                <div className="md:hidden block">
+                  <CallIcon size={16} />
+                </div>
+                <div className="hidden md:block">
+                  <CallIcon size={24} />
+                </div>
+                <span className="md:text-xl text-base">Call - 08198475894</span>
+              </button>
+              <button
+                onClick={() =>
+                  window.open('mailto:Hello.twentyii@gmail.com', '_blank')
+                }
+                className="flex gap-2 items-center"
+              >
+                <div className="md:hidden block">
+                  <EmailIcon size={16} />
+                </div>
+                <div className="hidden md:block">
+                  <EmailIcon size={24} />
+                </div>
+
+                <span className="md:text-xl text-base">
+                  Hello.twentyii@gmail.com
+                </span>
+              </button>
             </div>
           </div>
         )}
         <nav className="hidden md:flex items-center gap-4 font-semibold text-sm xl:text-base">
           <a href="/">Back to Main Website</a>
-          <a href="">Contact</a>
-          <a href="">
+          <button onClick={() => setOpenContact(true)}>Contact</button>
+          <a
+            href="https://www.instagram.com/twentyiiart/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <InstagramIcon />
           </a>
         </nav>
@@ -179,6 +223,7 @@ const LandingPage = () => {
       {isEntryPortalOpen && (
         <EntryPortal handleEntryPortalClose={handleEntryPortalClose} />
       )}
+      <ToastContainer />
     </div>
   );
 };
