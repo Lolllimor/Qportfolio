@@ -100,6 +100,7 @@ const LandingPage = () => {
               alt="image"
               width={650}
               height={410}
+              loading="eager"
               className="md:w-[502px] md:h-[321px] w-full h-[200px] xl:w-[650px] xl:h-[410px]"
             />
             <p className="md:text-lg xl:text-2xl text-base">
@@ -131,14 +132,20 @@ const LandingPage = () => {
               </div>
               <div className="lg:hidden flex flex-col md:flex-row gap-4  md:h-[48px]">
                 <button
+                  disabled
                   onClick={handleEntryPortalOpen}
-                  className="border border-[#ffffff] py-3 xl:py-4 cursor-pointer text-white w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl group"
+                  className="border border-[#ffffff] py-3 xl:py-4 cursor-not-allowed text-white w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span className="group-hover:scale-75 transition-transform duration-300 inline-block font-medium text-sm">
                     Experience the Art
                   </span>
                 </button>
-                <button className="bg-[#EB5D1D] group py-3 px-7 xl:py-4 xl:px-10 text-white font-medium w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl cursor-pointer relative">
+                <button
+                  onClick={() =>
+                    window.open('https://pv.rsvp/twenty-ii', '_blank')
+                  }
+                  className="bg-[#EB5D1D] group py-3 px-7 xl:py-4 xl:px-10 text-white font-medium w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl cursor-pointer relative"
+                >
                   <span className="group-hover:scale-75 transition-transform duration-300 inline-block font-medium text-sm">
                     Buy Tickets
                     <ArrowRightIcon className="absolute  top-1/2 -translate-y-1/2 inline-block opacity-0 -translate-x-4 ml-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
@@ -151,14 +158,18 @@ const LandingPage = () => {
       </main>
       <div className="hidden lg:flex w-full  justify-end gap-4 mt-16 max-w-[1440px] mx-auto">
         <button
+          disabled
           onClick={() => setIsEntryPortalOpen(true)}
-          className="border border-[#ffffff] py-3 xl:py-4 cursor-pointer text-white w-[191px] xl:w-[269px] text-base xl:text-xl group"
+          className="border border-[#ffffff] py-3 xl:py-4 cursor-pointer text-white w-[191px] xl:w-[269px] text-base xl:text-xl group disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <span className="group-hover:scale-75 transition-transform duration-300 inline-block font-medium">
+          <span className=" group-hover:scale-75 transition-transform duration-300 inline-block font-medium">
             Experience the Art
           </span>
         </button>
-        <button className="bg-[#EB5D1D] group py-3 px-7 xl:py-4 xl:px-10 text-white font-medium w-[191px] xl:w-[269px] text-base xl:text-xl cursor-pointer relative">
+        <button
+          onClick={() => window.open('https://pv.rsvp/twenty-ii', '_blank')}
+          className="bg-[#EB5D1D] group py-3 px-7 xl:py-4 xl:px-10 text-white font-medium w-[191px] xl:w-[269px] text-base xl:text-xl cursor-pointer relative"
+        >
           <span className="group-hover:scale-75 transition-transform duration-300 inline-block font-medium">
             Buy Tickets
             <ArrowRightIcon className="absolute  top-1/2 -translate-y-1/2 inline-block opacity-0 -translate-x-4 ml-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />

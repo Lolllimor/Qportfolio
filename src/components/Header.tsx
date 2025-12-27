@@ -6,7 +6,7 @@ import { BehanceIcon } from './icons/inactive/header/BehanceIcon';
 export default function Header() {
   const [isHovered, setIsHovered] = useState("");
   return (
-    <header className=" flex items-end gap-4 w-full justify-end mt-[51px] sm:mt-[62px] xl:max-w-[1000px] md:max-w-[868px] max-w-[500px] mx-auto px-6 sm:px-0">
+    <header className=" flex items-end gap-4 w-full justify-end mt-[51px] sm:mt-[62px] xl:max-w-[1074px] md:max-w-[868px] max-w-[500px] mx-auto px-6 sm:px-0">
    
       <a
         href="mailto:quadrimorin@gmail.com"

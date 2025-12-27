@@ -1,60 +1,7 @@
-import { Geist, Geist_Mono, Montserrat } from 'next/font/google';
-import localFont from 'next/font/local';
 import type { Metadata } from 'next';
 
 import '../globals.css';
 import { StepProvider } from '@/contexts/StepContext';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
-
-const montserrat = Montserrat({
-  variable: '--font-montserrat',
-  subsets: ['latin'],
-});
-const barbra = localFont({
-  src: [
-    {
-      path: '../../../public/barbra-font/Barbra-Regular.otf',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../../public/barbra-font/Barbra-Italic.otf',
-      weight: '400',
-      style: 'italic',
-    },
-    {
-      path: '../../../public/barbra-font/Barbra-High.otf',
-      weight: '700',
-      style: 'normal',
-    },
-    {
-      path: '../../../public/barbra-font/Barbra-HighItalic.otf',
-      weight: '700',
-      style: 'italic',
-    },
-  ],
-  variable: '--font-barbra',
-});
-
-const longShot = localFont({
-  src: [
-    {
-      path: '../../../public/Long_Shot.ttf',
-      weight: '400',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-long-shot',
-});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -66,13 +13,5 @@ export default function TwentyTwoLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${barbra.variable} ${montserrat.variable} ${longShot.variable} antialiased `}
-      >
-        <StepProvider>{children}</StepProvider>
-      </body>
-    </html>
-  );
+  return <StepProvider>{children}</StepProvider>;
 }

@@ -12,15 +12,13 @@ export const FuturePage = () => {
   const { push } = useRouter();
   const handleEnterExhibition = () => {
     setIsTransitioning(true);
-    push('/twenty-two/artworks');
+    push('/twenty-ii/artworks');
   };
 
   const handleTransitionComplete = () => {
     setIsTransitioning(false);
   };
-  // Open curtain on mount (if coming from a transition)
   useEffect(() => {
-    // Small delay to ensure smooth transition
     const timer = setTimeout(() => {
       setShouldOpenCurtain(true);
     }, 100);
