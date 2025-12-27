@@ -19,7 +19,7 @@ const Artist = () => {
           </h1>
         </div>
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push('/')}
           className="text-[#EB5D1D] text-sm xl:text-base font-semibold"
         >
           Back to Main Website

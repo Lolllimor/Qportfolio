@@ -43,7 +43,7 @@ const LandingPage = () => {
               onClick={handleHamburgerMenuClose}
               className="absolute flex flex-col items-start  p-[14px] gap-4"
             >
-              <a href="" className="font-semibold">
+              <a href="/" className="font-semibold">
                 Back to Main Website
               </a>
               <span
@@ -69,7 +69,7 @@ const LandingPage = () => {
                   <XIcon />
                 </div>
               </button>
-              <a href="" className="font-semibold">
+              <a href="/" className="font-semibold">
                 Back to Main Website
               </a>
               <span
@@ -85,7 +85,7 @@ const LandingPage = () => {
           </div>
         )}
         <nav className="hidden md:flex items-center gap-4 font-semibold text-sm xl:text-base">
-          <a href="">Back to Main Website</a>
+          <a href="/">Back to Main Website</a>
           <a href="">Contact</a>
           <a href="">
             <InstagramIcon />
