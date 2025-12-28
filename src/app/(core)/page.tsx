@@ -1,9 +1,9 @@
 'use client';
 import { ProductComponent } from '@/components/product/Product';
 import { useActiveTab } from '@/contexts/ActiveTabContext';
+import { Graphics } from '@/components/graphics/Graphics';
 import { Gallery } from '@/components/gallery/Gallery';
 import Home from '@/components/home/Home';
-import { Graphics } from '@/components/graphics/Graphics';
 
 export default function Page() {
   const { activeTab } = useActiveTab();
