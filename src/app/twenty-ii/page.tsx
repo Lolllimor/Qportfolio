@@ -1,9 +1,9 @@
 'use client';
 
-import { RecognizePage } from '@/components/twenty-two/RecognizePage';
-import { ReavealPage } from '@/components/twenty-two/ReavealPage';
-import { FuturePage } from '@/components/twenty-two/FuturePage';
-import LandingPage from '@/components/twenty-two/LandingPage';
+import { RecognizePage } from '@/components/twenty-ii/RecognizePage';
+import { ReavealPage } from '@/components/twenty-ii/ReavealPage';
+import { FuturePage } from '@/components/twenty-ii/FuturePage';
+import LandingPage from '@/components/twenty-ii/LandingPage';
 import { useStep } from '@/contexts/StepContext';
 
 export default function TwentyTwoPage() {

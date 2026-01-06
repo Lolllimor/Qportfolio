@@ -1,4 +1,4 @@
-import ExhibitionPage from "../../../components/twenty-two/ExhibitionPage";
+import ExhibitionPage from "../../../components/twenty-ii/ExhibitionPage";
 
 export default function PayPage() {
   return <ExhibitionPage />;
