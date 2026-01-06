@@ -176,7 +176,7 @@ const LandingPage = () => {
               </div>
               <div className="lg:hidden flex flex-col md:flex-row gap-4  md:h-[48px]">
                 <button
-                  disabled
+
                   onClick={handleEntryPortalOpen}
                   className="border border-[#ffffff] py-3 xl:py-4 cursor-not-allowed text-white w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
