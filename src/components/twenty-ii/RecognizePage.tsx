@@ -31,7 +31,7 @@ export const RecognizePage = () => {
 
   return (
     <>
-      <div className="flex font-montserrat flex-col min-h-screen  bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat md:px-[75px] py-[40px] xl:px-[120px] xl:py-[57px] px-6 items-center">
+      <div className="relative flex font-montserrat flex-col min-h-screen h-full  bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat md:px-[75px] py-[40px] xl:px-[120px] xl:py-[57px] px-6 items-center">
         {' '}
         <div className="absolute inset-0 bg-[#57D791]/30"></div>
         <header className="z-10">
