@@ -17,7 +17,7 @@ const ArtworkCard = ({
   id,
 }: Artwork & { id: number }) => {
   return (
-    <Link href={`/twenty-two/artworks/${id}`}>
+    <Link href={`/twenty-ii/artworks/${id}`}>
       <div className="xl:w-[588px] xl:h-[588px] md:w-[420px] w-[342px] md:h-[420px] h-fit gap-2 md:gap-4 bg-[#F2F2F2] flex flex-col items-center justify-between font-montserrat cursor-pointer hover:opacity-90 transition-opacity">
         <div className="flex w-full items-center justify-between px-4 pt-4">
           <div className="flex items-center gap-2 font-montserrat">
@@ -80,14 +80,14 @@ const DetailsPage = () => {
       {/* Hero Section */}
       <div className="relative w-full h-fit overflow-hidden lg:px-[75px] py-[40px] xl:px-[120px] xl:py-[57px] px-6">
         <div className="flex items-center justify-between md:mb-[69px] mb-3">
-          <a href="/twenty-two"
+          <a href="/twenty-ii"
             className="font-barbra text-[#57D791] text-[32px] 
         lg:text-5xl"
           >
             Twenty- <span className="text-[#EB5D1D]">II</span>
           </a>
           <Link
-            href="/twenty-two/artworks"
+            href="/twenty-ii/artworks"
             className="text-[#E3591C] font-semibold text-base hidden md:block"
           >
             Back to Artworks
@@ -112,9 +112,8 @@ const DetailsPage = () => {
                   {artwork.tags.map((tag, idx) => (
                     <div
                       key={idx}
-                      className={`px-2.5 py-2 text-[#000000] text-[8px] bg-white uppercase ${
-                        idx === 0 ? 'hidden md:block' : ''
-                      }`}
+                      className={`px-2.5 py-2 text-[#000000] text-[8px] bg-white uppercase ${idx === 0 ? 'hidden md:block' : ''
+                        }`}
                     >
                       {tag}
                     </div>
