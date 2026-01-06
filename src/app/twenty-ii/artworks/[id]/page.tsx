@@ -1,12 +1,12 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+
 import { useFetchArtwork } from '@/hooks/useFetchArtwork';
 import { useFetchArtworks } from '@/hooks/useFetchArtworks';
 import { Artwork } from '@/types';
-import { div } from 'framer-motion/client';
 
 const ArtworkCard = ({
   tags,
