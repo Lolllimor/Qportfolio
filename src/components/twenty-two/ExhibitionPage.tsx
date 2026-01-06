@@ -157,9 +157,8 @@ const ExhibitionPage = () => {
             artworks.map((artwork) => (
               <Link
                 key={artwork.id}
-                href={`/twenty-two/artworks/${
-                  artwork.documentId || artwork.id
-                }`}
+                href={`/twenty-ii/artworks/${artwork.documentId || artwork.id
+                  }`}
               >
                 <div className="cursor-pointer hover:opacity-90 transition-opacity">
                   <ArtworkCard {...artwork} />
