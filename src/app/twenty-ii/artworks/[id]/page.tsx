@@ -1,9 +1,11 @@
 'use client';
 
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { PaymentModal } from '@/components/twenty-ii/PaymentModal';
 import { useFetchArtwork } from '@/hooks/useFetchArtwork';
 import { useFetchArtworks } from '@/hooks/useFetchArtworks';
 import { Artwork } from '@/types';
@@ -69,6 +71,7 @@ const DetailsPage = () => {
   const params = useParams();
   const artworkId = params?.id as string;
   const { artwork, loading, error } = useFetchArtwork(artworkId);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   // Fetch related artworks (excluding current one)
   const { artworks: allArtworks } = useFetchArtworks(1, 25);
@@ -178,7 +181,10 @@ const DetailsPage = () => {
                     <div className="w-[60px] md:h-2.5 h-1 bg-[#E3591C]" />
                   </div>
                 ) : (
-                  <button className="bg-[#E3591C] text-white font-medium text-xl font-montserrat px-4 w-full h-[56px]">
+                  <button
+                    onClick={() => setIsPaymentModalOpen(true)}
+                    className="bg-[#E3591C] text-white font-medium text-xl font-montserrat px-4 w-full h-[56px]"
+                  >
                     Buy Artwork
                   </button>
                 )}
@@ -206,6 +212,9 @@ const DetailsPage = () => {
             ))}
           </div>
         </div>
+      )}
+      {isPaymentModalOpen && artwork && (
+        <PaymentModal artwork={artwork} onClose={() => setIsPaymentModalOpen(false)} />
       )}
     </div>
   );

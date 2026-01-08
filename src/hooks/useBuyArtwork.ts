@@ -1,157 +1,72 @@
-import { useEffect, useState } from 'react';
 
-import client, { STRAPI_BASE_URL_WITHOUT_API } from '@/lib/strapiClient';
-import { Art, Artwork } from '@/types';
 
-export interface UseFetchArtworkReturn {
-    artwork?: Artwork;
-    loading: boolean;
-    error?: unknown;
+import { usePaystackPayment } from 'react-paystack';
+import { Artwork } from '@/types';
+
+interface UseBuyArtworkProps {
+    artwork: Artwork;
+    email: string;
+    phone?: string;
+    firstName?: string;
+    lastName?: string;
+    onSuccess?: (reference: any) => void;
+    onClose?: () => void;
 }
 
-export function useFetchArtwork(id: string | number): UseFetchArtworkReturn {
-    const [artwork, setArtwork] = useState<Artwork | undefined>(undefined);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<unknown>(undefined);
+export const useBuyArtwork = ({
+    artwork,
+    email,
+    phone = '',
+    firstName = '',
+    lastName = '',
+    onSuccess,
+    onClose
+}: UseBuyArtworkProps) => {
 
-    useEffect(() => {
-        if (!id) {
-            setLoading(false);
-            return;
+    // Default config
+    const config = {
+        reference: new Date().getTime().toString(),
+        email: email,
+        amount: Number(artwork.Price) * 100, 
+        publicKey: process.env.NEXT_PUBLIC_PAYSTACK_KEY || 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxx',
+        metadata: {
+            custom_fields: [
+                {
+                    display_name: "Artwork ID",
+                    variable_name: "artwork_id",
+                    value: String(artwork.id)
+                },
+                {
+                    display_name: "Artwork Title",
+                    variable_name: "artwork_title",
+                    value: artwork.Title
+                },
+                {
+                    display_name: "Customer Name",
+                    variable_name: "customer_name",
+                    value: `${firstName} ${lastName}`.trim()
+                },
+                {
+                    display_name: "Phone Number",
+                    variable_name: "phone_number",
+                    value: phone
+                }
+            ]
+        }
+    };
+
+    const initializePayment = usePaystackPayment(config);
+
+    const handleBuy = () => {
+        if (!process.env.NEXT_PUBLIC_PAYSTACK_KEY) {
+            console.warn('Paystack key is missing. Using test key or failing.');
         }
 
-        let isMounted = true;
+        // @ts-ignore
+        initializePayment(onSuccess, onClose);
+    };
 
-        (async () => {
-            try {
-                // Try to find by documentId first, then by id
-                let response;
-                try {
-                    response = await client.collection('artworks').find({
-                        filters: { documentId: { $eq: String(id) } },
-                        populate: '*',
-                    });
-                } catch {
-                    // Fallback to id if documentId doesn't work
-                    response = await client.collection('artworks').find({
-                        filters: { id: { $eq: Number(id) || id } },
-                        populate: '*',
-                    });
-                }
-
-                if (!response.data || response.data.length === 0) {
-                    throw new Error('Artwork not found');
-                }
-
-                const item = response.data[0];
-                const data = item.attributes || item;
-
-                // Extract tags - handle both relation format and direct format
-                let tags: string[] = [];
-                if (data.tags) {
-                    if (data.tags.data) {
-                        // Relation format: tags.data is an array of tag objects
-                        tags = Array.isArray(data.tags.data)
-                            ? data.tags.data.map((tag: any) => {
-                                const tagData = tag.attributes || tag;
-                                return tagData.tag || tagData.name || tagData.title || '';
-                            })
-                            : [];
-                    } else if (Array.isArray(data.tags)) {
-                        // Array of tag objects
-                        tags = data.tags.map((tag: any) => {
-                            const tagData = tag.attributes || tag;
-                            return (
-                                tagData.tag || tagData.name || tagData.title || String(tag)
-                            );
-                        });
-                    } else if (typeof data.tags === 'string') {
-                        // Single string
-                        tags = [data.tags];
-                    }
-                }
-
-                // Process art object and construct full URL
-                let art: Art = {} as Art;
-                if (data.art) {
-                    const artData = data.art.data || data.art;
-                    const artAttributes = artData.attributes || artData;
-
-                    // Construct full URL if it's a relative path
-                    const imageUrl = artAttributes.url
-                        ? artAttributes.url.startsWith('http')
-                            ? artAttributes.url
-                            : `${STRAPI_BASE_URL_WITHOUT_API}${artAttributes.url}`
-                        : '';
-
-                    art = {
-                        ...artAttributes,
-                        url: imageUrl,
-                        // Also update formats URLs if they exist
-                        formats: artAttributes.formats
-                            ? {
-                                ...artAttributes.formats,
-                                thumbnail: artAttributes.formats.thumbnail
-                                    ? {
-                                        ...artAttributes.formats.thumbnail,
-                                        url: artAttributes.formats.thumbnail.url?.startsWith(
-                                            'http'
-                                        )
-                                            ? artAttributes.formats.thumbnail.url
-                                            : `${STRAPI_BASE_URL_WITHOUT_API}${artAttributes.formats.thumbnail.url}`,
-                                    }
-                                    : ({} as any),
-                                small: artAttributes.formats.small
-                                    ? {
-                                        ...artAttributes.formats.small,
-                                        url: artAttributes.formats.small.url?.startsWith('http')
-                                            ? artAttributes.formats.small.url
-                                            : `${STRAPI_BASE_URL_WITHOUT_API}${artAttributes.formats.small.url}`,
-                                    }
-                                    : ({} as any),
-                            }
-                            : ({} as any),
-                    };
-                }
-
-                const transformedArtwork: Artwork = {
-                    id: item.id || data.id || 0,
-                    documentId: item.documentId || data.documentId || '',
-                    Title: data.Title || '',
-                    Date: data.Date || '',
-                    createdAt: item.createdAt || data.createdAt || new Date(),
-                    updatedAt: item.updatedAt || data.updatedAt || new Date(),
-                    publishedAt: item.publishedAt || data.publishedAt || new Date(),
-                    art: art,
-                    tags: tags.filter((tag) => tag !== ''),
-                    Price:
-                        typeof data.Price === 'string'
-                            ? data.Price
-                            : String(data.Price || '0'),
-                    Year:
-                        typeof data.Year === 'number' ? data.Year : Number(data.Year) || 0,
-                    Collection: data.Collection || '',
-                    BoughtBy: data.BoughtBy || null,
-                };
-
-                if (isMounted) {
-                    setArtwork(transformedArtwork);
-                }
-            } catch (err) {
-                if (isMounted) {
-                    setError(err);
-                }
-            } finally {
-                if (isMounted) {
-                    setLoading(false);
-                }
-            }
-        })();
-
-        return () => {
-            isMounted = false;
-        };
-    }, [id]);
-
-    return { artwork, loading, error };
+    return {
+        buyArtwork: handleBuy
+    };
 }

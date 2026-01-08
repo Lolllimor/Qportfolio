@@ -9,9 +9,9 @@ import { ArrowRightIcon } from '../icons/arrow-right';
 import { InstagramIcon } from '../icons/instagram';
 import { LocationIcon } from '../icons/location';
 import { EntryPortal } from './EntryPortal';
-import { XIcon } from '../icons/x';
-import { CallIcon } from '../icons/call';
 import { EmailIcon } from '../icons/email';
+import { CallIcon } from '../icons/call';
+import { XIcon } from '../icons/x';
 
 //
 
@@ -167,16 +167,15 @@ const LandingPage = () => {
             </div>
             <div className="flex flex-col gap-2">
               <span>Time</span>
-              <p className=" font-semibold ">3PM - 7PM</p>
+              <p className=" font-semibold ">1PM - 6PM</p>
             </div>
             <div className="flex flex-col md:flex-row justify-between md:items-center gap-12 md:gap-0">
               <div className="flex flex-col gap-2">
                 <span>Date</span>
                 <p className=" font-semibold ">February 14, 2026</p>
               </div>
-              <div className="lg:hidden flex flex-col md:flex-row gap-4  md:h-[48px]">
+              <div className="lg:hidden flex flex-col md:flex-row gap-4  md:h-12">
                 <button
-                  disabled
                   onClick={handleEntryPortalOpen}
                   className="border border-[#ffffff] py-3 xl:py-4 cursor-not-allowed text-white w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -191,7 +190,7 @@ const LandingPage = () => {
                   className="bg-[#EB5D1D] group py-3 px-7 xl:py-4 xl:px-10 text-white font-medium w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl cursor-pointer relative"
                 >
                   <span className="group-hover:scale-75 transition-transform duration-300 inline-block font-medium text-sm">
-                    Buy Tickets
+                    Register
                     <ArrowRightIcon className="absolute  top-1/2 -translate-y-1/2 inline-block opacity-0 -translate-x-4 ml-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                   </span>
                 </button>
@@ -202,7 +201,6 @@ const LandingPage = () => {
       </main>
       <div className="hidden lg:flex w-full  justify-end gap-4 mt-16 max-w-[1440px] mx-auto">
         <button
-          disabled
           onClick={() => setIsEntryPortalOpen(true)}
           className="border border-[#ffffff] py-3 xl:py-4 cursor-pointer text-white w-[191px] xl:w-[269px] text-base xl:text-xl group disabled:opacity-50 disabled:cursor-not-allowed"
         >
@@ -215,7 +213,7 @@ const LandingPage = () => {
           className="bg-[#EB5D1D] group py-3 px-7 xl:py-4 xl:px-10 text-white font-medium w-[191px] xl:w-[269px] text-base xl:text-xl cursor-pointer relative"
         >
           <span className="group-hover:scale-75 transition-transform duration-300 inline-block font-medium">
-            Buy Tickets
+            Register
             <ArrowRightIcon className="absolute  top-1/2 -translate-y-1/2 inline-block opacity-0 -translate-x-4 ml-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
           </span>
         </button>
