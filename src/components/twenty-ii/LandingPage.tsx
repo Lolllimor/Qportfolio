@@ -13,7 +13,7 @@ import { EmailIcon } from '../icons/email';
 import { CallIcon } from '../icons/call';
 import { XIcon } from '../icons/x';
 
-//
+
 
 const LandingPage = () => {
   const [isEntryPortalOpen, setIsEntryPortalOpen] = useState(false);
