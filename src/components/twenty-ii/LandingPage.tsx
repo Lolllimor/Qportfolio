@@ -13,8 +13,6 @@ import { EmailIcon } from '../icons/email';
 import { CallIcon } from '../icons/call';
 import { XIcon } from '../icons/x';
 
-
-
 const LandingPage = () => {
   const [isEntryPortalOpen, setIsEntryPortalOpen] = useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
@@ -83,10 +81,10 @@ const LandingPage = () => {
         )}
         {openContact && (
           <div className=" absolute flex justify-center items-center h-full w-full inset-0 bg-black/50 z-99999">
-            <div className=" bg-black flex flex-col items-start py-[40px] px-[20px] md:px-[48px] gap-4 relative w-[276px] md:w-[374px]">
+            <div className=" bg-black flex flex-col items-start py-10 px-5 md:px-12 gap-4 relative w-69 md:w-93.5">
               <button
                 onClick={() => setOpenContact(false)}
-                className="absolute md:top-4 md:right-4 top-[14px] right-[14px]"
+                className="absolute md:top-4 md:right-4 top-3.5 right-3.5"
               >
                 <div className="md:w-8 md:h-8 h-6 w-6">
                   <XIcon />
@@ -136,7 +134,7 @@ const LandingPage = () => {
           </a>
         </nav>
       </header>
-      <main className="flex flex-col lg:flex-row lg:items-center justify-between w-full mt-10 md:mt-[113px] max-w-[1440px] mx-auto">
+      <main className="flex flex-col lg:flex-row lg:items-center justify-between w-full mt-10 md:mt-28.25 max-w-360 mx-auto">
         <div className="flex justify-center lg:justify-start w-full lg:w-auto lg:items-end">
           <div className="flex flex-col gap-4 items-end">
             <Image
@@ -145,7 +143,7 @@ const LandingPage = () => {
               width={650}
               height={410}
               loading="eager"
-              className="md:w-[502px] md:h-[321px] w-full h-[200px] xl:w-[650px] xl:h-[410px]"
+              className="md:w-125.5 md:h-80.25 w-full h-50 xl:w-162.5 xl:h-102.5"
             />
             <p className="md:text-lg xl:text-2xl text-base">
               A Solo Exhibition by{' '}
@@ -154,12 +152,12 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <div className="flex justify-between mt-10 lg:max-w-[225px]">
+        <div className="flex justify-between mt-10 lg:max-w-56.25">
           <div className=" flex flex-col gap-6 xl:gap-8 text-sm xl:text-base w-full lg:w-auto">
             <div className="flex flex-col gap-2">
               <span>Location</span>
               <div className="w-full flex ">
-                <p className="underline font-semibold max-w-[189px]">
+                <p className="underline font-semibold max-w-47.25">
                   OneArt Gallery, Anthony Village, Lagos
                 </p>
                 <LocationIcon className="animate-breathing" />
@@ -176,6 +174,7 @@ const LandingPage = () => {
               </div>
               <div className="lg:hidden flex flex-col md:flex-row gap-4  md:h-12">
                 <button
+                  disabled
                   onClick={handleEntryPortalOpen}
                   className="border border-[#ffffff] py-3 xl:py-4 cursor-not-allowed text-white w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -202,6 +201,7 @@ const LandingPage = () => {
       <div className="hidden lg:flex w-full  justify-end gap-4 mt-16 max-w-[1440px] mx-auto">
         <button
           onClick={() => setIsEntryPortalOpen(true)}
+          disabled
           className="border border-[#ffffff] py-3 xl:py-4 cursor-pointer text-white w-[191px] xl:w-[269px] text-base xl:text-xl group disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <span className=" group-hover:scale-75 transition-transform duration-300 inline-block font-medium">
