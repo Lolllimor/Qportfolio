@@ -23,14 +23,14 @@ export const PaymentModal = ({ artwork, onClose }: PaymentModalProps) => {
         phone,
         firstName,
         lastName,
-        onSuccess: (reference: any) => {
-            console.log('Payment successful:', reference);
-            toast.success('Payment successful! We will contact you regarding delivery.');
-            onClose();
-        },
-        onClose: () => {
-            console.log('Payment closed');
-        }
+        // onSuccess: (reference: any) => {
+        //     console.log('Payment successful:', reference);
+        //     toast.success('Payment successful! We will contact you regarding delivery.');
+        //     onClose();
+        // },
+        // onClose: () => {
+        //     console.log('Payment closed');
+        // }
     });
 
     const handlePay = () => {
