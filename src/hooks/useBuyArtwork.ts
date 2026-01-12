@@ -1,75 +1,148 @@
-"use client"
+'use client';
 
-import { usePaystackPayment } from 'react-paystack';
 import { Artwork } from '@/types';
+import { useState, useCallback, useEffect } from 'react';
+
+// Declare PaystackPop type
+declare global {
+  interface Window {
+    PaystackPop: {
+      setup: (config: any) => {
+        openIframe: () => void;
+      };
+    };
+  }
+}
 
 interface UseBuyArtworkProps {
-    artwork: Artwork;
-    email: string;
-    phone?: string;
-    firstName?: string;
-    lastName?: string;
-    onSuccess?: (reference: any) => void;
-    onClose?: () => void;
+  artwork: Artwork;
+  email: string;
+  phone?: string;
+  firstName?: string;
+  lastName?: string;
+  onSuccess?: (reference: any) => void;
+  onClose?: () => void;
 }
 
 export const useBuyArtwork = ({
+  artwork,
+  email,
+  phone = '',
+  firstName = '',
+  lastName = '',
+  onSuccess,
+  onClose,
+}: UseBuyArtworkProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY;
+
+  if (!publicKey) {
+    throw new Error('NEXT_PUBLIC_PAYSTACK_KEY is not set');
+  }
+
+  // Load Paystack script
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !window.PaystackPop) {
+      const script = document.createElement('script');
+      script.src = 'https://js.paystack.co/v1/inline.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  const handleBuy = useCallback(async () => {
+    if (isLoading || !artwork || !email) {
+      if (!artwork || !email) {
+        console.warn('Payment data not ready');
+      }
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      // Create payment on server-side with validated price
+      const response = await fetch('/api/payments/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          artworkId: artwork.id || artwork.documentId,
+          email: email.trim(),
+          phone: phone.trim(),
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to create payment');
+      }
+
+      const paymentData = await response.json();
+
+      // Wait for Paystack script to load if needed
+      let retries = 0;
+      while (!window.PaystackPop && retries < 10) {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        retries++;
+      }
+
+      if (!window.PaystackPop) {
+        throw new Error('Paystack script failed to load');
+      }
+
+      // Initialize Paystack payment with server-validated data
+      const handler = window.PaystackPop.setup({
+        key: publicKey,
+        email: paymentData.email,
+        amount: paymentData.amount,
+        ref: paymentData.reference,
+        metadata: paymentData.metadata,
+        callback: (response: any) => {
+          setIsLoading(false);
+          if (onSuccess) {
+            onSuccess(response);
+          } else {
+            window.location.href = `/twenty-ii/payment-success?reference=${paymentData.reference}`;
+          }
+        },
+        onClose: () => {
+          setIsLoading(false);
+          if (onClose) {
+            onClose();
+          } else {
+            window.location.href = '/twenty-ii';
+          }
+        },
+      });
+
+      handler.openIframe();
+    } catch (error) {
+      console.error('Payment initialization error:', error);
+      alert(
+        error instanceof Error
+          ? error.message
+          : 'Failed to initialize payment. Please try again.'
+      );
+      setIsLoading(false);
+    }
+  }, [
     artwork,
     email,
-    phone = '',
-    firstName = '',
-    lastName = '',
+    phone,
+    firstName,
+    lastName,
     onSuccess,
-    onClose
-}: UseBuyArtworkProps) => {
-    const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY;
-if (!publicKey) {
-  throw new Error('NEXT_PUBLIC_PAYSTACK_KEY is not set');
-}
-    // Default config
-    const config = {
-      reference: new Date().getTime().toString(),
-      email: email,
-      amount: Number(artwork.Price) * 100,
-      publicKey: publicKey,
-      metadata: {
-        custom_fields: [
-          {
-            display_name: 'Artwork ID',
-            variable_name: 'artwork_id',
-            value: String(artwork.id),
-          },
-          {
-            display_name: 'Artwork Title',
-            variable_name: 'artwork_title',
-            value: artwork.Title,
-          },
-          {
-            display_name: 'Customer Name',
-            variable_name: 'customer_name',
-            value: `${firstName} ${lastName}`.trim(),
-          },
-          {
-            display_name: 'Phone Number',
-            variable_name: 'phone_number',
-            value: phone,
-          },
-        ],
-      },
-    };
+    onClose,
+    isLoading,
+    publicKey,
+  ]);
 
-    const initializePayment = usePaystackPayment(config);
-
-    const handleBuy = () => {
-        if (publicKey) {
-          console.warn('Paystack key is missing. Using test key or failing.');
-        }
-
-        // @ts-ignore
-        initializePayment(onSuccess, onClose);
-    };
-
-    return {
-        buyArtwork: handleBuy
-    };
-}
+  return {
+    buyArtwork: handleBuy,
+    isLoading,
+  };
+};

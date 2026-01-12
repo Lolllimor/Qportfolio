@@ -7,7 +7,7 @@ import { useFetchArtworks } from '@/hooks/useFetchArtworks';
 import { Artwork } from '@/types';
 
 const ArtworkCard = ({ tags, Year, art, Title, Price }: Artwork) => {
-  console.log(art);
+
   return (
     <div className=" xl:w-[588px] xl:h-[588px] md:w-[420px] w-[342px] md:h-[420px] h-fit gap-2 md:gap-4  bg-[#F2F2F2] flex flex-col items-center justify-between font-montserrat">
       <div className="flex  w-full items-center justify-between px-4  pt-4 ">
