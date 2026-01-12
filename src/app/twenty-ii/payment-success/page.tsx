@@ -2,9 +2,9 @@
 
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 
-const PaymentSuccessPage = () => {
+const PaymentSuccessPageContent = () => {
   const searchParams = useSearchParams();
   const [reference, setReference] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -209,6 +209,25 @@ const PaymentSuccessPage = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const PaymentSuccessPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full min-h-screen bg-[url('/bg.png')] bg-cover bg-center font-montserrat flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-xl md:text-2xl text-white mb-4">
+              Loading...
+            </div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+          </div>
+        </div>
+      }
+    >
+      <PaymentSuccessPageContent />
+    </Suspense>
   );
 };
 
