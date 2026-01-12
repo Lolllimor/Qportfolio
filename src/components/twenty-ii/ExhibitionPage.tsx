@@ -123,7 +123,7 @@ const ExhibitionPage = () => {
               <div className="flex flex-col lg:flex-row items-center gap-4 xl:w-[588px] lg:w-[470px] w-full lg:h-14 font-montserrat">
                 <button className=" xl:h-14 h-10   bg-[#EB5D1D] flex justify-center items-center gap-2.5 xl:w-[286px] lg:w-[200px] w-full">
                   <span className="text-white text-center font-medium xl:text-xl text-base">
-                    Buy Tickets
+                 Register
                   </span>
                 </button>
                 <button className="xl:h-14 h-10 py-2 border border-black flex justify-center items-center gap-2.5 xl:w-[286px] lg:w-[200px] w-full">
