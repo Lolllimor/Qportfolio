@@ -46,7 +46,7 @@ export const FuturePage = () => {
             </p>
             <input
               type="text"
-              className="w-full h-[97px] bg-white text-[#2C2C2C] font-barbra uppercase text-xl md:text-2xl py-4 px-8 hover:opacity-90 transition-opacity rounded-lg"
+              className="w-full h-[97px] bg-white text-[#2C2C2C] font-montserrat uppercase text-xl md:text-2xl py-4 px-8 hover:opacity-90 transition-opacity rounded-lg"
             />
             <button
               onClick={handleEnterExhibition}
