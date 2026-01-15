@@ -1,28 +1,7 @@
 'use client';
 
-import { Artwork } from '@/types';
+import { UseBuyArtworkProps } from '@/types';
 import { useState, useCallback, useEffect } from 'react';
-
-// Declare PaystackPop type
-declare global {
-  interface Window {
-    PaystackPop: {
-      setup: (config: any) => {
-        openIframe: () => void;
-      };
-    };
-  }
-}
-
-interface UseBuyArtworkProps {
-  artwork: Artwork;
-  email: string;
-  phone?: string;
-  firstName?: string;
-  lastName?: string;
-  onSuccess?: (reference: any) => void;
-  onClose?: () => void;
-}
 
 export const useBuyArtwork = ({
   artwork,
@@ -40,7 +19,6 @@ export const useBuyArtwork = ({
     throw new Error('NEXT_PUBLIC_PAYSTACK_KEY is not set');
   }
 
-  // Load Paystack script
   useEffect(() => {
     if (typeof window !== 'undefined' && !window.PaystackPop) {
       const script = document.createElement('script');
@@ -51,28 +29,24 @@ export const useBuyArtwork = ({
   }, []);
 
   const handleBuy = useCallback(async () => {
-    if (isLoading || !artwork || !email) {
-      if (!artwork || !email) {
-        console.warn('Payment data not ready');
-      }
-      return;
-    }
-
     setIsLoading(true);
 
     try {
-      // Create payment on server-side with validated price
-      const response = await fetch('/api/payments/create', {
+      const apiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL || '';
+      const apiUrl = `${apiBaseUrl}/orders/create`;
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          artworkId: artwork.id || artwork.documentId,
+          reference: `art_${artwork.id}_${Date.now()}`,
+          amount: Number(artwork.Price),
+          customerName: `${firstName.trim()} ${lastName.trim()}`.trim(),
+          artworkId: artwork.id,
           email: email.trim(),
           phone: phone.trim(),
-          firstName: firstName.trim(),
-          lastName: lastName.trim(),
         }),
       });
 
@@ -83,7 +57,6 @@ export const useBuyArtwork = ({
 
       const paymentData = await response.json();
 
-      // Wait for Paystack script to load if needed
       let retries = 0;
       while (!window.PaystackPop && retries < 10) {
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -93,12 +66,10 @@ export const useBuyArtwork = ({
       if (!window.PaystackPop) {
         throw new Error('Paystack script failed to load');
       }
-
-      // Initialize Paystack payment with server-validated data
       const handler = window.PaystackPop.setup({
         key: publicKey,
-        email: paymentData.email,
-        amount: paymentData.amount,
+        email: email.trim(),
+        amount: paymentData.data.amount * 100,
         ref: paymentData.reference,
         metadata: paymentData.metadata,
         callback: (response: any) => {

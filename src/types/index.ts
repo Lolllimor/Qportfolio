@@ -87,3 +87,24 @@ export interface Tag {
   updatedAt: Date;
   publishedAt: Date;
 }
+
+export interface UseBuyArtworkProps {
+  artwork: Artwork;
+  email: string;
+  phone?: string;
+  firstName?: string;
+  lastName?: string;
+  onSuccess?: (reference: any) => void;
+  onClose?: () => void;
+}
+
+
+declare global {
+  interface Window {
+    PaystackPop: {
+      setup: (config: any) => {
+        openIframe: () => void;
+      };
+    };
+  }
+}

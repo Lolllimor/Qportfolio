@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import client from '@/lib/strapiServer';
+import crypto from 'crypto';
 
 // Email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -13,7 +14,14 @@ export async function POST(request: NextRequest) {
     const { reference, amount, customerName, email, phone, artworkId } = body;
 
     // Validate required fields
-    if (!reference || !amount || !customerName || !email || !phone || !artworkId) {
+    if (
+      !reference ||
+      !amount ||
+      !customerName ||
+      !email ||
+      !phone ||
+      !artworkId
+    ) {
       return NextResponse.json(
         { error: 'All fields are required' },
         { status: 400 }
@@ -40,8 +48,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
-
 
     // Fetch artwork from Strapi to get the REAL price (server-side)
     let artwork;
@@ -100,9 +106,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate secure payment reference
-
-
     // Return payment configuration (price is now validated server-side)
     return NextResponse.json({
       reference,
@@ -112,14 +115,14 @@ export async function POST(request: NextRequest) {
         artwork_id: String(artwork.id),
         artwork_documentId: artwork.documentId,
         artwork_title: artwork.Title,
-          customer_name: customerName.trim(),
+        customer_name: customerName.trim(),
         phone_number: phone.trim(),
       },
     });
   } catch (error) {
-    console.error('Error creating payment:', error);
+    console.error('Error creating order:', error);
     return NextResponse.json(
-      { error: 'Failed to create payment' },
+      { error: 'Failed to create order' },
       { status: 500 }
     );
   }

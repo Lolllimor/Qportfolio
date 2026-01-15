@@ -17,7 +17,6 @@ const PaymentSuccessPageContent = () => {
     const ref = searchParams.get('reference') || searchParams.get('trxref');
     setReference(ref);
 
-    // Verify payment with server
     if (ref) {
       verifyPayment(ref);
     } else {
@@ -28,7 +27,9 @@ const PaymentSuccessPageContent = () => {
 
   const verifyPayment = async (ref: string) => {
     try {
-      const response = await fetch('/api/payments/verify', {
+      const apiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL || '';
+      const apiUrl = `${apiBaseUrl}/payments/verify`;
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

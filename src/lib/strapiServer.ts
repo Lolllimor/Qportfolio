@@ -1,6 +1,5 @@
 import { strapi } from '@strapi/client';
 
-// Server-only Strapi client - uses server-side environment variables
 const STRAPI_BASE_URL =
   process.env.STRAPI_BASE_URL || process.env.NEXT_PUBLIC_STRAPI_BASE_URL;
 const STRAPI_BASE_URL_WITHOUT_API =

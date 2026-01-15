@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import client, { STRAPI_BASE_URL_WITHOUT_API } from '@/lib/strapiServer';
 import { Art, Artwork } from '@/types';
 
@@ -19,7 +20,6 @@ export async function GET(request: NextRequest) {
     const transformedArtworks: Artwork[] = response.data.map((item: any) => {
       const data = item.attributes || item;
 
-      // Extract tags - handle both relation format and direct format
       let tags: string[] = [];
       if (data.tags) {
         if (data.tags.data) {
