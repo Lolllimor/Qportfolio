@@ -7,6 +7,7 @@ import { useEffect, useState, Suspense } from 'react';
 const PaymentSuccessPageContent = () => {
   const searchParams = useSearchParams();
   const [reference, setReference] = useState<string | null>(null);
+  const [orderId, setOrderId] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const [verified, setVerified] = useState<boolean>(false);
   const [verifying, setVerifying] = useState<boolean>(true);
@@ -15,17 +16,61 @@ const PaymentSuccessPageContent = () => {
   useEffect(() => {
     setMounted(true);
     const ref = searchParams.get('reference') || searchParams.get('trxref');
+    const oId = searchParams.get('orderId');
     setReference(ref);
+    setOrderId(oId);
 
-    if (ref) {
-      verifyPayment(ref);
+    if (ref && oId) {
+      verifyPayment(Number(oId), ref);
+    } else if (ref) {
+      // Fallback: try to verify with just reference (for backward compatibility)
+      verifyPaymentLegacy(ref);
     } else {
       setVerifying(false);
-      setError('No payment reference found');
+      setError('No payment reference or order ID found');
     }
   }, [searchParams]);
 
-  const verifyPayment = async (ref: string) => {
+  const verifyPayment = async (oId: number, ref: string) => {
+    try {
+      const apiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL || '';
+      const verifyUrl = `${apiBaseUrl}/orders/verify`;
+
+      const response = await fetch(verifyUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Idempotency-Key': `${oId}_${ref}`,
+        },
+        body: JSON.stringify({
+          orderId: oId,
+          reference: ref,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.message || errorData.error || 'Payment verification failed'
+        );
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        setVerified(true);
+      } else {
+        setError(data.message || 'Payment verification failed');
+      }
+    } catch (err) {
+      console.error('Payment verification error:', err);
+      setError(err instanceof Error ? err.message : 'Failed to verify payment');
+    } finally {
+      setVerifying(false);
+    }
+  };
+
+  // Legacy verification for backward compatibility
+  const verifyPaymentLegacy = async (ref: string) => {
     try {
       const apiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL || '';
       const apiUrl = `${apiBaseUrl}/payments/verify`;

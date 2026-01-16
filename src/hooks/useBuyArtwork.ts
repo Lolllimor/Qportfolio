@@ -1,24 +1,49 @@
 'use client';
 
-import { UseBuyArtworkProps } from '@/types';
-import { useState, useCallback, useEffect } from 'react';
+import { Artwork } from '@/types';
+import { useState, useCallback, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
-export const useBuyArtwork = ({
-  artwork,
-  email,
-  phone = '',
-  firstName = '',
-  lastName = '',
-  onSuccess,
-  onClose,
-}: UseBuyArtworkProps) => {
+interface CustomerData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+}
+
+interface OrderData {
+  orderId: number;
+  reference: string;
+  amount: number;
+  status: string;
+  customerName: string;
+  email: string;
+}
+
+declare global {
+  interface Window {
+    PaystackPop: {
+      setup: (config: any) => {
+        openIframe: () => void;
+      };
+    };
+  }
+}
+
+export const useBuyArtwork = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [orderData, setOrderData] = useState<OrderData | null>(null);
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY;
+  const onSuccessRef = useRef<((reference: any) => Promise<void>) | null>(null);
+  const onCloseRef = useRef<(() => void) | null>(null);
 
   if (!publicKey) {
     throw new Error('NEXT_PUBLIC_PAYSTACK_KEY is not set');
   }
 
+  // Load Paystack script
   useEffect(() => {
     if (typeof window !== 'undefined' && !window.PaystackPop) {
       const script = document.createElement('script');
@@ -28,92 +53,200 @@ export const useBuyArtwork = ({
     }
   }, []);
 
-  const handleBuy = useCallback(async () => {
-    setIsLoading(true);
+  // ✅ Success callback with backend verification
+  const onSuccess = useCallback(
+    async (reference: any) => {
+      try {
+        console.log('Payment successful, verifying...', reference);
 
-    try {
-      const apiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL || '';
-      const apiUrl = `${apiBaseUrl}/orders/create`;
+        if (!orderData) {
+          throw new Error('Order data not found');
+        }
 
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          reference: `art_${artwork.id}_${Date.now()}`,
-          amount: Number(artwork.Price),
-          customerName: `${firstName.trim()} ${lastName.trim()}`.trim(),
-          artworkId: artwork.id,
-          email: email.trim(),
-          phone: phone.trim(),
-        }),
-      });
+        // STEP 1: Verify payment with backend
+        const apiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL || '';
+        const verifyUrl = `${apiBaseUrl}/orders/verify`;
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Failed to create payment');
-      }
+        const verifyResponse = await fetch(verifyUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Idempotency-Key': `${orderData.orderId}_${reference.reference}`,
+          },
+          body: JSON.stringify({
+            orderId: orderData.orderId,
+            reference: reference.reference,
+          }),
+        });
 
-      const paymentData = await response.json();
+        if (!verifyResponse.ok) {
+          const error = await verifyResponse.json();
+          throw new Error(
+            error.message || error.error || 'Verification failed'
+          );
+        }
 
-      let retries = 0;
-      while (!window.PaystackPop && retries < 10) {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        retries++;
-      }
+        const verifyData = await verifyResponse.json();
+        console.log('Verification response:', verifyData);
 
-      if (!window.PaystackPop) {
-        throw new Error('Paystack script failed to load');
-      }
-      const handler = window.PaystackPop.setup({
-        key: publicKey,
-        email: email.trim(),
-        amount: paymentData.data.amount * 100,
-        ref: paymentData.reference,
-        metadata: paymentData.metadata,
-        callback: (response: any) => {
+        if (verifyData.success) {
+          // ✓ Payment confirmed!
+          toast.success('Payment successful!');
+
+          // Reset form
+          setOrderData(null);
           setIsLoading(false);
-          if (onSuccess) {
-            onSuccess(response);
-          } else {
-            window.location.href = `/twenty-ii/payment-success?reference=${paymentData.reference}`;
-          }
-        },
-        onClose: () => {
-          setIsLoading(false);
-          if (onClose) {
-            onClose();
-          } else {
-            window.location.href = '/twenty-ii';
-          }
-        },
-      });
 
-      handler.openIframe();
-    } catch (error) {
-      console.error('Payment initialization error:', error);
-      alert(
-        error instanceof Error
-          ? error.message
-          : 'Failed to initialize payment. Please try again.'
-      );
-      setIsLoading(false);
-    }
-  }, [
-    artwork,
-    email,
-    phone,
-    firstName,
-    lastName,
-    onSuccess,
-    onClose,
-    isLoading,
-    publicKey,
-  ]);
+          // Redirect to success page
+          router.push(
+            `/twenty-ii/payment-success?orderId=${orderData.orderId}&reference=${reference.reference}`
+          );
+        } else {
+          throw new Error(verifyData.message || 'Verification failed');
+        }
+      } catch (error) {
+        console.error('Verification error:', error);
+        toast.error(
+          'Payment verification failed. Please contact support with reference: ' +
+            (reference?.reference || 'unknown')
+        );
+        setIsLoading(false);
+      }
+    },
+    [orderData, router]
+  );
+
+  // ✅ Close callback
+  const onClose = useCallback(() => {
+    console.log('Payment modal closed');
+    setIsLoading(false);
+    // Order is still in "pending" status
+    // User can retry payment
+  }, []);
+
+  // Store callbacks in refs for Paystack
+  useEffect(() => {
+    onSuccessRef.current = onSuccess;
+    onCloseRef.current = onClose;
+  }, [onSuccess, onClose]);
+
+  const handleBuy = useCallback(
+    async (artwork: Artwork, customerData: CustomerData) => {
+      setIsLoading(true);
+
+      try {
+        // STEP 1: Create order on backend
+        const reference = `art_${artwork.id}_${new Date().getTime()}`;
+        const apiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL || '';
+        const createOrderUrl = `${apiBaseUrl}/orders/create`;
+
+        const createOrderResponse = await fetch(createOrderUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            reference: reference,
+            amount: Number(artwork.Price) * 100, // Convert to kobo
+            customerName:
+              customerData.firstName.trim() +
+              ' ' +
+              customerData.lastName.trim(),
+            email: customerData.email.trim(),
+            phone: customerData.phone.trim(),
+            artworkId: artwork.id,
+          }),
+        });
+
+        if (!createOrderResponse.ok) {
+          const error = await createOrderResponse.json();
+          throw new Error(
+            error.message || error.error || 'Failed to create order'
+          );
+        }
+
+        const orderResult = await createOrderResponse.json();
+
+        if (!orderResult.success) {
+          throw new Error(orderResult.message || 'Failed to create order');
+        }
+
+        console.log('Order created:', orderResult.data);
+
+        // Store for verification later
+        setOrderData(orderResult.data);
+
+        // Wait for Paystack script to load
+        let retries = 0;
+        while (!window.PaystackPop && retries < 10) {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+          retries++;
+        }
+
+        if (!window.PaystackPop) {
+          throw new Error('Paystack script failed to load');
+        }
+
+        // STEP 2: Initialize Paystack with order info
+        // ====================================================
+        // 🚨 CRITICAL: Pass custom reference in custom_fields
+        // ====================================================
+        // Paystack generates its own reference (e.g., T619736757775957)
+        // But our backend uses our custom reference (e.g., art_4_1768538030067)
+        // We MUST pass our reference in metadata.custom_fields for webhook
+        const handler = window.PaystackPop.setup({
+          publicKey: publicKey,
+          email: customerData.email.trim(),
+          amount: orderResult.data.amount,
+          reference: orderResult.data.reference,
+          metadata: {
+            orderId: orderResult.data.orderId,
+            artworkId: artwork.id,
+            artworkDocumentId: artwork.documentId,
+            artworkTitle: artwork.Title,
+            customerName:
+              customerData.firstName.trim() +
+              ' ' +
+              customerData.lastName.trim(),
+            custom_fields: [
+              {
+                display_name: 'Order Reference',
+                variable_name: 'reference',
+                value: orderResult.data.reference,
+              },
+            ],
+          },
+          callback: (response: any) => {
+            setIsLoading(false);
+            if (onSuccessRef.current) {
+              onSuccessRef.current(response);
+            }
+          },
+          onClose: () => {
+            setIsLoading(false);
+            if (onCloseRef.current) {
+              onCloseRef.current();
+            }
+          },
+        });
+
+        // STEP 3: Show payment modal
+        handler.openIframe();
+      } catch (error) {
+        console.error('Error creating order:', error);
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : 'Failed to create order. Please try again.'
+        );
+        setIsLoading(false);
+      }
+    },
+    [publicKey]
+  );
 
   return {
-    buyArtwork: handleBuy,
+    handleBuy,
     isLoading,
   };
 };

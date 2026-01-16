@@ -17,26 +17,43 @@ export const PaymentModal = ({ artwork, onClose }: PaymentModalProps) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const { buyArtwork, isLoading } = useBuyArtwork({
-    artwork,
-    email,
-    phone,
-    firstName,
-    lastName,
-  });
+  const { handleBuy, isLoading } = useBuyArtwork();
 
   const handlePay = () => {
+    // Validate form
     if (!email || !firstName || !lastName || !phone) {
       toast.error('Please fill in all fields');
       return;
     }
 
-    const key = process.env.NEXT_PUBLIC_PAYSTACK_KEY;
-    if (!key || key === 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxx') {
-      if (!key) toast.warning('Paystack public key is not set.');
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error('Please enter a valid email address');
+      return;
     }
 
-    buyArtwork();
+    // Basic phone validation
+    if (phone.trim().length < 8) {
+      toast.error('Please enter a valid phone number');
+      return;
+    }
+
+    const key = process.env.NEXT_PUBLIC_PAYSTACK_KEY;
+    if (!key || key === 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxx') {
+      if (!key) {
+        toast.warning('Paystack public key is not set.');
+        return;
+      }
+    }
+
+    // Call handleBuy with artwork and customer data
+    handleBuy(artwork, {
+      firstName,
+      lastName,
+      email,
+      phone,
+    });
   };
 
   return (

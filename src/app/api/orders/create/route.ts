@@ -1,128 +1,208 @@
 import { NextRequest, NextResponse } from 'next/server';
 import client from '@/lib/strapiServer';
-import crypto from 'crypto';
 
 // Email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-// Phone validation (basic - adjust for your needs)
-const PHONE_REGEX = /^[\d\s\-\+\(\)]+$/;
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { reference, amount, customerName, email, phone, artworkId } = body;
 
-    // Validate required fields
-    if (
-      !reference ||
-      !amount ||
-      !customerName ||
-      !email ||
-      !phone ||
-      !artworkId
-    ) {
+    // Validate required fields (phone and artworkId are optional per guide)
+    if (!reference || !amount || !customerName || !email) {
       return NextResponse.json(
-        { error: 'All fields are required' },
+        {
+          success: false,
+          message:
+            'Missing required fields: reference, amount, customerName, email',
+        },
         { status: 400 }
       );
     }
 
-    if (!email || !EMAIL_REGEX.test(email)) {
+    if (!EMAIL_REGEX.test(email)) {
       return NextResponse.json(
-        { error: 'Valid email is required' },
-        { status: 400 }
-      );
-    }
-
-    if (!phone || !PHONE_REGEX.test(phone) || phone.trim().length < 8) {
-      return NextResponse.json(
-        { error: 'Valid phone number is required' },
+        {
+          success: false,
+          message: 'Valid email is required',
+        },
         { status: 400 }
       );
     }
 
     if (!customerName || customerName.trim().length < 1) {
       return NextResponse.json(
-        { error: 'Customer name is required' },
+        {
+          success: false,
+          message: 'Customer name is required',
+        },
         { status: 400 }
       );
     }
 
-    // Fetch artwork from Strapi to get the REAL price (server-side)
-    let artwork;
+    // Check if order with this reference already exists (idempotency)
+    let existingOrder = null;
     try {
-      const response = await client.collection('artworks').find({
-        filters: {
-          $or: [
-            { documentId: { $eq: String(artworkId) } },
-            { id: { $eq: Number(artworkId) || artworkId } },
-          ],
-        },
-        populate: '*',
+      const existingResponse = await client.collection('orders').find({
+        filters: { reference: { $eq: reference } },
       });
 
-      if (!response.data || response.data.length === 0) {
-        return NextResponse.json(
-          { error: 'Artwork not found' },
-          { status: 404 }
-        );
+      if (existingResponse.data && existingResponse.data.length > 0) {
+        existingOrder = existingResponse.data[0];
+        const orderData = existingOrder.attributes || existingOrder;
+
+        return NextResponse.json({
+          success: true,
+          message: 'Order already exists',
+          isNew: false,
+          data: {
+            orderId: existingOrder.id || orderData.id,
+            reference: orderData.reference || reference,
+            amount: orderData.amount || amount,
+            status: orderData.status || 'pending',
+            customerName: orderData.customerName || customerName,
+            email: orderData.email || email,
+          },
+        });
       }
-
-      const item = response.data[0];
-      const data = item.attributes || item;
-
-      // Check if artwork is already sold
-      if (data.BoughtBy) {
-        return NextResponse.json(
-          { error: 'This artwork has already been purchased' },
-          { status: 400 }
-        );
-      }
-
-      artwork = {
-        id: item.id || data.id,
-        documentId: item.documentId || data.documentId,
-        Title: data.Title || '',
-        Price:
-          typeof data.Price === 'string'
-            ? data.Price
-            : String(data.Price || '0'),
-      };
     } catch (error) {
-      console.error('Error fetching artwork:', error);
+      // Collection might not exist yet, continue to create
+      console.log(
+        'No existing order found or collection does not exist, creating new order'
+      );
+    }
+
+    // Fetch artwork from Strapi to validate price if artworkId is provided
+    if (artworkId) {
+      try {
+        const artworkResponse = await client.collection('artworks').find({
+          filters: {
+            $or: [
+              { documentId: { $eq: String(artworkId) } },
+              { id: { $eq: Number(artworkId) || artworkId } },
+            ],
+          },
+          populate: '*',
+        });
+
+        if (artworkResponse.data && artworkResponse.data.length > 0) {
+          const item = artworkResponse.data[0];
+          const data = item.attributes || item;
+
+          // Check if artwork is already sold
+          if (data.BoughtBy) {
+            return NextResponse.json(
+              {
+                success: false,
+                message: 'This artwork has already been purchased',
+              },
+              { status: 400 }
+            );
+          }
+
+          // Validate amount matches artwork price (in kobo)
+          const artworkPrice = Number(data.Price) * 100;
+          if (Math.abs(artworkPrice - amount) > 1) {
+            console.warn(
+              `Amount mismatch: expected ${artworkPrice}, got ${amount}`
+            );
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching artwork:', error);
+        // Continue with order creation even if artwork fetch fails
+      }
+    }
+
+    // Create order in Strapi
+    let createdOrder;
+    try {
+      const orderData: any = {
+        reference: reference.trim(),
+        amount: Number(amount),
+        customerName: customerName.trim(),
+        email: email.trim(),
+        status: 'pending',
+      };
+
+      if (phone) {
+        orderData.phone = phone.trim();
+      }
+
+      if (artworkId) {
+        orderData.artworkId = Number(artworkId) || artworkId;
+      }
+
+      const createResponse = await client.collection('orders').create({
+        data: orderData,
+      });
+
+      createdOrder = createResponse.data;
+    } catch (error: any) {
+      console.error('Error creating order in Strapi:', error);
+
+      // If order creation fails, check if it was created in a retry
+      if (error.message?.includes('duplicate') || error.status === 409) {
+        try {
+          const retryResponse = await client.collection('orders').find({
+            filters: { reference: { $eq: reference } },
+          });
+
+          if (retryResponse.data && retryResponse.data.length > 0) {
+            const existing = retryResponse.data[0];
+            const orderData = existing.attributes || existing;
+
+            return NextResponse.json({
+              success: true,
+              message: 'Order already exists (retry)',
+              isNew: false,
+              data: {
+                orderId: existing.id || orderData.id,
+                reference: orderData.reference || reference,
+                amount: orderData.amount || amount,
+                status: orderData.status || 'pending',
+                customerName: orderData.customerName || customerName,
+                email: orderData.email || email,
+              },
+            });
+          }
+        } catch (retryError) {
+          // Fall through to error response
+        }
+      }
+
       return NextResponse.json(
-        { error: 'Failed to fetch artwork details' },
+        {
+          success: false,
+          error: `Failed to create order: ${error.message || 'Unknown error'}`,
+        },
         { status: 500 }
       );
     }
 
-    // Validate and convert price
-    const price = Number(artwork.Price);
-    if (Number.isNaN(price) || price <= 0) {
-      return NextResponse.json(
-        { error: 'Invalid artwork price' },
-        { status: 400 }
-      );
-    }
+    const orderAttributes = createdOrder.attributes || createdOrder;
 
-    // Return payment configuration (price is now validated server-side)
     return NextResponse.json({
-      reference,
-      amount: Math.round(price * 100), // Convert to kobo (Paystack uses smallest currency unit)
-      email: email.trim(),
-      metadata: {
-        artwork_id: String(artwork.id),
-        artwork_documentId: artwork.documentId,
-        artwork_title: artwork.Title,
-        customer_name: customerName.trim(),
-        phone_number: phone.trim(),
+      success: true,
+      message: 'Order created successfully',
+      isNew: true,
+      data: {
+        orderId: createdOrder.id || orderAttributes.id,
+        reference: orderAttributes.reference || reference,
+        amount: orderAttributes.amount || amount,
+        status: orderAttributes.status || 'pending',
+        customerName: orderAttributes.customerName || customerName,
+        email: orderAttributes.email || email,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating order:', error);
     return NextResponse.json(
-      { error: 'Failed to create order' },
+      {
+        success: false,
+        error: `Failed to create order: ${error.message || 'Unknown error'}`,
+      },
       { status: 500 }
     );
   }
