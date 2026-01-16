@@ -135,7 +135,6 @@ export const useBuyArtwork = () => {
       setIsLoading(true);
 
       try {
-        // STEP 1: Create order on backend
         const reference = `art_${artwork.id}_${new Date().getTime()}`;
         const apiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL || '';
         const createOrderUrl = `${apiBaseUrl}/orders/create`;
@@ -187,15 +186,8 @@ export const useBuyArtwork = () => {
           throw new Error('Paystack script failed to load');
         }
 
-        // STEP 2: Initialize Paystack with order info
-        // ====================================================
-        // 🚨 CRITICAL: Pass custom reference in custom_fields
-        // ====================================================
-        // Paystack generates its own reference (e.g., T619736757775957)
-        // But our backend uses our custom reference (e.g., art_4_1768538030067)
-        // We MUST pass our reference in metadata.custom_fields for webhook
         const handler = window.PaystackPop.setup({
-          publicKey: publicKey,
+          key: publicKey,
           email: customerData.email.trim(),
           amount: orderResult.data.amount,
           reference: orderResult.data.reference,
@@ -212,7 +204,7 @@ export const useBuyArtwork = () => {
               {
                 display_name: 'Order Reference',
                 variable_name: 'reference',
-                value: orderResult.data.reference,
+                value: orderResult.data.reference, // ← CRITICAL for webhook!
               },
             ],
           },
