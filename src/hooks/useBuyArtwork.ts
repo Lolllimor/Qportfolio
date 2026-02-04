@@ -75,7 +75,7 @@ export const useBuyArtwork = () => {
           },
           body: JSON.stringify({
             orderId: orderData.orderId,
-            reference: reference.reference,
+            reference: orderData.reference,
           }),
         });
 
@@ -120,11 +120,8 @@ export const useBuyArtwork = () => {
   const onClose = useCallback(() => {
     console.log('Payment modal closed');
     setIsLoading(false);
-    // Order is still in "pending" status
-    // User can retry payment
   }, []);
 
-  // Store callbacks in refs for Paystack
   useEffect(() => {
     onSuccessRef.current = onSuccess;
     onCloseRef.current = onClose;
