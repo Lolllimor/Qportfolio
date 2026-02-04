@@ -200,7 +200,7 @@ const LandingPage = () => {
       </main>
       <div className="hidden lg:flex w-full  justify-end gap-4 mt-16 max-w-[1440px] mx-auto">
         <button
-          onClick={() => setIsEntryPortalOpen(true)}
+          onClick={() => setIsEntryPortalOpen(true)} disabled
           className="border border-[#ffffff] py-3 xl:py-4 cursor-pointer text-white w-[191px] xl:w-[269px] text-base xl:text-xl group disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <span className=" group-hover:scale-75 transition-transform duration-300 inline-block font-medium">
