@@ -154,6 +154,7 @@ export const useBuyArtwork = () => {
             email: customerData.email.trim(),
             phone: customerData.phone.trim(),
             artworkId: artwork.id,
+                artworkDocumentId: artwork.documentId, 
           }),
         });
 
