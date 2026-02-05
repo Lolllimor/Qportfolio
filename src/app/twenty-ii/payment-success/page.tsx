@@ -1,17 +1,21 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import { useEffect, useState, Suspense } from 'react';
+import Link from 'next/link';
+
+import { generateReceipt } from '@/utils/generateReceipt';
 
 const PaymentSuccessPageContent = () => {
-  const searchParams = useSearchParams();
+  const [artworkDetails, setArtworkDetails] = useState<any>(null);
   const [reference, setReference] = useState<string | null>(null);
   const [orderId, setOrderId] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
-  const [verified, setVerified] = useState<boolean>(false);
+  const [orderDetails, setOrderDetails] = useState<any>(null);
   const [verifying, setVerifying] = useState<boolean>(true);
+  const [verified, setVerified] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     setMounted(true);
@@ -23,13 +27,15 @@ const PaymentSuccessPageContent = () => {
     if (ref && oId) {
       verifyPayment(Number(oId), ref);
     } else if (ref) {
-      // Fallback: try to verify with just reference (for backward compatibility)
+     
       verifyPaymentLegacy(ref);
     } else {
       setVerifying(false);
       setError('No payment reference or order ID found');
     }
   }, [searchParams]);
+
+
 
   const verifyPayment = async (oId: number, ref: string) => {
     try {
@@ -58,18 +64,63 @@ const PaymentSuccessPageContent = () => {
       const data = await response.json();
       if (data.success) {
         setVerified(true);
+        if (data.data) {
+          console.log('Order details received:', data.data);
+          setOrderDetails(data.data);
+         
+          // Fetch full order details - it includes artwork details
+          const orderIdToFetch = data.data.orderId || oId;
+          if (orderIdToFetch) {
+            try {
+              const orderResponse = await fetch(`/api/orders/${orderIdToFetch}`);
+              if (orderResponse.ok) {
+                const orderData = await orderResponse.json();
+                if (orderData.order) {
+                  // Merge order details
+                  setOrderDetails({
+                    ...data.data,
+                    ...orderData.order,
+                  });
+                  
+                  // Use artwork details directly from order response
+                  if (orderData.order.artwork) {
+                    setArtworkDetails({
+                      id: orderData.order.artwork.id,
+                      title: orderData.order.artwork.title,
+                      price: orderData.order.artwork.price,
+                      year: orderData.order.artwork.year,
+                      collection: orderData.order.artwork.collection,
+                    });
+                  }
+                  setVerifying(false);
+                } else {
+                  setVerifying(false);
+                }
+              } else {
+                setVerifying(false);
+              }
+            } catch (fetchError) {
+              console.error('Error fetching order details:', fetchError);
+              setVerifying(false);
+            }
+          } else {
+            setVerifying(false);
+          }
+        } else {
+          console.warn('No order data in response:', data);
+          setVerifying(false);
+        }
       } else {
         setError(data.message || 'Payment verification failed');
+        setVerifying(false);
       }
     } catch (err) {
       console.error('Payment verification error:', err);
       setError(err instanceof Error ? err.message : 'Failed to verify payment');
-    } finally {
       setVerifying(false);
     }
   };
 
-  // Legacy verification for backward compatibility
   const verifyPaymentLegacy = async (ref: string) => {
     try {
       const apiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL || '';
@@ -90,13 +141,57 @@ const PaymentSuccessPageContent = () => {
       const data = await response.json();
       if (data.success) {
         setVerified(true);
+        if (data.data) {
+          setOrderDetails(data.data);
+          
+          // Fetch full order details - it includes artwork details
+          const orderIdToFetch = data.data.orderId;
+          if (orderIdToFetch) {
+            try {
+              const orderResponse = await fetch(`/api/orders/${orderIdToFetch}`);
+              if (orderResponse.ok) {
+                const orderData = await orderResponse.json();
+                if (orderData.order) {
+                  // Merge order details
+                  setOrderDetails({
+                    ...data.data,
+                    ...orderData.order,
+                  });
+                  
+                  // Use artwork details directly from order response
+                  if (orderData.order.artwork) {
+                    setArtworkDetails({
+                      id: orderData.order.artwork.id,
+                      title: orderData.order.artwork.title,
+                      price: orderData.order.artwork.price,
+                      year: orderData.order.artwork.year,
+                      collection: orderData.order.artwork.collection,
+                    });
+                  }
+                  setVerifying(false);
+                } else {
+                  setVerifying(false);
+                }
+              } else {
+                setVerifying(false);
+              }
+            } catch (fetchError) {
+              console.error('Error fetching order details:', fetchError);
+              setVerifying(false);
+            }
+          } else {
+            setVerifying(false);
+          }
+        } else {
+          setVerifying(false);
+        }
       } else {
         setError('Payment verification failed');
+        setVerifying(false);
       }
     } catch (err) {
       console.error('Payment verification error:', err);
       setError(err instanceof Error ? err.message : 'Failed to verify payment');
-    } finally {
       setVerifying(false);
     }
   };
@@ -221,6 +316,42 @@ const PaymentSuccessPageContent = () => {
                     {reference}
                   </p>
                 </div>
+              )}
+
+              {orderDetails && (
+                <button
+                  onClick={() => {
+                    // Prepare artwork data for receipt
+                    const artworkForReceipt = artworkDetails || 
+                      (orderDetails.artwork ? {
+                        id: orderDetails.artwork.id,
+                        title: orderDetails.artwork.title || orderDetails.artwork.Title,
+                        price: orderDetails.artwork.price || orderDetails.artwork.Price,
+                        year: orderDetails.artwork.year || orderDetails.artwork.Year,
+                        collection: orderDetails.artwork.collection || orderDetails.artwork.Collection,
+                      } : undefined);
+                    
+                    console.log('Generating receipt with data:', {
+                      orderDetails,
+                      artworkDetails,
+                      artworkForReceipt,
+                    });
+                    
+                    generateReceipt({
+                      orderId: orderDetails.orderId || orderId || '',
+                      reference: orderDetails.reference || reference || '',
+                      amount: orderDetails.amount || 0,
+                      customerName: orderDetails.customerName || 'N/A',
+                      email: orderDetails.email || 'N/A',
+                      phone: orderDetails.phone,
+                      artwork: artworkForReceipt,
+                      createdAt: orderDetails.createdAt,
+                    });
+                  }}
+                  className="bg-[#49B7D9] text-white font-bold uppercase py-2.5 md:py-4 px-4 md:px-8 hover:opacity-90 transition-opacity text-center w-full mb-4 md:mb-6 text-sm md:text-base"
+                >
+                  Download Receipt
+                </button>
               )}
 
               <div className="flex flex-col md:flex-row gap-3 md:gap-4 w-full mb-4 md:mb-6">

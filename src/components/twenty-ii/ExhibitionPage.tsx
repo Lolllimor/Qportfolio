@@ -6,22 +6,22 @@ import { useState, useEffect } from 'react';
 import { useFetchArtworks } from '@/hooks/useFetchArtworks';
 import { Artwork } from '@/types';
 
-const ArtworkCard = ({ tags, Year, art, Title, Price }: Artwork) => {
+const ArtworkCard = ({ tags, Year, art, Title, Price, BoughtBy }: Artwork) => {
 
   return (
-    <div className=" xl:w-[588px] xl:h-[588px] md:w-[420px] w-[342px] md:h-[420px] h-fit gap-2 md:gap-4  bg-[#F2F2F2] flex flex-col items-center justify-between font-montserrat">
+    <div className="relative xl:w-[588px] xl:h-[588px] md:w-[420px] w-[342px] md:h-[420px] h-fit gap-2 md:gap-4  bg-[#F2F2F2] flex flex-col items-center justify-between font-montserrat">
       <div className="flex  w-full items-center justify-between px-4  pt-4 ">
-        <div className="flex items-center gap-2 font-montserrat">
+        <div className="flex items-center gap-2 font-montserrat ">
           {tags.map((tag, idx) => (
             <div
               key={idx}
-              className="px-2.5 py-2 text-[#000000] text-[8px] bg-white uppercase"
+              className=" px-2.5 py-2 text-[#000000] md:px-4 md:py-3 text-[8px] md:text-xs bg-white uppercase"
             >
               {tag}
             </div>
           ))}
         </div>
-        <span className=" text-[#7D7A7A] text-center font-semibold text-xs uppercase ">
+        <span className=" text-[#7D7A7A] text-center font-semibold text-xs md:text-sm uppercase ">
           {Year}
         </span>
       </div>
@@ -38,12 +38,19 @@ const ArtworkCard = ({ tags, Year, art, Title, Price }: Artwork) => {
         ) : (
           <div className="w-full h-full" />
         )}
+        {BoughtBy && (
+          <div className="absolute top-0 right-0 w-60 h-60 overflow-hidden z-50 pointer-events-none">
+            <div className="absolute top-6 -right-8 bg-[#E3591C] text-white text-[10px] md:text-xs font-bold uppercase px-12 py-1.5 transform rotate-45 shadow-xl">
+              SOLD
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex flex-col justify-center items-center w-full gap-2  mb-[34px] md:mb-5 ">
-        <span className="  text-black font-semibold text-base uppercase ">
+        <span className="  text-black font-semibold text-base md:text-lg uppercase ">
           {Title}
         </span>
-        <span className="text-[#7D7A7A] font-semibold text-xs">
+        <span className="text-[#7D7A7A] font-semibold text-xs md:text-base">
           ₦{' '}
           {Number(Price).toLocaleString('en-US', {
             minimumFractionDigits: 0,

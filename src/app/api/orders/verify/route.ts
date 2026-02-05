@@ -44,7 +44,6 @@ export async function POST(request: NextRequest) {
 
       order = orderResponse.data[0];
     } catch (error) {
-      console.error('Error fetching order:', error);
       return NextResponse.json(
         { error: 'Failed to fetch order' },
         { status: 500 }
@@ -52,9 +51,19 @@ export async function POST(request: NextRequest) {
     }
 
     const orderData = order.attributes || order;
+    
+    // Extract all possible field locations
+    const customerName = orderData.customerName || (order as any).customerName || '';
+    const email = orderData.email || (order as any).email || '';
+    const phone = orderData.phone || (order as any).phone || '';
+    const amount = orderData.amount || (order as any).amount || 0;
+    const orderReference = orderData.reference || (order as any).reference || reference;
+    const artworkId = orderData.artworkId || (order as any).artworkId;
+    const artworkDocumentId = orderData.artworkDocumentId || order.documentId || (order as any).artworkDocumentId;
+    const createdAt = orderData.createdAt || orderData.created_at || (order as any).createdAt;
 
-    // Check if order is already paid (idempotency check)
     if (orderData.status === 'paid') {
+      // Use original orderData which has all fields
       return NextResponse.json({
         success: true,
         message: 'Payment already verified (cached)',
@@ -64,6 +73,14 @@ export async function POST(request: NextRequest) {
           orderId: order.id || orderData.id,
           status: orderData.status,
           paid: true,
+          reference: orderReference,
+          amount: amount,
+          customerName: customerName,
+          email: email,
+          phone: phone,
+          artworkId: artworkId,
+          artworkDocumentId: artworkDocumentId,
+          createdAt: createdAt,
         },
       });
     }
@@ -148,16 +165,52 @@ export async function POST(request: NextRequest) {
             }
           }
         } catch (artworkError) {
-          console.error('Error updating artwork after payment:', artworkError);
           // Don't fail the verification if artwork update fails
         }
       }
+      
+      // Use original orderData which has all fields, status is now 'paid' after update
+      const paystackCustomer = verificationResult.data?.customer;
+      const paystackMetadata = verificationResult.data?.metadata;
+      
+      // Use Paystack data as fallback if order data is missing
+      const finalCustomerName = customerName || paystackMetadata?.customer_name || (paystackCustomer?.first_name && paystackCustomer?.last_name ? `${paystackCustomer.first_name} ${paystackCustomer.last_name}` : '') || '';
+      const finalEmail = email || paystackCustomer?.email || paystackMetadata?.email || '';
+      const finalPhone = phone || paystackMetadata?.phone_number || '';
+      const finalAmount = amount || verificationResult.data?.amount || 0;
+      
+      return NextResponse.json({
+        success: true,
+        message: 'Order verified and paid',
+        alreadyPaid: false,
+        data: {
+          orderId: order.id || orderData.id,
+          status: 'paid',
+          paid: true,
+          reference: orderReference,
+          amount: finalAmount,
+          customerName: finalCustomerName,
+          email: finalEmail,
+          phone: finalPhone,
+          artworkId: artworkId,
+          artworkDocumentId: artworkDocumentId,
+          createdAt: createdAt,
+        },
+      });
     } catch (updateError) {
-      console.error('Error updating order status:', updateError);
       // Payment is verified but order update failed
-      // Return success but log the error
     }
 
+    // Fallback: Use original order data and Paystack data (if update failed)
+    const paystackCustomer = verificationResult.data?.customer;
+    const paystackMetadata = verificationResult.data?.metadata;
+    
+    // Use Paystack data as fallback if order data is missing
+    const finalCustomerName = customerName || paystackMetadata?.customer_name || (paystackCustomer?.first_name && paystackCustomer?.last_name ? `${paystackCustomer.first_name} ${paystackCustomer.last_name}` : '') || '';
+    const finalEmail = email || paystackCustomer?.email || paystackMetadata?.email || '';
+    const finalPhone = phone || paystackMetadata?.phone_number || '';
+    const finalAmount = amount || verificationResult.data?.amount || 0;
+    
     return NextResponse.json({
       success: true,
       message: 'Order verified and paid',
@@ -166,10 +219,17 @@ export async function POST(request: NextRequest) {
         orderId: order.id || orderData.id,
         status: 'paid',
         paid: true,
+        reference: orderReference,
+        amount: finalAmount,
+        customerName: finalCustomerName,
+        email: finalEmail,
+        phone: finalPhone,
+        artworkId: artworkId,
+        artworkDocumentId: artworkDocumentId,
+        createdAt: createdAt,
       },
     });
   } catch (error: any) {
-    console.error('Error verifying payment:', error);
     return NextResponse.json(
       {
         success: false,
@@ -227,7 +287,6 @@ async function verifyPaystackPayment(reference: string): Promise<{
       };
     }
   } catch (error) {
-    console.error('Paystack verification error:', error);
     return {
       success: false,
       message: 'Network error during verification',

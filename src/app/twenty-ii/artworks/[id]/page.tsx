@@ -16,10 +16,10 @@ const ArtworkCard = ({
   art,
   Title,
   Price,
-  id,
+  id, documentId
 }: Artwork & { id: number }) => {
   return (
-    <Link href={`/twenty-ii/artworks/${id}`}>
+    <Link href={`/twenty-ii/artworks/${documentId}`}>
       <div className="xl:w-[588px] xl:h-[588px] md:w-[420px] w-[342px] md:h-[420px] h-fit gap-2 md:gap-4 bg-[#F2F2F2] flex flex-col items-center justify-between font-montserrat cursor-pointer hover:opacity-90 transition-opacity">
         <div className="flex w-full items-center justify-between px-4 pt-4">
           <div className="flex items-center gap-2 font-montserrat">
