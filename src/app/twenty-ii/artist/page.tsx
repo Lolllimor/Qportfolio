@@ -27,7 +27,7 @@ const Artist = () => {
       </header>{' '}
       <button
         onClick={() => router.back()}
-        className="w-6 h-6 bg-white flex items-center justify-center md:mx-[75px] mx-[22px] xl:mx-[120px] mt-8 mb-4.5"
+        className="w-6 h-6 bg-white flex items-center justify-center md:mx-[75px] mx-[22px] xl:mx-[120px] mt-8 mb-4.5 cursor-pointer"
         aria-label="Go back"
       >
         <svg
@@ -79,7 +79,7 @@ const Artist = () => {
             {/* Instagram Icon */}
             <a
               href=""
-              className="w-8 h-8  flex items-center justify-center hover:bg-white hover:bg-opacity-10 transition-colors"
+              className="w-8 h-8  flex items-center justify-center  hover:bg-opacity-10 transition-colors"
               aria-label="Instagram"
             >
               <div className="scale-75">
@@ -89,7 +89,7 @@ const Artist = () => {
 
             <a
               href="mailto:quadmor@hotmail.com"
-              className="w-8 h-8  flex items-center justify-center hover:bg-white hover:bg-opacity-10 transition-colors"
+              className="w-8 h-8  flex items-center justify-center  hover:bg-opacity-10 transition-colors"
               aria-label="Email"
             >
               <svg

@@ -133,11 +133,14 @@ const ExhibitionPage = () => {
                  Register
                   </span>
                 </button>
-                <button className="xl:h-14 h-10 py-2 border border-black flex justify-center items-center gap-2.5 xl:w-[286px] lg:w-[200px] w-full">
-                  <span className="text-black text-center font-medium xl:text-xl text-base">
+                <Link 
+                  href="/twenty-ii/artist"
+                  className="xl:h-14 h-10 py-2 border border-black flex justify-center items-center gap-2.5 xl:w-[286px] lg:w-[200px] w-full hover:bg-black transition-colors group"
+                >
+                  <span className="text-black group-hover:text-white text-center font-medium xl:text-xl text-base transition-colors">
                     About the Artist
                   </span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
