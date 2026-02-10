@@ -25,7 +25,7 @@ const ArtworkCard = ({ tags, Year, art, Title, Price, BoughtBy }: Artwork) => {
           {Year}
         </span>
       </div>
-      <div className=" border border-[#000000] xl:w-[353px] xl:h-[373px] md:w-[250px] w-[309px] md:h-[270px] h-[335px] relative overflow-hidden">
+      <div className=" border border-[#E9E9E9] xl:w-[353px] xl:h-[373px] md:w-[250px] w-[309px] md:h-[270px] h-[335px] relative overflow-hidden">
         {art?.url ? (
           <Image
             src={art.url}
