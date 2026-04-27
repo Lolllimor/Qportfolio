@@ -23,7 +23,7 @@ export default function ProfileStack() {
       {profileImages.map((src, index) => (
         <motion.div
           key={`profile-img-${index}`}
-          className="absolute top-0 w-[40px] h-[64px] rounded-lg overflow-hidden shadow-sm"
+          className="absolute top-0 w-[40px] h-[64px] rounded-lg overflow-hidden "
           style={{
             zIndex: index,
             left: index * 24,
