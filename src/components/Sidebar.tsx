@@ -38,7 +38,7 @@ export default function Sidebar() {
     }
   };
   return (
-    <aside className=" mt-[56px] sm:mt-[162px] flex lg:flex-col flex-row fixed lg:relative bottom-0 items-center justify-center lg:gap-8 sm:gap-16 gap-8 z-10  bg-white/80 py-5 lg:py-0 w-full mx-auto lg:mx-0 lg:w-auto shadow-[0_-6px_16px_rgba(0,0,0,0.04)] lg:shadow-none h-fit">
+    <aside className=" mt-[56px] sm:mt-[162px] flex lg:flex-col flex-row fixed lg:relative bottom-0 items-center justify-center lg:gap-8 sm:gap-16 gap-8 z-9999  bg-white/80 py-5 lg:py-0 w-full mx-auto lg:mx-0 lg:w-auto shadow-[0_-6px_16px_rgba(0,0,0,0.04)] lg:shadow-none h-fit">
       <Tooltip description="Home">
         <button
           className="flex flex-col gap-1 items-center justify-center cursor-pointer"

@@ -1,43 +1,42 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 
-import { ArrowRightIcon } from './icons/arrow-right';
+import { ArrowRightIcon } from '@/components/icons/arrow-right';
 
 export const GoToTwentyII = () => {
   const router = useRouter();
+
   return (
     <button
-      className="relative  lg:h-[193px] lg:w-[204px] bg-[url('/bg.png')] bg-cover bg-center px-2 py-2 lg:py-4  w-[181px] lg:px-6 overflow-hidden flex lg:flex-col lg:rounded-2xl rounded-lg items-center lg:items-start lg:gap-0 gap-2 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg hover:brightness-110"
+      type="button"
+      aria-label="Visit Twenty-II"
+      className="group relative block sm:h-[52px] h-9 w-[150px] sm:w-[206px] shrink-0 cursor-pointer overflow-hidden sm:rounded-xl rounded-md border-0 shadow-md outline-none ring-0 transition-[height,box-shadow] duration-300 ease-out lg:hover:h-[104px] lg:hover:shadow-lg focus-visible:ring-2 focus-visible:ring-[#57D791] focus-visible:ring-offset-2 p-6"
       onClick={() => router.push('/twenty-ii')}
     >
-      <div className="relative z-10 flex lg:justify-between lg:gap-0 gap-1 items-center  lg:mb-2 w-full">
-        <span className="text-[#F76C00] font-montserrat font-medium text-xs ">
-          Return to:
-        </span>
-        <div className="text-white ">
-          <ArrowRightIcon className="w-3 h-3 md:w-4 md:h-4" />
+      <div className="absolute bottom-0 left-0 h-9 sm:h-[52px] w-[150px] sm:w-[206px] overflow-hidden sm:rounded-xl rounded-md  bg-[#121212] bg-[url('/bg.png')] bg-cover bg-center text-left lg:group-hover:h-[104px]">
+        <div className="relative lg:group-hover:py-6 py-0 flex sm:px-6 px-2 lg:group-hover:items-start items-center h-full justify-center  flex-col">
+          <p className="z-10   hidden lg:group-hover:block transition-all duration-300 font-campton text-xs font-normal tracking-wide text-white ">
+            Visit
+          </p>
+
+          <div className=" z-10 flex items-center justify-between gap-3 w-full">
+            <span className="min-w-0 font-barbra text-base sm:text-2xl leading-none tracking-tight">
+              <span className="text-[#99FFCC]">Twenty</span>
+              <span className="text-[#FF6633]">-II</span>
+            </span>
+
+            <span
+              className="relative grid h-9 w-9 shrink-0 place-items-center"
+              aria-hidden
+            >
+              <ArrowRightIcon className="col-start-1 row-start-1 h-5 w-5 text-white transition-opacity duration-300 lg:group-hover:opacity-0" />
+              <span className="col-start-1 row-start-1 flex h-9 w-9 items-center justify-center rounded-lg bg-[#2a2a2a] opacity-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] ring-1 ring-white/10 transition-opacity duration-300 lg:group-hover:opacity-100">
+                <ArrowRightIcon className="h-4 w-4 text-white" />
+              </span>
+            </span>
+          </div>
         </div>
-      </div>
-
-      {/* Main title section */}
-      <div className="relative z-10  flex-col grow justify-center lg:flex hidden">
-        <Image
-          src="/restock.png"
-          alt="Logo"
-          width={154}
-          height={97}
-          className="w-full h-full object-contain"
-        />
-      </div>
-
-      {/* Twenty-II subtitle - positioned at bottom right */}
-      <div className="relative z-10 lg:pt-4 flex lg:justify-end w-full">
-        <span className="font-barbra text-base">
-          <span className="text-[#57D791]">Twenty-</span>
-          <span className="text-[#EB5D1D]">II</span>
-        </span>
       </div>
     </button>
   );
