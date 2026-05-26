@@ -78,7 +78,7 @@ export default function ChangersLaptop() {
           </span>
         </div>
         <div className="flex h-4 flex-col justify-center self-stretch text-[#848484] text-center text-xs font-normal leading-4">
-          Research, Web, Dashboard, Payment
+          Onboarding · Growth · Web
         </div>
       </div>
     </div>

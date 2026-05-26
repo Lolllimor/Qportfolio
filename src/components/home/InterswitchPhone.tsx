@@ -8,7 +8,7 @@ export default function InterswitchPhone() {
   return (
     <div className="flex flex-col items-center gap-2 lg:w-auto w-full">
       <motion.a
-        href="https://www.dropbox.com/scl/fi/6841qmgky4yzy0s0c7xjl/PMP-Usability-Test-Case-Study.pdf?rlkey=b3dwgrripbuol0k7a5nomfm0n&st=a8994uwc&dl=0"
+        href="https://www.notion.so/Usability-Report-Design-Iteration-Comprehensive-Case-Study-343a2f6201c880efa3cceb92ba658b6b"
         target="_blank"
         rel="noreferrer"
         whileHover={isLargeScreen ? 'hover' : undefined}
@@ -78,7 +78,7 @@ export default function InterswitchPhone() {
           </span>
         </div>
         <div className="flex h-4 flex-col justify-center self-stretch text-[#848484] text-center text-xs font-normal leading-4">
-          Mobile App, Dashboard, Payment
+          Usability Research · Payment · A/B Testing
         </div>
       </div>
     </div>

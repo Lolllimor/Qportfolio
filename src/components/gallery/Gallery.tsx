@@ -1,31 +1,36 @@
-
+import { GoToTwentyII } from '@/components/GoToTwentyII';
 import { DotIcon } from '../icons/dot';
 import { gallery } from '../data';
 
 export const Gallery = () => {
   return (
-    <div className="min-h-screen bg-white relative max-[700px]:max-w-[500px] w-full px-6 sm:px-0 max-w-[850px] xl:max-w-[1014px] pt-[60px] mb-20">
-      {' '}
-      <h2 className="font-campton font-medium md:text-[32px] text-2xl text-black mb-2 leading-tight">
-        Gallery
-      </h2>
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-4 pt-6 lg:pt-16 ">
-        {gallery.map((item,idx) => (
-          <div key={idx} className="w-full h-auto mb-4 relative group">
+    <div className="relative mb-20 min-h-screen w-full max-w-[850px] bg-white px-6 pt-[60px] max-[700px]:max-w-[500px] sm:px-0 xl:max-w-[1014px]">
+      <div className="flex items-center justify-between gap-4">
+        <h2 className="font-campton text-2xl font-medium leading-tight text-black md:text-[32px]">
+          Gallery
+        </h2>
+        <div className="shrink-0">
+          <GoToTwentyII />
+        </div>
+      </div>
+
+      <div className="columns-1 gap-4 pt-6 md:columns-2 lg:columns-3 lg:pt-16">
+        {gallery.map((item, idx) => (
+          <div key={idx} className="relative mb-4 h-auto w-full group">
             <img
               src={item.src}
               alt={item.name}
-              className="w-full h-auto select-none"
+              className="h-auto w-full select-none"
               draggable={false}
               onContextMenu={(e) => e.preventDefault()}
               onDragStart={(e) => e.preventDefault()}
             />
-            <div className="absolute bottom-4 left-4 w-fit h-fit bg-white/80 rounded-md opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 px-2.5 py-1.5 flex items-center gap-1">
-              <p className="text-black text-xs font-campton  leading-tight">
+            <div className="absolute bottom-4 left-4 flex h-fit w-fit items-center gap-1 rounded-md bg-white/80 px-2.5 py-1.5 opacity-100 transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100">
+              <p className="font-campton text-xs leading-tight text-black">
                 {item.name}
               </p>
               <DotIcon />
-              <p className="text-black text-xs font-campton  leading-tight">
+              <p className="font-campton text-xs leading-tight text-black">
                 {item.date}
               </p>
             </div>

@@ -136,13 +136,11 @@ export default function Sidebar() {
           </button>
       </Tooltip>
       <Tooltip description="Article">
-        <a
+        <button
           className="flex flex-col gap-1 items-center justify-center cursor-pointer"
           onMouseEnter={() => handleMouseEnter('article')}
           onMouseLeave={handleMouseLeave}
-          href="https://medium.com/@quadmor009"
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={() => setActiveTab('article')}
         >
           {isActive('article') ? (
             <ArticleIcon />
@@ -158,7 +156,7 @@ export default function Sidebar() {
           >
             Article
           </p>
-        </a>
+        </button>
       </Tooltip>
     </aside>
   );

@@ -1,3 +1,5 @@
+const footerLinkClassName =
+  'text-center font-apple-garamond-light text-base font-normal text-[#353F50] underline transition-colors hover:text-[#E66001]';
 
 export const Footer = () => {
   return (
@@ -6,7 +8,7 @@ export const Footer = () => {
         href="https://drive.google.com/file/d/1JqFp6UDPv49VyWxwWrgDizJ3f8mGL9MO/view?usp=sharing"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#353F50] text-center text-base font-normal underline font-apple-garamond-light"
+        className={footerLinkClassName}
       >
         Download CV
       </a>
@@ -14,7 +16,7 @@ export const Footer = () => {
         href="https://www.behance.net/quadrimorin"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#353F50] text-center text-base font-normal underline font-apple-garamond-light"
+        className={footerLinkClassName}
       >
         Behance
       </a>
@@ -22,9 +24,17 @@ export const Footer = () => {
         href="https://www.linkedin.com/in/quadmor/"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#353F50] text-center text-base font-normal underline font-apple-garamond-light"
+        className={footerLinkClassName}
       >
         Linkedin
+      </a>
+      <a
+        href="https://github.com/Quadmor009"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={footerLinkClassName}
+      >
+        Github
       </a>
     </div>
   );

@@ -18,7 +18,7 @@ export const caseStudies: CaseStudy[] = [
   {
     description:
       'I led the usability testing and redesign of the parking management companion app, identifying friction points in navigation and onboarding through moderated sessions and user feedback. Using these insights, I redesigned key flows and interface elements, improving clarity, reducing task time, and delivering a more intuitive, user-centred experience for the next product release.',
-    url: 'https://www.dropbox.com/scl/fi/6841qmgky4yzy0s0c7xjl/PMP-Usability-Test-Case-Study.pdf?rlkey=b3dwgrripbuol0k7a5nomfm0n&st=a8994uwc&dl=0',
+    url: 'https://www.notion.so/Usability-Report-Design-Iteration-Comprehensive-Case-Study-343a2f6201c880efa3cceb92ba658b6b',
     imageClass: 'w-full h-auto rounded-2xl border border-[#D8D8D8]',
     imageAlt: 'Parking Management Companion App',
     title: 'Parking Management Companion App',

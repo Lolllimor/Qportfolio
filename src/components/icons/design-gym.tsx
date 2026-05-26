@@ -40,7 +40,7 @@ export const ExternalLinkMarkIcon = ({ className }: { className?: string }) => {
     >
       <path
         d="M15.3197 13.0296L15.3197 7.30674L9.59681 7.30674"
-        stroke="#1C1C28"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -48,7 +48,7 @@ export const ExternalLinkMarkIcon = ({ className }: { className?: string }) => {
       />
       <path
         d="M7.30575 15.3205L15.2395 7.38672"
-        stroke="#1C1C28"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
