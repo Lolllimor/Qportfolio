@@ -13,7 +13,7 @@ export default function PouchiiPhone() {
         rel="noreferrer"
         whileHover={isLargeScreen ? 'hover' : undefined}
         initial="initial"
-        className={`cursor-pointer xl:w-[333px] xl:h-[472px] lg:w-[284px] lg:h-[384px] w-full h-[320px]  rounded-lg relative overflow-hidden flex justify-center`}
+        className="group cursor-pointer xl:w-[333px] xl:h-[472px] lg:w-[284px] lg:h-[384px] w-full h-[320px] rounded-lg relative overflow-hidden flex justify-center"
         style={{
           background:
             'linear-gradient(156deg, #FFECE8 -1.47%, #F1EFFF 109.75%)',
@@ -46,6 +46,11 @@ export default function PouchiiPhone() {
           height={500}
           className="w-[234px] h-[485px] lg:left-[144px] lg:top-[92px] left-[75px] mt-[50px] lg:absolute "
         />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/70 via-black/15 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <p className="pointer-events-none absolute bottom-4 left-4 right-4 text-left font-campton text-xs font-normal leading-4 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          Pouchii redesign cut onboarding from 120s to 30s (75% faster) and
+          accelerated white-label deployment for new customers.
+        </p>
       </motion.a>
       <div className="flex flex-col items-center gap-1 w-[284px]">
         <div className="flex h-6 items-center justify-center gap-1 self-stretch">
@@ -64,20 +69,8 @@ export default function PouchiiPhone() {
           <span className="text-[#353F50] text-center text-base font-normal leading-10">
             Mobile App
           </span>
-          <svg
-            width="2"
-            height="2"
-            viewBox="0 0 2 2"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="1" cy="1" r="1" fill="#353F50" />
-          </svg>
-          <span className="text-[#353F50] text-center text-base font-normal leading-10">
-            2024
-          </span>
         </div>
-        <div className="flex h-4 flex-col justify-center self-stretch text-[#848484] text-center text-xs font-normal leading-4">
+        <div className="flex min-h-4 flex-col justify-center self-stretch text-[#848484] text-center text-xs font-normal leading-4">
           Activation · Retention · Onboarding flows
         </div>
       </div>

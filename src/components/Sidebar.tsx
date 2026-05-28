@@ -15,7 +15,6 @@ import { HoverHomeIcon } from './icons/hover/HomeIcon';
 import { HoverArtIcon } from './icons/hover/ArtIcon';
 import { HomeIcon } from './icons/active/HomeIcon';
 import { ArtIcon } from './icons/active/ArtIcon';
-import { Tooltip } from './common/Tooltip';
 import { useState } from 'react';
 import { useIsLargeScreen } from '@/hooks/useIsLargeScreen';
 
@@ -38,40 +37,38 @@ export default function Sidebar() {
     }
   };
   return (
-    <aside className=" mt-[56px] sm:mt-[162px] flex lg:flex-col flex-row fixed lg:relative bottom-0 items-center justify-center lg:gap-8 sm:gap-16 gap-8 z-9999  bg-white/80 py-5 lg:py-0 w-full mx-auto lg:mx-0 lg:w-auto shadow-[0_-6px_16px_rgba(0,0,0,0.04)] lg:shadow-none h-fit">
-      <Tooltip description="Home">
-        <button
-          className="flex flex-col gap-1 items-center justify-center cursor-pointer"
-          onMouseEnter={() => handleMouseEnter('home')}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => setActiveTab('home')}
+    <aside className=" mt-[56px] sm:mt-[162px] flex lg:flex-col flex-row fixed lg:sticky bottom-0 lg:bottom-auto lg:top-[162px] items-center lg:items-start justify-center lg:gap-6 sm:gap-16 gap-8 z-9999 bg-white/80 py-5 lg:py-0 w-full mx-auto lg:mx-0 lg:w-[150px] lg:shrink-0 shadow-[0_-6px_16px_rgba(0,0,0,0.04)] lg:shadow-none h-fit lg:self-start">
+      <button
+        className="group flex flex-col gap-1 lg:flex-row-reverse lg:w-[150px] items-center justify-center lg:justify-between cursor-pointer transition-all lg:px-2 lg:py-1.5 lg:rounded-md hover:bg-[#F5F5F5] lg:hover:px-3 lg:hover:py-2.5"
+        onMouseEnter={() => handleMouseEnter('home')}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => setActiveTab('home')}
+      >
+        <div className="w-5 h-5 items-center justify-center flex">
+          {isActive('home') ? (
+            <HomeIcon />
+          ) : isHover('home') ? (
+            <HoverHomeIcon />
+          ) : (
+            <InactiveHomeIcon />
+          )}
+        </div>
+        <p
+          className={`flex text-[10px] lg:text-sm font-campton transition-colors ${
+            isActive('home') ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
+          } ${isActive('home') ? '' : 'group-hover:text-[#E66001]'}`}
         >
-          <div className="w-6 h-6 items-center justify-center cursor-pointer">
-            {isActive('home') ? (
-              <HomeIcon />
-            ) : isHover('home') ? (
-              <HoverHomeIcon />
-            ) : (
-              <InactiveHomeIcon />
-            )}
-          </div>
-          <p
-            className={` flex lg:hidden text-[10px] font-campton  ${
-              isActive('home') ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
-            }`}
-          >
-            Home
-          </p>
-        </button>
-      </Tooltip>
+          Home
+        </p>
+      </button>
 
-      <Tooltip description="Product Design">
-        <button
-          className="flex flex-col gap-1 items-center justify-center cursor-pointer"
-          onMouseEnter={() => handleMouseEnter('product')}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => setActiveTab('product')}
-        >
+      <button
+        className="group flex flex-col gap-1 lg:flex-row-reverse lg:w-[150px] items-center justify-center lg:justify-between cursor-pointer transition-all lg:px-2 lg:py-1.5 lg:rounded-md hover:bg-[#F5F5F5] lg:hover:px-3 lg:hover:py-2.5"
+        onMouseEnter={() => handleMouseEnter('product')}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => setActiveTab('product')}
+      >
+        <div className="w-5 h-5 items-center justify-center flex">
           {isActive('product') ? (
             <ProductIcon />
           ) : isHover('product') ? (
@@ -79,23 +76,23 @@ export default function Sidebar() {
           ) : (
             <InactiveProductIcon />
           )}
-          <p
-            className={` flex lg:hidden text-[10px] font-campton  ${
-              isActive('product') ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
-            }`}
-          >
-            Product 
-          </p>
-        </button>
-      </Tooltip>
-
-      <Tooltip description="Graphic Design">
-        <button
-          className="flex flex-col gap-1 items-center justify-center cursor-pointer"
-          onMouseEnter={() => handleMouseEnter('graphics')}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => setActiveTab('graphics')}
+        </div>
+        <p
+          className={`flex text-[10px] lg:text-sm font-campton transition-colors ${
+            isActive('product') ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
+          } ${isActive('product') ? '' : 'group-hover:text-[#E66001]'}`}
         >
+          Products
+        </p>
+      </button>
+
+      <button
+        className="group flex flex-col gap-1 lg:flex-row-reverse lg:w-[150px] items-center justify-center lg:justify-between cursor-pointer transition-all lg:px-2 lg:py-1.5 lg:rounded-md hover:bg-[#F5F5F5] lg:hover:px-3 lg:hover:py-2.5"
+        onMouseEnter={() => handleMouseEnter('graphics')}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => setActiveTab('graphics')}
+      >
+        <div className="w-5 h-5 items-center justify-center flex">
           {isActive('graphics') ? (
             <GraphicIcon />
           ) : isHover('graphics') ? (
@@ -103,22 +100,23 @@ export default function Sidebar() {
           ) : (
             <InactiveGraphicIcon />
           )}
-          <p
-            className={` flex lg:hidden text-[10px] font-campton  ${
-              isActive('graphics') ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
-            }`}
-          >
-            Graphic 
-          </p>
-        </button>
-      </Tooltip>
-      <Tooltip description="Art Works">
-        <button
-          className="flex flex-col gap-1 items-center justify-center cursor-pointer"
-          onMouseEnter={() => handleMouseEnter('gallery')}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => setActiveTab('gallery')}
+        </div>
+        <p
+          className={`flex text-[10px] lg:text-sm font-campton transition-colors ${
+            isActive('graphics') ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
+          } ${isActive('graphics') ? '' : 'group-hover:text-[#E66001]'}`}
         >
+          Graphics
+        </p>
+      </button>
+
+      <button
+        className="group flex flex-col gap-1 lg:flex-row-reverse lg:w-[150px] items-center justify-center lg:justify-between cursor-pointer transition-all lg:px-2 lg:py-1.5 lg:rounded-md hover:bg-[#F5F5F5] lg:hover:px-3 lg:hover:py-2.5"
+        onMouseEnter={() => handleMouseEnter('gallery')}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => setActiveTab('gallery')}
+      >
+        <div className="w-5 h-5 items-center justify-center flex">
           {isActive('gallery') ? (
             <ArtIcon />
           ) : isHover('gallery') ? (
@@ -126,22 +124,23 @@ export default function Sidebar() {
           ) : (
             <InactiveArtIcon />
           )}
-          <p
-            className={` flex lg:hidden text-[10px] font-campton  ${
-              isActive('gallery') ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
-            }`}
-          >
-            Art 
-          </p>
-          </button>
-      </Tooltip>
-      <Tooltip description="Article">
-        <button
-          className="flex flex-col gap-1 items-center justify-center cursor-pointer"
-          onMouseEnter={() => handleMouseEnter('article')}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => setActiveTab('article')}
+        </div>
+        <p
+          className={`flex text-[10px] lg:text-sm font-campton transition-colors ${
+            isActive('gallery') ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
+          } ${isActive('gallery') ? '' : 'group-hover:text-[#E66001]'}`}
         >
+          Artworks
+        </p>
+      </button>
+
+      <button
+        className="group flex flex-col gap-1 lg:flex-row-reverse lg:w-[150px] items-center justify-center lg:justify-between cursor-pointer transition-all lg:px-2 lg:py-1.5 lg:rounded-md hover:bg-[#F5F5F5] lg:hover:px-3 lg:hover:py-2.5"
+        onMouseEnter={() => handleMouseEnter('article')}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => setActiveTab('article')}
+      >
+        <div className="w-5 h-5 items-center justify-center flex">
           {isActive('article') ? (
             <ArticleIcon />
           ) : isHover('article') ? (
@@ -149,15 +148,15 @@ export default function Sidebar() {
           ) : (
             <InactiveArticleIcon />
           )}
-          <p
-            className={` flex lg:hidden text-[10px] font-campton  ${
-              isActive('article') ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
-            }`}
-          >
-            Article
-          </p>
-        </button>
-      </Tooltip>
+        </div>
+        <p
+          className={`flex text-[10px] lg:text-sm font-campton transition-colors ${
+            isActive('article') ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
+          } ${isActive('article') ? '' : 'group-hover:text-[#E66001]'}`}
+        >
+          Articles
+        </p>
+      </button>
     </aside>
   );
 }

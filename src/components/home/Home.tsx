@@ -55,9 +55,9 @@ export default function HomeComponent() {
             Selected Projects
           </span>
           <div className="flex flex-col lg:flex-row items-center lg:gap-2 gap-6 font-campton">
-            <ChangersLaptop />
-            <PouchiiPhone />
             <InterswitchPhone />
+            <PouchiiPhone />
+            <ChangersLaptop />
           </div>
         </div>
 
