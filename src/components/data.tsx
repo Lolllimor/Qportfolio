@@ -250,12 +250,12 @@ export const gallery = [
 
 export const graphics = [
   {
-    imageSrc:
-      'https://api.builder.io/api/v1/image/assets/TEMP/f29b21f3672975f77a8d3b7d1566f81c5833665d',
-    imageAlt: 'Emprinte Logo Redesign',
+    imageSrc: '/Emprinte cover.png',
+    imageAlt: 'Emprinte brand and product ecosystem case study cover',
     category: 'Brand',
     company: 'Emprinte',
-    title: 'Logo Redesign & Style Guide',
+    title: 'Brand & Product Ecosystem Case Study',
+    url: 'https://www.behance.net/gallery/250175837/BRAND-PRODUCT-ECOSYSTEM-CASE-STUDY',
   },
   {
     imageSrc:
