@@ -69,7 +69,7 @@ const projects: ProjectRow[] = [
     rowIcon: <ReferenceOverlayTile />,
     hoverBg: 'hover:bg-[#DEEEFE]',
     date: 'Feb, 2026',
-    platform: 'Figma',
+    platform: 'Figma Plugin',
     titleColor: 'text-[#6C8497]',
     titleHoverColor: 'group-hover:text-[#6C8497]',
     description:
