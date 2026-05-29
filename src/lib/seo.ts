@@ -6,12 +6,17 @@ export function createPageMetadata({
   title,
   description,
   path = '',
+  image,
+  type = 'website',
 }: {
   title: string;
   description: string;
   path?: string;
+  image?: string;
+  type?: 'website' | 'article';
 }): Metadata {
   const url = `${siteConfig.url}${path}`;
+  const imageUrl = image ?? siteConfig.ogImage;
 
   return {
     title,
@@ -24,13 +29,13 @@ export function createPageMetadata({
       description,
       url,
       siteName: siteConfig.name,
-      type: 'website',
+      type,
       images: [
         {
-          url: siteConfig.ogImage,
+          url: imageUrl,
           width: 1200,
           height: 630,
-          alt: siteConfig.name,
+          alt: title,
         },
       ],
     },
@@ -38,7 +43,7 @@ export function createPageMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [siteConfig.ogImage],
+      images: [imageUrl],
     },
   };
 }
@@ -51,8 +56,10 @@ export const rootMetadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: '/logo.png',
+    icon: [{ url: '/logo.png', type: 'image/png' }],
+    apple: '/apple-touch-icon.png',
   },
+  manifest: '/manifest.json',
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
@@ -92,6 +99,51 @@ export function getPersonJsonLd() {
     jobTitle: 'Product & UX Designer',
     url: siteConfig.url,
     email: siteConfig.email,
+    image: `${siteConfig.url}/logo.png`,
     sameAs: Object.values(siteConfig.links),
+  };
+}
+
+export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+export function artworkJsonLd(artwork: {
+  title: string;
+  url: string;
+  image?: string;
+  price: string;
+  collection?: string;
+  year?: number;
+  artist: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VisualArtwork',
+    name: artwork.title,
+    url: artwork.url,
+    image: artwork.image,
+    artform: 'Digital Art',
+    creator: {
+      '@type': 'Person',
+      name: artwork.artist,
+    },
+    offers: {
+      '@type': 'Offer',
+      price: artwork.price,
+      priceCurrency: 'NGN',
+      availability: 'https://schema.org/InStock',
+    },
+    ...(artwork.collection ? { isPartOf: { '@type': 'Collection', name: artwork.collection } } : {}),
+    ...(artwork.year ? { dateCreated: String(artwork.year) } : {}),
   };
 }

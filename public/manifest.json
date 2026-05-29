@@ -1,0 +1,21 @@
+{
+  "name": "Quadri Morin — Product & UX Designer",
+  "short_name": "Quadri Morin",
+  "description": "Product and UX designer crafting digital experiences across fintech, ed-tech, AI-powered tools, and social impact products.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
