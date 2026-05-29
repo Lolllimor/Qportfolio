@@ -4,7 +4,7 @@ export const siteConfig = {
   description:
     'Product and UX designer crafting digital experiences across fintech, ed-tech, AI-powered tools, and social impact products. Currently designing at Interswitch.',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.quadmor.design',
-  ogImage: '/logo.png',
+  ogImage: '/opengraph-image',
   email: 'quadrimorin@gmail.com',
   links: {
     linkedin: 'https://www.linkedin.com/in/quadmor/',
