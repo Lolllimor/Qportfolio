@@ -3,7 +3,7 @@ export const siteConfig = {
   title: 'Quadri Morin — Product & UX Designer',
   description:
     'Product and UX designer crafting digital experiences across fintech, ed-tech, AI-powered tools, and social impact products. Currently designing at Interswitch.',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://qportfolio-one.vercel.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.quadmor.design',
   ogImage: '/logo.png',
   email: 'quadrimorin@gmail.com',
   links: {
