@@ -6,9 +6,9 @@ export const Gallery = () => {
   return (
     <div className="relative mb-20 min-h-screen w-full max-w-[850px] bg-white px-6 pt-[60px] max-[700px]:max-w-[500px] sm:px-0 xl:max-w-[1014px]">
       <div className="flex items-center justify-between gap-4">
-        <h2 className="font-campton text-2xl font-medium leading-tight text-black md:text-[32px]">
+        <h1 className="font-campton text-2xl font-medium leading-tight text-black md:text-[32px]">
           Gallery
-        </h2>
+        </h1>
         <div className="shrink-0">
           <GoToTwentyII />
         </div>

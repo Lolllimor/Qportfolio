@@ -258,12 +258,12 @@ export const graphics = [
     url: 'https://www.behance.net/gallery/250175837/BRAND-PRODUCT-ECOSYSTEM-CASE-STUDY',
   },
   {
-    imageSrc:
-      'https://api.builder.io/api/v1/image/assets/TEMP/0d6cff2f952c630b6cfd6b176be7807ee0c48c93',
-    imageAlt: 'Cherry Strike Social Media Designs',
+    imageSrc: '/Frame 2095586675.png',
+    imageAlt: 'Cherry Strike social media and marketing designs cover',
     category: 'Social Media',
     company: 'Cherry Strike',
-    title: 'Social Media Designs',
+    title: 'Social Media & Marketing Designs',
+    url: 'https://drive.google.com/file/d/1sHLmbRcKbmAq13yUrqkPemMHhqMvWPIU/view?usp=sharing',
   },
   {
     imageSrc:
@@ -272,5 +272,6 @@ export const graphics = [
     category: 'Social Media',
     company: 'MarketMemo',
     title: 'Social Media Design',
+    comingSoon: true,
   },
 ];

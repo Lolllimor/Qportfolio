@@ -67,9 +67,9 @@ export default function Article() {
       <div className="flex w-full min-w-0 flex-col max-w-[845px] xl:max-w-full">
         <div className="flex items-center justify-between gap-4">
           <div className="min-w-0">
-            <h2 className="font-garamond text-2xl font-medium text-[#353F50] sm:text-3xl">
+            <h1 className="font-garamond text-2xl font-medium text-[#353F50] sm:text-3xl">
               Articles
-            </h2>
+            </h1>
             <p className="mt-1 font-campton text-sm leading-relaxed text-[#848484] sm:text-base">
               Thinking out loud on design, AI, and how we work.
             </p>
@@ -101,7 +101,7 @@ export default function Article() {
             >
               <img
                 src={article.imageSrc}
-                alt=""
+                alt={article.title}
                 width={400}
                 height={160}
                 className="h-40 w-full shrink-0 object-cover"

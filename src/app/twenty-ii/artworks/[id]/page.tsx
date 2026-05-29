@@ -190,7 +190,7 @@ const DetailsPage = () => {
                 )}
 
                 <a
-                  href=""
+                  href="/twenty-ii/artist"
                   className="font-semibold text-base text-black mt-2 underline"
                 >
                   About the Artist

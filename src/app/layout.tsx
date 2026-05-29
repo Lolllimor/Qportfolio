@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono, Montserrat } from 'next/font/google';
-import type { Metadata } from 'next';
+
+import { JsonLd } from '@/components/JsonLd';
+import { getPersonJsonLd, rootMetadata } from '@/lib/seo';
 
 import './globals.css';
 import localFont from 'next/font/local';
@@ -55,18 +57,7 @@ const longShot = localFont({
   variable: '--font-long-shot',
 });
 
-export const metadata: Metadata = {
-  title: 'Quadri Morin',
-  description: 'Quadri Morin',
-  icons: {
-    icon: '/logo.png',
-  },
-  openGraph: {
-    title: 'Quadri Morin',
-    description: 'Quadri Morin',
-    images: ['/logo.png'],
-  },
-};
+export const metadata = rootMetadata;
 
 export default function RootLayout({
   children,
@@ -78,6 +69,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${barbra.variable} ${longShot.variable} antialiased`}
       >
+        <JsonLd data={getPersonJsonLd()} />
         {children}
       </body>
     </html>
