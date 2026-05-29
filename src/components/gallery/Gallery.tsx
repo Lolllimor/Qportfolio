@@ -1,3 +1,5 @@
+'use client';
+
 import { GoToTwentyII } from '@/components/GoToTwentyII';
 import { DotIcon } from '../icons/dot';
 import { gallery } from '../data';
