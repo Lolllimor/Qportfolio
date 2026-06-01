@@ -1,9 +1,40 @@
+const DEFAULT_SITE_URL = 'https://www.quadmor.design';
+
+/** Single canonical origin: https, www, no trailing slash on origin. */
+export function normalizeSiteOrigin(raw: string): string {
+  try {
+    const parsed = new URL(raw);
+    if (parsed.hostname === 'quadmor.design') {
+      parsed.hostname = 'www.quadmor.design';
+    }
+    parsed.protocol = 'https:';
+    parsed.pathname = '';
+    parsed.search = '';
+    parsed.hash = '';
+    return parsed.origin;
+  } catch {
+    return DEFAULT_SITE_URL;
+  }
+}
+
+/** Absolute canonical URL for a path (homepage keeps trailing slash). */
+export function getCanonicalUrl(path = ''): string {
+  const origin = siteConfig.url;
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+
+  if (!path || normalizedPath === '/') {
+    return `${origin}/`;
+  }
+
+  return `${origin}${normalizedPath.replace(/\/$/, '')}`;
+}
+
 export const siteConfig = {
   name: 'Quadri Morin',
   title: 'Quadri Morin — Product & UX Designer',
   description:
     'Product and UX designer crafting digital experiences across fintech, ed-tech, AI-powered tools, and social impact products. Currently designing at Interswitch.',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.quadmor.design',
+  url: normalizeSiteOrigin(process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL),
   ogImage: '/opengraph-image',
   email: 'quadrimorin@gmail.com',
   links: {

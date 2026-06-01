@@ -1,19 +1,19 @@
 import type { MetadataRoute } from 'next';
 
-import { portfolioRoutes, siteConfig, twentyIiRoutes } from '@/lib/site';
+import { getCanonicalUrl, portfolioRoutes, twentyIiRoutes } from '@/lib/site';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const portfolioEntries = portfolioRoutes.map(({ path }) => ({
-    url: `${siteConfig.url}${path}`,
+    url: getCanonicalUrl(path),
     lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: path === '/' ? 1 : 0.8,
   }));
 
   const twentyIiEntries = twentyIiRoutes.map(({ path }) => ({
-    url: `${siteConfig.url}${path}`,
+    url: getCanonicalUrl(path),
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: path === '/twenty-ii' ? 0.7 : 0.6,
@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const artworks: { documentId: string; Title: string; art?: { url?: string } }[] =
         data.artworks ?? data ?? [];
       artworkEntries = artworks.map((a) => ({
-        url: `${siteConfig.url}/twenty-ii/artworks/${a.documentId}`,
+        url: getCanonicalUrl(`/twenty-ii/artworks/${a.documentId}`),
         lastModified: now,
         changeFrequency: 'monthly' as const,
         priority: 0.55,

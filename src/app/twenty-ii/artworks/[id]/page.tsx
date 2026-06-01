@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import DetailsPage from './DetailsClient';
-import { siteConfig } from '@/lib/site';
+import { getCanonicalUrl, siteConfig } from '@/lib/site';
 import { createPageMetadata } from '@/lib/seo';
 
 type PageProps = {
@@ -28,7 +28,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const artwork = await fetchArtworkForMeta(id);
 
   if (!artwork) {
-    return { title: 'Artwork not found' };
+    return {
+      title: 'Artwork not found',
+      alternates: {
+        canonical: getCanonicalUrl(`/twenty-ii/artworks/${id}`),
+      },
+      robots: { index: false, follow: false },
+    };
   }
 
   return createPageMetadata({

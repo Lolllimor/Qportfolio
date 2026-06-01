@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { siteConfig } from './site';
+import { getCanonicalUrl, siteConfig } from './site';
 
 export function createPageMetadata({
   title,
@@ -15,7 +15,7 @@ export function createPageMetadata({
   image?: string;
   type?: 'website' | 'article';
 }): Metadata {
-  const url = `${siteConfig.url}${path}`;
+  const url = getCanonicalUrl(path);
   const imageUrl = image ?? siteConfig.ogImage;
 
   return {
@@ -50,6 +50,9 @@ export function createPageMetadata({
 
 export const rootMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: getCanonicalUrl('/'),
+  },
   title: {
     default: siteConfig.title,
     template: `%s | ${siteConfig.name}`,
