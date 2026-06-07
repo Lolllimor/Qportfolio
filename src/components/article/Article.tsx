@@ -8,6 +8,15 @@ type ArticleItem = {
 
 const articles: ArticleItem[] = [
   {
+    title: 'Notes From a Designers’ Panel: What AI Really Means for Creative Work',
+    date: 'Jun 2026',
+    description:
+      'Reflections from an Interswitch design panel on working with AI across research, production, and creative judgment.',
+    href: 'https://medium.com/@quadmor009/notes-from-a-designers-panel-what-ai-really-means-for-creative-work-17c424ee3c11',
+    imageSrc:
+      'https://miro.medium.com/v2/resize:fill:400:160/1*iuacBjLIcI6Vbvg1Gv8ZVQ.png',
+  },
+  {
     title: 'The Real Skill That Separates Designers Who Thrive With AI',
     date: 'Apr 2026',
     description:
