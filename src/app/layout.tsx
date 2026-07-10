@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Montserrat } from 'next/font/google';
+import { Geist, Geist_Mono, Lora, Montserrat } from 'next/font/google';
 
 import { JsonLd } from '@/components/JsonLd';
 import { getPersonJsonLd, rootMetadata } from '@/lib/seo';
@@ -18,6 +18,11 @@ const geistMono = Geist_Mono({
 
 const montserrat = Montserrat({
   variable: '--font-montserrat',
+  subsets: ['latin'],
+});
+
+const lora = Lora({
+  variable: '--font-lora',
   subsets: ['latin'],
 });
 const barbra = localFont({
@@ -67,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${barbra.variable} ${longShot.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${lora.variable} ${barbra.variable} ${longShot.variable} antialiased`}
       >
         <JsonLd data={getPersonJsonLd()} />
         {children}

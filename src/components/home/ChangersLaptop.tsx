@@ -46,11 +46,12 @@ export default function ChangersLaptop() {
           height={500}
           className="w-[360px] h-[507px] rounded-xl lg:rotate-[-14.482deg] lg:-right-25 lg:top-[200px] mt-[100px] left-[12px] lg:absolute "
         />
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/70 via-black/15 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-        <p className="pointer-events-none absolute bottom-4 left-4 right-4 text-left font-campton text-xs font-normal leading-4 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          Increased completion of donation actions due to a more intuitive and
-          streamlined UX.
-        </p>
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#F8FFED]/90 px-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <p className="text-center font-lora text-sm font-normal leading-5 text-[#353F50] md:text-base md:leading-6">
+            Increased completion of donation actions due to a more intuitive and
+            streamlined UX.
+          </p>
+        </div>
       </motion.a>
       <div className="flex flex-col items-center gap-1 w-[284px]">
         <div className="flex h-6 items-center justify-center gap-1 self-stretch">

@@ -46,11 +46,12 @@ export default function PouchiiPhone() {
           height={500}
           className="w-[234px] h-[485px] lg:left-[144px] lg:top-[92px] left-[75px] mt-[50px] lg:absolute "
         />
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/70 via-black/15 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-        <p className="pointer-events-none absolute bottom-4 left-4 right-4 text-left font-campton text-xs font-normal leading-4 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          Pouchii redesign cut onboarding from 120s to 30s (75% faster) and
-          accelerated white-label deployment for new customers.
-        </p>
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#FFECE8]/90 px-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <p className="text-center font-lora text-sm font-normal leading-5 text-[#353F50] md:text-base md:leading-6">
+            Pouchii redesign cut onboarding from 120s to 30s (75% faster) and
+            accelerated white-label deployment for new customers.
+          </p>
+        </div>
       </motion.a>
       <div className="flex flex-col items-center gap-1 w-[284px]">
         <div className="flex h-6 items-center justify-center gap-1 self-stretch">

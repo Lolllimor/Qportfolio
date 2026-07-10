@@ -1,9 +1,9 @@
 const footerLinkClassName =
-  'text-center font-apple-garamond-light text-base font-normal text-[#353F50] underline transition-colors hover:text-[#E66001]';
+  'inline-block origin-center text-center font-apple-garamond-light text-base font-normal text-[#353F50] underline transition-[color,transform] duration-200 hover:scale-[1.125] hover:text-[#E66001]';
 
 export const Footer = () => {
   return (
-    <div className="flex items-center gap-4 pb-[100px] w-full justify-center">
+    <div className="flex items-center gap-6 pb-[100px] w-full justify-center">
       <a
         href="https://drive.google.com/file/d/1JqFp6UDPv49VyWxwWrgDizJ3f8mGL9MO/view?usp=sharing"
         target="_blank"

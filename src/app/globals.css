@@ -10,6 +10,7 @@
   --font-mono: var(--font-geist-mono);
   --font-barbra: var(--font-barbra);
   --font-montserrat: var(--font-montserrat);
+  --font-lora: var(--font-lora), serif;
   --font-long-shot: var(--font-long-shot);
 }
 

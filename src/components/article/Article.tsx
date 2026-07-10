@@ -8,6 +8,15 @@ type ArticleItem = {
 
 const articles: ArticleItem[] = [
   {
+    title: 'The Right Way to Pay Attention to Detail',
+    date: 'Jul 2026',
+    description:
+      'Most advice stops at the phrase itself — here’s what it actually means through typography, spacing, and consistency.',
+    href: 'https://medium.com/@quadmor009/the-right-way-to-pay-attention-to-detail-833522cd3565',
+    imageSrc:
+      'https://miro.medium.com/v2/resize:fill:400:160/1*Y8ir5vlP0LNRqmtbfUN6dw.png',
+  },
+  {
     title: 'Notes From a Designers’ Panel: What AI Really Means for Creative Work',
     date: 'Jun 2026',
     description:
