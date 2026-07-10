@@ -46,8 +46,8 @@ export default function PouchiiPhone() {
           height={500}
           className="w-[234px] h-[485px] lg:left-[144px] lg:top-[92px] left-[75px] mt-[50px] lg:absolute "
         />
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#FFECE8]/90 px-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <p className="text-center font-lora text-sm font-normal leading-5 text-[#353F50] md:text-base md:leading-6">
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#FFECE8]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <p className="text-center font-campton text-sm font-medium leading-5 text-[#353F50] md:text-base md:leading-6">
             Pouchii redesign cut onboarding from 120s to 30s (75% faster) and
             accelerated white-label deployment for new customers.
           </p>

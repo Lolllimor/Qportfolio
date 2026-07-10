@@ -45,10 +45,10 @@ export default function InterswitchPhone() {
           height={500}
           className="w-[378px] h-[376px] lg:left-[55px] lg:top-[264px] left-[35px] mt-[10px] lg:absolute "
         />
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#F3F6E1]/90 px-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <p className="text-center font-lora text-sm font-normal leading-5 text-[#353F50] md:text-base md:leading-6">
-            Redesign boosted usability from 7.3 to 9.4 and achieved an 89.9%
-            success rate on QR code generation, reducing misclicks and drop-offs
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#F3F6E1]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <p className="text-center font-campton text-sm font-medium leading-5 text-[#353F50] md:text-base md:leading-6">
+            Redesign boosted usability from 7.3 to 9.4 & achieved an 89.9%
+            success rate on QR code generation, reducing misclicks & drop-offs
             for first-time users.
           </p>
         </div>
