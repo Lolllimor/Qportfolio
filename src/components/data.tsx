@@ -5,7 +5,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       'CHANGERS is a platform connecting social-initiative advocates with development opportunities across Africa. I led the end-to-end design; creating a scalable design system, simplifying dual user journeys, and crafting an accessible, mobile-first experience that strengthened engagement and positioned the platform for growth.',
     url: 'https://www.behance.net/gallery/235856111/Changers-UX-Case-Study',
-    imageClass: 'w-full h-auto rounded-2xl border border-[#D8D8D8]',
+    imageClass: 'w-full h-auto rounded-2xl',
     imageAlt: 'Changers Website Design',
     title: 'Changers Website Design',
     linkText: 'Read Case Study',
@@ -19,7 +19,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       'I led the usability testing and redesign of the parking management companion app, identifying friction points in navigation and onboarding through moderated sessions and user feedback. Using these insights, I redesigned key flows and interface elements, improving clarity, reducing task time, and delivering a more intuitive, user-centred experience for the next product release.',
     url: 'https://www.notion.so/Usability-Report-Design-Iteration-Comprehensive-Case-Study-343a2f6201c880efa3cceb92ba658b6b',
-    imageClass: 'w-full h-auto rounded-2xl border border-[#D8D8D8]',
+    imageClass: 'w-full h-auto rounded-2xl',
     imageAlt: 'Parking Management Companion App',
     title: 'Parking Management Companion App',
     role: 'LEAD RESEARCHER & UX DESIGNER',
@@ -33,7 +33,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       'I led the complete redesign of the Pouchii platform, creating a streamlined, visually cohesive UI and an intuitive user-flow that improved clarity and elevated the brand experience. The redesign delivered a polished interface, stronger visual identity, and a more engaging user journey from onboarding to main features.',
     url: 'https://www.behance.net/gallery/188111073/Pouchii-Redesign',
-    imageClass: 'w-full h-auto rounded-2xl border border-[#D8D8D8]',
+    imageClass: 'w-full h-auto rounded-2xl',
     imageContainerClass: 'bg-[#DDDFE6] rounded-2xl',
     imageAlt: 'Pouchii Community Solution',
     title: 'Pouchii Community Solution',

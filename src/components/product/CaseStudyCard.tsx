@@ -25,7 +25,7 @@ export const CaseStudyCard = ({ caseStudy }: CaseStudyCardProps) => {
   return (
     <div className={layoutClass}>
       <div className="flex flex-col  md:gap-[21px] gap-4 w-full lg:w-[400px] xl:w-[479px]">
-        <div className="flex flex-col gap-1 md:gap-5">
+        <div className="flex flex-col gap-0">
           <div className="flex items-center gap-1">
             <span className="text-[#848484] text-xs font-normal font-campton leading-tight">
               {year}
