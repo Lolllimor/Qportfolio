@@ -38,7 +38,7 @@ export default function HomeComponent() {
                 .
               </p>
               <a
-                href="https://drive.google.com/file/d/1JqFp6UDPv49VyWxwWrgDizJ3f8mGL9MO/view?usp=sharing"
+                href="https://docs.google.com/document/d/1RYYdLsKFfPM6eUOkGXyi4YDR9bKg5-LhG5oHIHXhGy0/edit?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 inline-flex w-fit items-center justify-center rounded-lg border border-[#F0F0F0] bg-[#F5F5F5] px-5 py-3 font-campton text-sm font-normal leading-none text-[#353F50] no-underline transition-[color,background-color,transform] duration-200 hover:scale-105 hover:bg-[#EFEFEF] hover:text-[#E66001] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001]"

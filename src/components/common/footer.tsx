@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <div className="flex items-center gap-6 pb-[100px] w-full justify-center">
       <a
-        href="https://drive.google.com/file/d/1JqFp6UDPv49VyWxwWrgDizJ3f8mGL9MO/view?usp=sharing"
+        href="https://docs.google.com/document/d/1RYYdLsKFfPM6eUOkGXyi4YDR9bKg5-LhG5oHIHXhGy0/edit?usp=sharing"
         target="_blank"
         rel="noopener noreferrer"
         className={footerLinkClassName}
