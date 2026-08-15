@@ -46,7 +46,7 @@ export const siteConfig = {
 } as const;
 
 export const portfolioRoutes = [
-  { path: '/', label: 'Home' },
+  { path: '/', label: 'Quadmor' },
   { path: '/product', label: 'Products' },
   { path: '/graphics', label: 'Graphics' },
   { path: '/gallery', label: 'Artworks' },

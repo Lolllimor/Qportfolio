@@ -23,7 +23,7 @@ import { HomeIcon } from './icons/active/HomeIcon';
 import { ArtIcon } from './icons/active/ArtIcon';
 
 const navItems = [
-  { href: '/', key: 'home', label: 'Home' },
+  { href: '/', key: 'home', label: 'Quadmor' },
   { href: '/product', key: 'product', label: 'Products' },
   { href: '/graphics', key: 'graphics', label: 'Graphics' },
   { href: '/gallery', key: 'gallery', label: 'Artworks' },

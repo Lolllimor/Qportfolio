@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import VibeCodedProjects from '@/components/home/VibeCodedProjects';
 import InterswitchPhone from '@/components/home/InterswitchPhone';
 import ChangersLaptop from '@/components/home/ChangersLaptop';
@@ -17,22 +19,26 @@ export default function HomeComponent() {
               <ProfileStack />
             </div>
 
-            <div className="flex flex-col gap-4 sm:gap-2.5 font-campton sm:max-w-[500px] md:max-w-full max-w-full">
+            <div className="group flex flex-col gap-4 sm:gap-2.5 font-campton sm:max-w-[500px] md:max-w-full max-w-full">
               <p className="text-base font-normal leading-6 text-[#848484] lg:leading-relaxed">
                 I design digital experiences that move people, across{' '}
-                <span className="text-[#353F50]">
+                <span className="text-[#353F50] transition-colors duration-200 group-hover:text-[#E66001]">
                   fintech, ed-tech, AI-powered tools, and social impact products
                 </span>{' '}
                 that have reached{' '}
-                <span className="text-[#353F50]">millions of users globally</span>
+                <span className="text-[#353F50] transition-colors duration-200 group-hover:text-[#E66001]">
+                  millions of users globally
+                </span>
                 . My focus is on the full arc: from understanding what users
                 need to shipping things that actually change behaviour.
               </p>
               <p className="text-base font-normal leading-6 text-[#848484]">
                 Currently at{' '}
-                <span className="text-[#353F50]">Interswitch</span>, designing
-                for one of{' '}
-                <span className="text-[#353F50]">
+                <span className="text-[#353F50] transition-colors duration-200 group-hover:text-[#E66001]">
+                  Interswitch
+                </span>
+                , designing for one of{' '}
+                <span className="text-[#353F50] transition-colors duration-200 group-hover:text-[#E66001]">
                   Africa&apos;s largest financial infrastructures
                 </span>
                 .
@@ -50,10 +56,17 @@ export default function HomeComponent() {
         </div>
 
         <div className="flex flex-col gap-6">
-          <span className="text-3xl font-[#353F50] font-garamond font-medium">
-            {' '}
-            Selected Projects
-          </span>
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-3xl text-[#353F50] font-garamond font-medium">
+              Selected Projects
+            </span>
+            <Link
+              href="/product"
+              className="shrink-0 font-campton text-sm font-normal text-[#353F50] underline underline-offset-4 transition-colors duration-200 hover:text-[#E66001] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001]"
+            >
+              View All Projects
+            </Link>
+          </div>
           <div className="flex flex-col lg:flex-row items-center lg:gap-2 gap-6 font-campton">
             <InterswitchPhone />
             <PouchiiPhone />
