@@ -1,5 +1,6 @@
 import { ProductComponent } from '@/components/product/Product';
-import { createPageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { createPageMetadata, pageBreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Product Design',
@@ -9,5 +10,10 @@ export const metadata = createPageMetadata({
 });
 
 export default function ProductPage() {
-  return <ProductComponent />;
+  return (
+    <>
+      <JsonLd data={pageBreadcrumbJsonLd('Product Design', '/product')} />
+      <ProductComponent />
+    </>
+  );
 }

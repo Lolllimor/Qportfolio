@@ -49,6 +49,7 @@ type ProjectRow = {
   date: string;
   platform: string;
   href: string;
+  cta: string;
 };
 
 const projects: ProjectRow[] = [
@@ -63,6 +64,7 @@ const projects: ProjectRow[] = [
     description:
       'I saw an opportunity to help Designers actively train their visual eye, so I built it. Design Gym helps designers sharpens their visual judgment through quick, side-by-side comparison rounds focused on the basic foundation of a good designs.',
     href: 'https://design-quiz-rho.vercel.app',
+    cta: 'Open Design Gym',
   },
   {
     title: 'Reference Overlay',
@@ -75,6 +77,7 @@ const projects: ProjectRow[] = [
     description:
       'Context-switching mid-design was often frustrating and killing my flow, so I built a solution. Reference Overlay keeps your reference images and PRD docs in a floating panel inside Figma, always visible, never blocking your canvas.',
     href: 'https://www.figma.com/community/plugin/1608990953292975108',
+    cta: 'Open Reference Overlay',
   },
   {
     title: 'Emprinte',
@@ -87,6 +90,7 @@ const projects: ProjectRow[] = [
     description:
       'As a founding member of Emprinte Readers Hub, I led the design of the full product experience from concept to a live App Store launch, onboarding, core flows, and visual identity. Emprinte is building the largest reading community in Africa.',
     href: 'https://apps.apple.com/ng/app/emprinte/id6762211251',
+    cta: 'View Emprinte on the App Store',
   },
 ];
 
@@ -96,7 +100,7 @@ export default function VibeCodedProjects() {
       <h2 className="font-garamond text-2xl font-medium text-[#353F50] sm:text-3xl">
         Top Vibe coded projects
       </h2>
-      <p className="mt-1 font-campton text-sm leading-relaxed text-[#848484] sm:text-base">
+      <p className="mt-1 font-campton text-sm leading-relaxed text-[#5C5C5C] sm:text-base">
         Things I got tired of waiting for someone else to build.
       </p>
 
@@ -121,20 +125,20 @@ export default function VibeCodedProjects() {
                 >
                   {project.title}
                 </h3>
-                <span className="mt-0.5 block font-campton text-[10px] text-[#848484] sm:text-[12px]">
+                <span className="mt-0.5 block font-campton text-[10px] text-[#5C5C5C] sm:text-[12px]">
                   {project.date}
-                  <span className="text-[#A8A8A8]"> · {project.platform}</span>
+                  <span className="text-[#5C5C5C]"> · {project.platform}</span>
                 </span>
               </div>
 
-              <p className="col-span-2 col-start-1 row-start-2 min-w-0 self-center font-campton text-xs leading-relaxed text-[#848484] sm:col-span-1 sm:col-start-3 sm:row-start-1 sm:max-w-[475px] sm:text-sm sm:leading-relaxed">
+              <p className="col-span-2 col-start-1 row-start-2 min-w-0 self-center font-campton text-xs leading-relaxed text-[#5C5C5C] sm:col-span-1 sm:col-start-3 sm:row-start-1 sm:max-w-[475px] sm:text-sm sm:leading-relaxed">
                 {project.description}
               </p>
 
               <span
-                className={`col-span-2 col-start-1 row-start-3 flex shrink-0 items-center gap-0.5 self-center font-campton text-xs text-[#848484] opacity-80 transition-opacity group-hover:opacity-100 sm:col-span-1 sm:col-start-4 sm:row-start-1 ${project.titleHoverColor}`}
+                className={`col-span-2 col-start-1 row-start-3 flex shrink-0 items-center gap-0.5 self-center font-campton text-xs text-[#5C5C5C] opacity-80 transition-opacity group-hover:opacity-100 sm:col-span-1 sm:col-start-4 sm:row-start-1 ${project.titleHoverColor}`}
               >
-                <span className="whitespace-nowrap">Check it out</span>
+                <span className="whitespace-nowrap">{project.cta}</span>
                 <ExternalLinkMarkIcon className="size-[18px] shrink-0 sm:size-[23px]" />
               </span>
             </a>

@@ -31,9 +31,9 @@ export const FuturePage = () => {
         <div className="absolute top-0 left-0 w-full h-full bg-[#41B4D7]/30"></div>
         <header className="z-10">
           {' '}
-          <h2 className="font-barbra text-white text-3xl lg:text-2xl">
+          <p className="font-barbra text-white text-3xl lg:text-2xl">
             Twenty- <span className="text-white">II</span>
-          </h2>
+          </p>
         </header>
         <main className="mt-14 flex flex-col gap-14 items-center max-w-[610px] z-10">
           <h2 className="font-long-shot text-white text-[40px] lg:text-[72px]">
@@ -41,13 +41,15 @@ export const FuturePage = () => {
           </h2>
           <SmileyIcon />
           <div className="flex flex-col gap-4 items-center">
-            <p className="font-montserrat text-white text-base font-medium max-w-[264px] md:max-w-full w-full text-center lg:text-2xl">
-              Who are you becoming when no one is watching?
-            </p>
-            <input
-              type="text"
-              className="w-full h-[97px] bg-white text-[#2C2C2C] font-montserrat uppercase text-xl md:text-2xl py-4 px-8 hover:opacity-90 transition-opacity rounded-lg"
-            />
+            <label className="flex w-full max-w-full flex-col items-center gap-4">
+              <span className="font-montserrat text-white text-base font-medium max-w-[264px] md:max-w-full w-full text-center lg:text-2xl">
+                Who are you becoming when no one is watching?
+              </span>
+              <input
+                type="text"
+                className="w-full h-[97px] bg-white text-[#2C2C2C] font-montserrat uppercase text-xl md:text-2xl py-4 px-8 hover:opacity-90 transition-opacity rounded-lg"
+              />
+            </label>
             <button
               onClick={handleEnterExhibition}
               className="mt-3 w-full max-w-[403px] bg-[#111112] font-long-shot uppercase text-2xl py-4 px-8 hover:opacity-90 transition-opacity cursor-pointer text-white"

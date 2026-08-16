@@ -1,6 +1,9 @@
 'use client';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useIsLargeScreen } from '@/hooks/useIsLargeScreen';
+
+const MotionImage = motion.create(Image);
 
 export default function InterswitchPhone() {
   const isLargeScreen = useIsLargeScreen();
@@ -19,7 +22,7 @@ export default function InterswitchPhone() {
             'linear-gradient(318deg, #F3F6E1 3.14%, #FFF 52.22%, #F5EEDE 101.3%)',
         }}
       >
-        <motion.img
+        <MotionImage
           variants={{
             initial: {
               scale: 1,
@@ -40,9 +43,11 @@ export default function InterswitchPhone() {
             duration: 0.3,
           }}
           src="https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LYBqZlKofS2I805isUVR9oqgHn1AxXKTBwpOQ"
-          alt="Interswitch Phone"
+          alt="Interswitch parking app — usability redesign, boosted score from 7.3 to 9.4"
           width={400}
           height={500}
+          priority
+          sizes="(max-width: 768px) 100vw, 33vw"
           className="w-[378px] h-[376px] lg:left-[55px] lg:top-[264px] left-[35px] mt-[10px] lg:absolute "
         />
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#F3F6E1]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -71,7 +76,7 @@ export default function InterswitchPhone() {
             Mobile App
           </span>
         </div>
-        <div className="flex min-h-4 flex-col justify-center self-stretch text-[#848484] text-center text-xs font-normal leading-4">
+        <div className="flex min-h-4 flex-col justify-center self-stretch text-[#5C5C5C] text-center text-xs font-normal leading-4">
           Usability Research · Payment · A/B Testing
         </div>
       </div>

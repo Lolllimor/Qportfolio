@@ -9,14 +9,15 @@ export function createPageMetadata({
   image,
   type = 'website',
 }: {
-  title: string;
+  title: string | { absolute: string };
   description: string;
   path?: string;
   image?: string;
   type?: 'website' | 'article';
 }): Metadata {
   const url = getCanonicalUrl(path);
-  const imageUrl = image ?? siteConfig.ogImage;
+  const titleText = typeof title === 'string' ? title : title.absolute;
+  const imageUrl = image;
 
   return {
     title,
@@ -25,31 +26,35 @@ export function createPageMetadata({
       canonical: url,
     },
     openGraph: {
-      title,
+      title: titleText,
       description,
       url,
       siteName: siteConfig.name,
       type,
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
+      ...(imageUrl
+        ? {
+            images: [
+              {
+                url: imageUrl,
+                width: 1200,
+                height: 630,
+                alt: titleText,
+              },
+            ],
+          }
+        : {}),
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: titleText,
       description,
-      images: [imageUrl],
+      ...(imageUrl ? { images: [imageUrl] } : {}),
     },
   };
 }
 
 export const rootMetadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL(getCanonicalUrl('/')),
   alternates: {
     canonical: getCanonicalUrl('/'),
   },
@@ -70,7 +75,7 @@ export const rootMetadata: Metadata = {
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
-    url: siteConfig.url,
+    url: getCanonicalUrl('/'),
     siteName: siteConfig.name,
     type: 'website',
     locale: 'en_US',
@@ -99,9 +104,11 @@ export const rootMetadata: Metadata = {
 };
 
 export function getPersonJsonLd() {
+  const id = `${siteConfig.url}/#person`;
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': id,
     name: siteConfig.name,
     jobTitle: 'Product & UX Designer',
     url: siteConfig.url,
@@ -109,6 +116,38 @@ export function getPersonJsonLd() {
     image: `${siteConfig.url}/logo.png`,
     sameAs: Object.values(siteConfig.links),
   };
+}
+
+export function getWebsiteJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteConfig.name,
+    url: getCanonicalUrl('/'),
+    publisher: {
+      '@id': `${siteConfig.url}/#person`,
+    },
+  };
+}
+
+export function pageBreadcrumbJsonLd(name: string, path: string) {
+  return breadcrumbJsonLd([
+    { name: 'Home', url: getCanonicalUrl('/') },
+    { name, url: getCanonicalUrl(path) },
+  ]);
+}
+
+export function twentyIiBreadcrumbJsonLd(
+  crumbs: { name: string; path: string }[]
+) {
+  return breadcrumbJsonLd([
+    { name: 'Home', url: getCanonicalUrl('/') },
+    { name: 'Twenty II', url: getCanonicalUrl('/twenty-ii') },
+    ...crumbs.map((crumb) => ({
+      name: crumb.name,
+      url: getCanonicalUrl(crumb.path),
+    })),
+  ]);
 }
 
 export function breadcrumbJsonLd(items: { name: string; url: string }[]) {

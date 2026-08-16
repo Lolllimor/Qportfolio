@@ -12,16 +12,27 @@ export const ProductComponent = () => {
       <h1 className="font-campton font-medium md:text-[32px] text-2xl text-black mb-2">
         Product Design
       </h1>
-      <div className="pl-4 pr-8 flex gap-[60px] border-b border-[#D8D8D8] md:w-fit w-full pt-6 lg:pt-16">
+      <p className="mb-2 max-w-[640px] font-campton text-sm leading-relaxed text-[#5C5C5C] sm:text-base">
+        Case studies and interface work across fintech, education, and tools
+        used at scale — from research through to shipping.
+      </p>
+      <div
+        className="pl-4 pr-8 flex gap-[60px] border-b border-[#D8D8D8] md:w-fit w-full pt-6 lg:pt-16"
+        role="tablist"
+        aria-label="Product work"
+      >
         {navItems.map((item: { label: string; value: string }) => (
-          <div
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === item.value}
             key={item.value}
-            className="flex flex-col items-center gap-1 cursor-pointer"
+            className="flex min-h-11 flex-col items-center gap-1 cursor-pointer bg-transparent border-0 p-0"
             onClick={() => setActiveTab(item.value)}
           >
             <span
               className={` text-center text-base font-normal leading-snug font-campton ${
-                activeTab === item.value ? 'text-[#000000]' : 'text-[#8A8A8A]'
+                activeTab === item.value ? 'text-[#000000]' : 'text-[#5C5C5C]'
               }`}
             >
               {item.label}
@@ -31,7 +42,7 @@ export const ProductComponent = () => {
                 activeTab === item.value ? 'bg-[#E66001]' : 'bg-transparent'
               }`}
             ></div>
-          </div>
+          </button>
         ))}
       </div>
 

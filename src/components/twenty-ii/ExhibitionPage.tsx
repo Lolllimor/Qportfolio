@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useFetchArtworks } from '@/hooks/useFetchArtworks';
+import type { PaginationMeta } from '@/hooks/useFetchArtworks';
 import { Artwork } from '@/types';
 
 const ArtworkCard = ({ tags, Year, art, Title, Price, BoughtBy }: Artwork) => {
@@ -21,7 +22,7 @@ const ArtworkCard = ({ tags, Year, art, Title, Price, BoughtBy }: Artwork) => {
             </div>
           ))}
         </div>
-        <span className=" text-[#7D7A7A] text-center font-semibold text-xs md:text-sm uppercase ">
+        <span className=" text-[#5C5C5C] text-center font-semibold text-xs md:text-sm uppercase ">
           {Year}
         </span>
       </div>
@@ -50,7 +51,7 @@ const ArtworkCard = ({ tags, Year, art, Title, Price, BoughtBy }: Artwork) => {
         <span className="  text-black font-semibold text-base md:text-lg uppercase ">
           {Title}
         </span>
-        <span className="text-[#7D7A7A] font-semibold text-xs md:text-base">
+        <span className="text-[#5C5C5C] font-semibold text-xs md:text-base">
           ₦{' '}
           {Number(Price).toLocaleString('en-US', {
             minimumFractionDigits: 0,
@@ -62,15 +63,30 @@ const ArtworkCard = ({ tags, Year, art, Title, Price, BoughtBy }: Artwork) => {
   );
 };
 
-const ExhibitionPage = () => {
+const ExhibitionPage = ({
+  initialArtworks,
+  initialPagination,
+  initialError = false,
+}: {
+  initialArtworks?: Artwork[];
+  initialPagination?: PaginationMeta;
+  initialError?: boolean;
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 25;
-  const { artworks, loading, error, pagination } = useFetchArtworks(
+  const { artworks: fetchedArtworks, loading, error, pagination } = useFetchArtworks(
     currentPage,
     pageSize
   );
 
-  const totalPages = pagination?.pageCount || 1;
+  const artworks =
+    fetchedArtworks ??
+    (currentPage === 1 ? initialArtworks : undefined);
+  const paginationMeta =
+    pagination ??
+    (currentPage === 1 ? initialPagination : undefined);
+  const totalPages = paginationMeta?.pageCount || 1;
+  const hasError = Boolean(error) || (initialError && !artworks?.length);
 
   // Scroll to top when page changes
   useEffect(() => {
@@ -92,7 +108,7 @@ const ExhibitionPage = () => {
           <div className=""></div>
           <Image
             src="/restock.png"
-            alt="Logo"
+            alt="Twenty II — Restacking the Odds"
             width={403}
             height={256}
             className="xl:w-[403px] xl:h-[256px] w-[300px] h-[190px] "
@@ -104,11 +120,11 @@ const ExhibitionPage = () => {
             <div className="h-5 w-full bg-[#49B7D9]"></div>
             <div className="xl:w-[581px] w-full mt-[38px] px-[23px]">
               <p className="xl:text-xl lg:text-base text-sm xl:leading-8 leading-6 mb-[18px] xl:w-[581px] xl:h-[262px] lg:w-[400px] w-[300px] h-fit font-montserrat">
-                <span className="text-[#7D7A7A]">This exhibition, </span>
+                <span className="text-[#5C5C5C]">This exhibition, </span>
                 <span className="text-black font-bold italic">
                   Restacking the Odds,
                 </span>
-                <span className="text-[#7D7A7A]">
+                <span className="text-[#5C5C5C]">
                   {' '}
                   presents a collection of artworks that explore the themes of
                   focus, courage, and transformation. Each piece reflects how
@@ -119,7 +135,7 @@ const ExhibitionPage = () => {
                 <span className="text-black font-semibold italic">
                   TWENTY-II
                 </span>
-                <span className="text-[#7D7A7A]">
+                <span className="text-[#5C5C5C]">
                   {' '}
                   invites viewers to reflect on how meaningful change begins
                   from within and unfolds through conscious, personal shifts.
@@ -149,17 +165,17 @@ const ExhibitionPage = () => {
 
       {/* Explore Artworks Section */}
       <div className="pt-[60px] pb-[110px]">
-        <h2 className=" font-montserrat text-center text-black font-bold lg:text-[32px] text-2xl uppercase mb-[51px]">
+        <h1 className=" font-montserrat text-center text-black font-bold lg:text-[32px] text-2xl uppercase mb-[51px]">
           Explore artworks
-        </h2>
+        </h1>
 
         {/* Artworks Grid */}
         <div className="xl:px-[120px] md:px-[75px] px-6 grid grid-cols-1 lg:grid-cols-2 gap-6 justify-items-center ">
-          {loading ? (
+          {loading && !artworks ? (
             <div className="col-span-2 py-20 text-center text-gray-500">
               Loading artworks...
             </div>
-          ) : error ? (
+          ) : hasError && !artworks?.length ? (
             <div className="col-span-2 py-20 text-center text-red-500">
               Error loading artworks. Please try again.
             </div>
@@ -189,7 +205,7 @@ const ExhibitionPage = () => {
             <button
               onClick={() => setCurrentPage(1)}
               disabled={currentPage === 1}
-              className="w-6 h-6 flex justify-center items-center disabled:opacity-50"
+              className="min-w-11 min-h-11 w-6 h-6 flex justify-center items-center disabled:opacity-50"
               aria-label="Skip to first page"
             >
               <svg
@@ -214,7 +230,7 @@ const ExhibitionPage = () => {
             <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
-              className="w-6 h-6 flex justify-center items-center bg-white rounded disabled:opacity-50"
+              className="min-w-11 min-h-11 w-6 h-6 flex justify-center items-center bg-white rounded disabled:opacity-50"
               aria-label="Go to previous page"
             >
               <svg
@@ -251,7 +267,7 @@ const ExhibitionPage = () => {
                 setCurrentPage(Math.min(totalPages, currentPage + 1))
               }
               disabled={currentPage === totalPages}
-              className="w-6 h-6 flex justify-center items-center bg-white rounded disabled:opacity-50"
+              className="min-w-11 min-h-11 w-6 h-6 flex justify-center items-center bg-white rounded disabled:opacity-50"
               aria-label="Go to next page"
             >
               <svg
@@ -272,7 +288,7 @@ const ExhibitionPage = () => {
             <button
               onClick={() => setCurrentPage(totalPages)}
               disabled={currentPage === totalPages}
-              className="w-6 h-6 flex justify-center items-center disabled:opacity-50"
+              className="min-w-11 min-h-11 w-6 h-6 flex justify-center items-center disabled:opacity-50"
               aria-label="Skip to last page"
             >
               <svg

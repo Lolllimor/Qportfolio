@@ -14,6 +14,7 @@ export interface CaseStudy {
 }
 export interface CaseStudyCardProps {
   caseStudy: CaseStudy;
+  priority?: boolean;
 }
 
 export interface ScreenItem {

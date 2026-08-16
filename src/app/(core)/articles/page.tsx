@@ -1,5 +1,6 @@
 import Article from '@/components/article/Article';
-import { createPageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { createPageMetadata, pageBreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Articles',
@@ -9,5 +10,10 @@ export const metadata = createPageMetadata({
 });
 
 export default function ArticlesPage() {
-  return <Article />;
+  return (
+    <>
+      <JsonLd data={pageBreadcrumbJsonLd('Articles', '/articles')} />
+      <Article />
+    </>
+  );
 }

@@ -1,19 +1,13 @@
-'use client';
+import { JsonLd } from '@/components/JsonLd';
+import { pageBreadcrumbJsonLd } from '@/lib/seo';
 
-import { RecognizePage } from '@/components/twenty-ii/RecognizePage';
-import { ReavealPage } from '@/components/twenty-ii/ReavealPage';
-import { FuturePage } from '@/components/twenty-ii/FuturePage';
-import LandingPage from '@/components/twenty-ii/LandingPage';
-import { useStep } from '@/contexts/StepContext';
+import TwentyTwoPage from './TwentyTwoClient';
 
-export default function TwentyTwoPage() {
-  const { step } = useStep();
+export default function Page() {
   return (
     <>
-      {step === 2 && <RecognizePage />}
-      {step === 0 && <LandingPage />}
-      {step === 1 && <ReavealPage />}
-      {step === 3 && <FuturePage />}
+      <JsonLd data={pageBreadcrumbJsonLd('Twenty II', '/twenty-ii')} />
+      <TwentyTwoPage />
     </>
   );
 }

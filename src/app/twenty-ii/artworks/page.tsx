@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 
+import type { Artwork } from '@/types';
 import ExhibitionPage from '@/components/twenty-ii/ExhibitionPage';
-import { createPageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { getArtworks } from '@/lib/artworks';
+import { createPageMetadata, twentyIiBreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Artworks — Twenty II',
@@ -10,6 +13,31 @@ export const metadata: Metadata = createPageMetadata({
   path: '/twenty-ii/artworks',
 });
 
-export default function ArtworksPage() {
-  return <ExhibitionPage />;
+export default async function ArtworksPage() {
+  let initialArtworks: Artwork[] = [];
+  let initialPagination;
+  let initialError = false;
+
+  try {
+    const result = await getArtworks(1, 25);
+    initialArtworks = result.artworks;
+    initialPagination = result.pagination;
+  } catch {
+    initialError = true;
+  }
+
+  return (
+    <>
+      <JsonLd
+        data={twentyIiBreadcrumbJsonLd([
+          { name: 'Artworks', path: '/twenty-ii/artworks' },
+        ])}
+      />
+      <ExhibitionPage
+        initialArtworks={initialArtworks}
+        initialPagination={initialPagination}
+        initialError={initialError}
+      />
+    </>
+  );
 }

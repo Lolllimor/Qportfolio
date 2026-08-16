@@ -61,7 +61,7 @@ export const PaymentModal = ({ artwork, onClose }: PaymentModalProps) => {
       <div className="relative max-w-[618px] w-full bg-white rounded-lg p-6 md:p-8 flex flex-col items-center max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded-full transition-colors"
+          className="absolute top-4 right-4 z-20 min-w-11 min-h-11 flex items-center justify-center hover:bg-gray-100 rounded-full transition-colors"
           aria-label="Close modal"
         >
           <svg
@@ -110,10 +110,11 @@ export const PaymentModal = ({ artwork, onClose }: PaymentModalProps) => {
         <div className="w-full flex flex-col gap-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1">
-              <label className="text-xs font-semibold uppercase">
+              <label htmlFor="checkout-first-name" className="text-xs font-semibold uppercase">
                 First Name
               </label>
               <input
+                id="checkout-first-name"
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -122,10 +123,11 @@ export const PaymentModal = ({ artwork, onClose }: PaymentModalProps) => {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-xs font-semibold uppercase">
+              <label htmlFor="checkout-last-name" className="text-xs font-semibold uppercase">
                 Last Name
               </label>
               <input
+                id="checkout-last-name"
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -136,10 +138,11 @@ export const PaymentModal = ({ artwork, onClose }: PaymentModalProps) => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-semibold uppercase">
+            <label htmlFor="checkout-email" className="text-xs font-semibold uppercase">
               Email Address
             </label>
             <input
+              id="checkout-email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -149,10 +152,11 @@ export const PaymentModal = ({ artwork, onClose }: PaymentModalProps) => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-semibold uppercase">
+            <label htmlFor="checkout-phone" className="text-xs font-semibold uppercase">
               Phone Number
             </label>
             <input
+              id="checkout-phone"
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}

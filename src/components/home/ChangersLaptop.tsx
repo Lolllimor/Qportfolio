@@ -1,6 +1,9 @@
 'use client';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useIsLargeScreen } from '@/hooks/useIsLargeScreen';
+
+const MotionImage = motion.create(Image);
 
 export default function ChangersLaptop() {
   const isLargeScreen = useIsLargeScreen();
@@ -19,7 +22,7 @@ export default function ChangersLaptop() {
             'linear-gradient(210deg, #F8FFED -0.16%, #E9F0FF 107.17%)',
         }}
       >
-        <motion.img
+        <MotionImage
           variants={{
             initial: {
               scale: 1,
@@ -41,9 +44,11 @@ export default function ChangersLaptop() {
             duration: 0.3,
           }}
           src="https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LIND1ga7vi0SXWVrujJ6LzK4mMPUbdcYf95Qh"
-          alt="Changers Laptop"
+          alt="Changers website redesign — increased donation action completion"
           width={400}
           height={500}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, 33vw"
           className="w-[360px] h-[507px] rounded-xl lg:rotate-[-14.482deg] lg:-right-25 lg:top-[200px] mt-[100px] left-[12px] lg:absolute "
         />
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#F8FFED]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -71,7 +76,7 @@ export default function ChangersLaptop() {
             Website Design
           </span>
         </div>
-        <div className="flex min-h-4 flex-col justify-center self-stretch text-[#848484] text-center text-xs font-normal leading-4">
+        <div className="flex min-h-4 flex-col justify-center self-stretch text-[#5C5C5C] text-center text-xs font-normal leading-4">
           Onboarding · Growth · Web
         </div>
       </div>

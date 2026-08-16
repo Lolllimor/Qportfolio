@@ -27,6 +27,16 @@ const nextConfig: NextConfig = {
         hostname: 'q-backend-92vd.onrender.com',
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: '6k5tmago9w.ufs.sh',
+        pathname: '/f/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.builder.io',
+        pathname: '/api/v1/image/assets/**',
+      },
     ],
     unoptimized: false
   },

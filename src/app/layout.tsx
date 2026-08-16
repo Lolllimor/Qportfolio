@@ -1,10 +1,10 @@
-import { Geist, Geist_Mono, Lora, Montserrat } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import { JsonLd } from '@/components/JsonLd';
 import { getPersonJsonLd, rootMetadata } from '@/lib/seo';
 
 import './globals.css';
-import localFont from 'next/font/local';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,15 +16,52 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const montserrat = Montserrat({
-  variable: '--font-montserrat',
-  subsets: ['latin'],
+const campton = localFont({
+  src: [
+    {
+      path: '../../public/fonts/CamptonBook.woff',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/CamptonMedium.woff',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/CamptonSemiBold.woff',
+      weight: '600',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-campton',
+  display: 'swap',
 });
 
-const lora = Lora({
-  variable: '--font-lora',
-  subsets: ['latin'],
+const appleGaramond = localFont({
+  src: [
+    {
+      path: '../../public/fonts/AppleGaramond.woff',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-apple-garamond',
+  display: 'swap',
 });
+
+const appleGaramondLight = localFont({
+  src: [
+    {
+      path: '../../public/fonts/AppleGaramond-Light.woff',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-apple-garamond-light',
+  display: 'swap',
+});
+
 const barbra = localFont({
   src: [
     {
@@ -49,17 +86,7 @@ const barbra = localFont({
     },
   ],
   variable: '--font-barbra',
-});
-
-const longShot = localFont({
-  src: [
-    {
-      path: '../../public/Long_Shot.ttf',
-      weight: '400',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-long-shot',
+  display: 'swap',
 });
 
 export const metadata = rootMetadata;
@@ -72,7 +99,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${lora.variable} ${barbra.variable} ${longShot.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${campton.variable} ${appleGaramond.variable} ${appleGaramondLight.variable} ${barbra.variable} antialiased`}
       >
         <JsonLd data={getPersonJsonLd()} />
         {children}

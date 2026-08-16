@@ -1,8 +1,13 @@
+import Image from 'next/image';
+
 import { CaseStudyCardProps } from '@/types';
 import { DotIcon } from '../icons/dot';
 import { ArrowRight } from '../icons/arrow-right-o';
 
-export const CaseStudyCard = ({ caseStudy }: CaseStudyCardProps) => {
+export const CaseStudyCard = ({
+  caseStudy,
+  priority = false,
+}: CaseStudyCardProps) => {
   const {
     url,
     year,
@@ -27,11 +32,11 @@ export const CaseStudyCard = ({ caseStudy }: CaseStudyCardProps) => {
       <div className="flex flex-col  md:gap-[21px] gap-4 w-full lg:w-[400px] xl:w-[479px]">
         <div className="flex flex-col gap-0">
           <div className="flex items-center gap-1">
-            <span className="text-[#848484] text-xs font-normal font-campton leading-tight">
+            <span className="text-[#5C5C5C] text-xs font-normal font-campton leading-tight">
               {year}
             </span>
             <DotIcon />
-            <span className="text-[#848484] text-xs font-normal font-campton leading-tight">
+            <span className="text-[#5C5C5C] text-xs font-normal font-campton leading-tight">
               {role}
             </span>
           </div>
@@ -39,21 +44,27 @@ export const CaseStudyCard = ({ caseStudy }: CaseStudyCardProps) => {
             {title}
           </h2>
         </div>
-        <p className="text-[#848484] text-xs md:text-base font-normal font-campton  md:leading-[24px] leading-snug">
+        <p className="text-[#5C5C5C] text-xs md:text-base font-normal font-campton  md:leading-[24px] leading-snug">
           {description}
         </p>
         <div className="flex items-center">
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group text-[#353F50] hover:text-[#E66001] text-base font-normal uppercase font-campton leading-tight flex items-center gap-2"
-          >
-            {linkText}
-            <div className="group-hover:opacity-100 opacity-0 -mt-1">
-              <ArrowRight />
-            </div>
-          </a>
+          {url ? (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group text-[#353F50] hover:text-[#E66001] text-base font-normal uppercase font-campton leading-tight flex items-center gap-2"
+            >
+              {linkText}
+              <div className="group-hover:opacity-100 opacity-0 -mt-1">
+                <ArrowRight />
+              </div>
+            </a>
+          ) : (
+            <span className="text-[#5C5C5C] text-base font-normal uppercase font-campton leading-tight">
+              {linkText}
+            </span>
+          )}
         </div>
       </div>
       <div
@@ -63,14 +74,27 @@ export const CaseStudyCard = ({ caseStudy }: CaseStudyCardProps) => {
       >
         {specialImageRender ? (
           <div className="w-full h-auto aspect-497/357 bg-white rounded-2xl overflow-hidden relative">
-            <img
+            <Image
               src={imageSrc}
               alt={imageAlt}
+              width={440}
+              height={320}
+              loading={priority ? 'eager' : 'lazy'}
+              sizes="(max-width: 1024px) 100vw, 497px"
               className="absolute left-[30px] top-[43px] w-[88%] h-auto rounded-lg shadow-[0_24px_48px_0_rgba(41,48,124,0.24)]"
             />
           </div>
         ) : (
-          <img src={imageSrc} alt={imageAlt} className={imageClass} />
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            width={497}
+            height={357}
+            loading={priority ? 'eager' : 'lazy'}
+            sizes="(max-width: 1024px) 100vw, 497px"
+            className={imageClass}
+            style={{ width: '100%', height: 'auto' }}
+          />
         )}
       </div>
     </div>

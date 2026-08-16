@@ -32,7 +32,7 @@ const ArtworkCard = ({
               </div>
             ))}
           </div>
-          <span className="text-[#7D7A7A] text-center font-semibold text-xs uppercase">
+          <span className="text-[#5C5C5C] text-center font-semibold text-xs uppercase">
             {Year}
           </span>
         </div>
@@ -53,7 +53,7 @@ const ArtworkCard = ({
           <span className="text-black font-semibold text-base uppercase">
             {Title}
           </span>
-          <span className="text-[#7D7A7A] font-semibold text-xs">
+          <span className="text-[#5C5C5C] font-semibold text-xs">
             ₦{' '}
             {Number(Price).toLocaleString('en-US', {
               minimumFractionDigits: 0,
@@ -66,10 +66,18 @@ const ArtworkCard = ({
   );
 };
 
-const DetailsPage = () => {
+const DetailsPage = ({
+  artworkId,
+  initialArtwork,
+}: {
+  artworkId?: string;
+  initialArtwork?: Artwork | null;
+}) => {
   const params = useParams();
-  const artworkId = params?.id as string;
-  const { artwork, loading, error } = useFetchArtwork(artworkId);
+  const id = artworkId || (params?.id as string);
+  const { artwork: fetchedArtwork, loading, error } = useFetchArtwork(id);
+  const artwork = fetchedArtwork ?? initialArtwork ?? undefined;
+  const isLoading = loading && !initialArtwork;
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   // Fetch related artworks (excluding current one)
@@ -96,14 +104,16 @@ const DetailsPage = () => {
           </Link>
         </div>
 
-        {loading ? (
+        {isLoading ? (
           <div className="flex items-center justify-center py-20">
             <div className="text-gray-500">Loading artwork...</div>
           </div>
-        ) : error || !artwork ? (
+        ) : !artwork ? (
           <div className="flex items-center justify-center py-20">
             <div className="text-red-500">
-              Error loading artwork. Please try again.
+              {error
+                ? 'Error loading artwork. Please try again.'
+                : 'Artwork not found.'}
             </div>
           </div>
         ) : (
@@ -121,10 +131,10 @@ const DetailsPage = () => {
                     </div>
                   ))}
                 </div>
-                <h2 className="uppercase text-black font-semibold text-center md:text-[40px] text-[32px]">
+                <h1 className="uppercase text-black font-semibold text-center md:text-[40px] text-[32px]">
                   {artwork.Title}
-                </h2>
-                <div className="flex flex-col gap-[23px] text-[#7D7A7A] text-xs">
+                </h1>
+                <div className="flex flex-col gap-[23px] text-[#5C5C5C] text-xs">
                   <div className="flex justify-between items-center">
                     <span className="uppercase">Date:</span>
                     <span className="text-[#000000] uppercase font-medium">

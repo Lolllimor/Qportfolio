@@ -1,5 +1,6 @@
 import { Gallery } from '@/components/gallery/Gallery';
-import { createPageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { createPageMetadata, pageBreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Artworks',
@@ -9,5 +10,10 @@ export const metadata = createPageMetadata({
 });
 
 export default function GalleryPage() {
-  return <Gallery />;
+  return (
+    <>
+      <JsonLd data={pageBreadcrumbJsonLd('Artworks', '/gallery')} />
+      <Gallery />
+    </>
+  );
 }

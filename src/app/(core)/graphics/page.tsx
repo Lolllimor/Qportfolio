@@ -1,5 +1,6 @@
 import { Graphics } from '@/components/graphics/Graphics';
-import { createPageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { createPageMetadata, pageBreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Graphics',
@@ -9,5 +10,10 @@ export const metadata = createPageMetadata({
 });
 
 export default function GraphicsPage() {
-  return <Graphics />;
+  return (
+    <>
+      <JsonLd data={pageBreadcrumbJsonLd('Graphics', '/graphics')} />
+      <Graphics />
+    </>
+  );
 }

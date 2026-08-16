@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { useState } from 'react';
+import Image from 'next/image';
 
 import { screens } from '../data';
 import { ScreenItem } from '@/types';
@@ -50,6 +51,7 @@ export const Screen = () => {
   return (
     <>
       <div className="mx-auto mb-12 flex w-full max-w-[850px] flex-col pt-8 sm:mb-20 sm:pt-12 lg:pt-[67px] xl:max-w-[1014px] xl:pt-6">
+        <h2 className="sr-only">Interface screens</h2>
         <ul className="grid list-none grid-cols-1 gap-3.5 p-0 lg:grid-cols-2 sm:gap-6 md:gap-7">
           {screens.map((screen: ScreenItem) => (
             <li key={screen.title} className="min-w-0">
@@ -60,9 +62,12 @@ export const Screen = () => {
               >
                 <ScreenCardShell>
                   <div className="aspect-377/215 w-full overflow-hidden rounded-md bg-[#E8E8E8]/80 mt-1 sm:rounded-lg">
-                    <img
+                    <Image
                       src={screen.imageSrc}
                       alt={screen.imageAlt}
+                      width={377}
+                      height={215}
+                      loading="lazy"
                       className="h-full w-full object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 507px"
                     />
@@ -112,10 +117,13 @@ export const Screen = () => {
                 />
               </svg>
             </button>
-            <img
+            <Image
               src={selectedScreen.imageSrc}
               alt={selectedScreen.imageAlt}
+              width={1200}
+              height={800}
               className="max-h-[min(85dvh,calc(100dvh-7rem))] max-w-full rounded-md object-contain sm:max-h-[min(88vh,calc(100vh-5rem))] sm:rounded-lg"
+              style={{ width: 'auto', height: 'auto' }}
             />
             <div className="absolute bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-1/2 max-w-[calc(100%-2rem)] -translate-x-1/2 rounded-md bg-black/55 px-3 py-2 text-center text-white sm:bottom-4 sm:px-4">
               <h3 className="font-campton text-sm font-normal leading-snug sm:text-base">

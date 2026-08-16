@@ -1,16 +1,14 @@
-@import url('https://fonts.cdnfonts.com/css/apple-garamond');
-@import url('https://fonts.cdnfonts.com/css/campton');
 @import 'tailwindcss';
 
 @theme {
-  --font-campton: 'Campton', sans-serif;
-  --font-apple-garamond: 'Apple Garamond', sans-serif;
-  --font-apple-garamond-light: 'Apple Garamond Light', sans-serif;
+  --font-campton: var(--font-campton), sans-serif;
+  --font-apple-garamond: var(--font-apple-garamond), serif;
+  --font-apple-garamond-light: var(--font-apple-garamond-light), serif;
+  --font-garamond: var(--font-apple-garamond), serif;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-barbra: var(--font-barbra);
   --font-montserrat: var(--font-montserrat);
-  --font-lora: var(--font-lora), serif;
   --font-long-shot: var(--font-long-shot);
 }
 
@@ -29,9 +27,7 @@
 body {
   background: #ffffff;
   color: #353f50;
-  font-family: 'Campton', sans-serif;
-  font-family: 'Apple Garamond', sans-serif;
-  font-family: 'Apple Garamond Light', sans-serif;
+  font-family: var(--font-apple-garamond), serif;
 }
 
 @keyframes breathing {

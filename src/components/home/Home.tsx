@@ -15,12 +15,13 @@ export default function HomeComponent() {
             <div className="h-[64px] w-full flex items-center gap-4">
               <h1 className="text-[#353F50] sm:text-[60px] md:text-[80px] text-[40px] font-normal leading-normal">
                 Quadri Morin
+                <span className="sr-only">, Product & UX Designer</span>
               </h1>
               <ProfileStack />
             </div>
 
             <div className="group flex flex-col gap-4 sm:gap-2.5 font-campton sm:max-w-[500px] md:max-w-full max-w-full">
-              <p className="text-base font-normal leading-6 text-[#848484] lg:leading-relaxed">
+              <p className="text-base font-normal leading-6 text-[#5C5C5C] lg:leading-relaxed">
                 I design digital experiences that move people, across{' '}
                 <span className="text-[#353F50] transition-colors duration-200 group-hover:text-[#E66001]">
                   fintech, ed-tech, AI-powered tools, and social impact products
@@ -32,7 +33,7 @@ export default function HomeComponent() {
                 . My focus is on the full arc: from understanding what users
                 need to shipping things that actually change behaviour.
               </p>
-              <p className="text-base font-normal leading-6 text-[#848484]">
+              <p className="text-base font-normal leading-6 text-[#5C5C5C]">
                 Currently at{' '}
                 <span className="text-[#353F50] transition-colors duration-200 group-hover:text-[#E66001]">
                   Interswitch
@@ -57,9 +58,9 @@ export default function HomeComponent() {
 
         <div className="flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">
-            <span className="text-3xl text-[#353F50] font-garamond font-medium">
+            <h2 className="text-3xl text-[#353F50] font-garamond font-medium">
               Selected Projects
-            </span>
+            </h2>
             <Link
               href="/product"
               className="shrink-0 font-campton text-sm font-normal text-[#353F50] underline underline-offset-4 transition-colors duration-200 hover:text-[#E66001] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001]"

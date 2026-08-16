@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 
+import { getAllArtworkIds } from '@/lib/artworks';
 import { getCanonicalUrl, portfolioRoutes, twentyIiRoutes } from '@/lib/site';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -19,27 +20,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: path === '/twenty-ii' ? 0.7 : 0.6,
   }));
 
-  // Fetch artwork IDs for dynamic routes
-  let artworkEntries: MetadataRoute.Sitemap = [];
-  try {
-    const base =
-      process.env.NEXT_PUBLIC_SITE_URL ?? `http://localhost:${process.env.PORT ?? 3000}`;
-    const res = await fetch(`${base}/api/artworks`, { next: { revalidate: 3600 } });
-    if (res.ok) {
-      const data = await res.json();
-      const artworks: { documentId: string; Title: string; art?: { url?: string } }[] =
-        data.artworks ?? data ?? [];
-      artworkEntries = artworks.map((a) => ({
-        url: getCanonicalUrl(`/twenty-ii/artworks/${a.documentId}`),
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.55,
-        ...(a.art?.url ? { images: [a.art.url] } : {}),
-      }));
-    }
-  } catch {
-    // API unavailable at build time — skip dynamic entries
-  }
+  const artworkIds = await getAllArtworkIds();
+  const artworkEntries = artworkIds.map((id) => ({
+    url: getCanonicalUrl(`/twenty-ii/artworks/${id}`),
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.55,
+  }));
 
   return [...portfolioEntries, ...twentyIiEntries, ...artworkEntries];
 }

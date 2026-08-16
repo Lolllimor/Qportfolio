@@ -243,7 +243,7 @@ const PaymentSuccessPageContent = () => {
             <h1 className="text-xl md:text-4xl font-bold uppercase mb-4 text-black">
               Payment Verification Failed
             </h1>
-            <p className="text-sm md:text-lg text-[#7D7A7A] mb-6">
+            <p className="text-sm md:text-lg text-[#5C5C5C] mb-6">
               {error ||
                 'Unable to verify your payment. Please contact support if you have already made a payment.'}
             </p>
@@ -302,14 +302,14 @@ const PaymentSuccessPageContent = () => {
                 Payment Successful!
               </h1>
 
-              <p className="text-sm md:text-lg text-[#7D7A7A] mb-4 md:mb-8 max-w-md leading-snug md:leading-relaxed">
+              <p className="text-sm md:text-lg text-[#5C5C5C] mb-4 md:mb-8 max-w-md leading-snug md:leading-relaxed">
                 Thank you for your purchase. We will contact you shortly
                 regarding delivery.
               </p>
 
               {reference && (
                 <div className="w-full bg-[#F2F2F2] rounded-lg p-3 md:p-4 mb-4 md:mb-8 border border-gray-200">
-                  <p className="text-[10px] md:text-xs uppercase font-semibold text-[#7D7A7A] mb-1 md:mb-2">
+                  <p className="text-[10px] md:text-xs uppercase font-semibold text-[#5C5C5C] mb-1 md:mb-2">
                     Transaction Reference
                   </p>
                   <p className="text-xs md:text-sm font-mono font-semibold text-black break-all">
@@ -364,14 +364,14 @@ const PaymentSuccessPageContent = () => {
 
                 <Link
                   href="/twenty-ii"
-                  className="border border-[#7D7A7A] text-black font-bold uppercase py-2.5 md:py-4 px-4 md:px-8 hover:bg-black hover:text-white transition-all duration-200 text-center w-full md:min-w-[200px] text-sm md:text-base"
+                  className="border border-[#5C5C5C] text-black font-bold uppercase py-2.5 md:py-4 px-4 md:px-8 hover:bg-black hover:text-white transition-all duration-200 text-center w-full md:min-w-[200px] text-sm md:text-base"
                 >
                   Back to Home
                 </Link>
               </div>
 
               <div className="w-full border-t border-gray-200 pt-3 md:pt-6">
-                <p className="text-[10px] md:text-xs text-[#7D7A7A] max-w-md mx-auto leading-tight md:leading-relaxed">
+                <p className="text-[10px] md:text-xs text-[#5C5C5C] max-w-md mx-auto leading-tight md:leading-relaxed">
                   Confirmation email sent. Questions?{' '}
                   <a
                     href="mailto:Hello.twentyii@gmail.com"

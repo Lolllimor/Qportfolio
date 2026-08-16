@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { graphics } from '../data';
 import { ArrowRight } from '../icons/arrow-right-o';
 
@@ -7,6 +9,16 @@ export const Graphics = () => {
       <h1 className="font-campton font-medium md:text-[32px] text-2xl text-black mb-2 leading-tight">
         Graphics
       </h1>
+      <p className="mb-2 max-w-[640px] font-campton text-sm leading-relaxed text-[#5C5C5C] sm:text-base">
+        Brand systems, campaign visuals, and social design — the work that has
+        to hold up next to the product itself. These pieces come from identity
+        systems, covers, and marketing for apps and campaigns where the visual
+        language is part of how people decide to trust, tap, or share. I care
+        about type, colour, and composition as much as the interface: a cover
+        that reads at thumbnail size, a social set that still feels like one
+        brand, a mark that survives a small app icon. Selected projects below;
+        more of the archive lives on Behance.
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-[64px] md:pt-12 pt-6 lg:pt-16">
         {graphics.map((item, index) => {
           const isComingSoon = item.comingSoon === true;
@@ -17,10 +29,13 @@ export const Graphics = () => {
           const cardContent = (
             <>
               <div className="relative w-full aspect-497/357 overflow-hidden rounded-2xl border border-[#D8D8D8]">
-                <img
+                <Image
                   src={item.imageSrc}
                   alt={item.imageAlt}
-                  className="absolute inset-0 h-full w-full object-cover object-center"
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-center"
                 />
                 {isComingSoon && (
                   <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-[#121212]/85">
@@ -41,12 +56,12 @@ export const Graphics = () => {
                 )}
               </div>
               <div className="flex flex-col lg:gap-2">
-                <div className="text-[#666] lg:text-base text-xs font-normal leading-tight font-campton">
+                <div className="text-[#5C5C5C] lg:text-base text-xs font-normal leading-tight font-campton">
                   {item.company}
                 </div>
-                <div className="text-black lg:text-[32px] text-basefont-medium leading-tight font-campton">
+                <h2 className="text-black lg:text-[32px] text-base font-medium leading-tight font-campton">
                   {item.title}
-                </div>
+                </h2>
               </div>
             </>
           );

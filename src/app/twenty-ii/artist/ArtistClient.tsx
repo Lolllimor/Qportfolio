@@ -1,32 +1,30 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import { InstagramIcon } from '@/components/icons/instagram';
 
 const Artist = () => {
-  const router = useRouter();
-
   return (
     <div className="min-h-screen bg-black text-white font-montserrat">
       <header className="flex justify-between items-center px-6 md:px-[75px] xl:px-[120px] pt-[40px] xl:pt-[57px]">
         <div className="flex flex-col gap-4">
-          <h1 className="font-barbra text-[#57D791] text-[32px] xl:text-5xl">
+          <Link
+            href="/twenty-ii"
+            className="font-barbra text-[#57D791] text-[32px] xl:text-5xl"
+          >
             Twenty- <span className="text-[#EB5D1D]">II</span>
-          </h1>
+          </Link>
         </div>
-        <button
-          onClick={() => router.push('/')}
-          className="text-[#EB5D1D] text-sm xl:text-base font-semibold"
+        <Link
+          href="/"
+          className="text-[#EB5D1D] text-sm xl:text-base font-semibold min-h-11 inline-flex items-center"
         >
           Back to Main Website
-        </button>
-      </header>{' '}
-      <button
-        onClick={() => router.back()}
-        className="w-6 h-6 bg-white flex items-center justify-center md:mx-[75px] mx-[22px] xl:mx-[120px] mt-8 mb-4.5 cursor-pointer"
-        aria-label="Go back"
+        </Link>
+      </header>
+      <Link
+        href="/twenty-ii/artworks"
+        className="min-w-11 min-h-11 bg-white flex items-center justify-center md:mx-[75px] mx-[22px] xl:mx-[120px] mt-8 mb-4.5 cursor-pointer"
+        aria-label="Back to artworks"
       >
         <svg
           width="16"
@@ -43,7 +41,7 @@ const Artist = () => {
             strokeLinejoin="round"
           />
         </svg>
-      </button>
+      </Link>
       <main className="flex flex-col lg:flex-row gap-8 lg:gap-12 px-6 md:px-[75px] xl:px-[120px] pb-10 xl:pb-16 md:items-center items-start relative">
         <div className="w-full lg:w-1/2 aspect-square bg-[#F2F2F2] relative overflow-hidden xl:py-24 md:py-16 xl:px-16 md:px-12 flex items-center justify-center py-8 px-[38px]">
           <div className="bg-[#D9D9D9] border border-black xl:w-[460px] lg:w-[300px] xl:h-[405px] lg:h-[270px] w-full h-full" />
@@ -51,6 +49,9 @@ const Artist = () => {
 
         <div className="w-full lg:w-1/2 flex flex-col justify-between font-montserrat">
           <div className="text-white text-base xl:text-lg leading-relaxed">
+            <h1 className="font-montserrat text-2xl xl:text-3xl font-semibold mb-4">
+              About the Artist
+            </h1>
             <p>
               <span className="font-semibold">Quadri Morin</span> is an artist
               whose work explores self-empowerment; inner transformation; and
@@ -61,17 +62,21 @@ const Artist = () => {
               and reconnect with their own internal journey. His practice is
               rooted in observation and intentionality, weaving everyday{' '}
               <span className="font-semibold">human emotions</span> into layered
-              compositions that feel both intimate and expansive. Quadri&apos;s work
-              continues to evolve as he experiments with new forms, mediums, and
-              narratives that challenge how we see ourselves and the world
-              around us.
+              compositions that feel both intimate and expansive.
+            </p>
+            <p className="mt-4">
+              Twenty II, Restacking the Odds, gathers that inquiry into a
+              single body of work: discipline, courage, and the quiet decision
+              to change. Quadri continues to experiment with form, medium, and
+              narrative — as a product designer by day and as an artist
+              asking how we see ourselves when nobody is watching.
             </p>
           </div>
 
           <div className="flex gap-4 mt-8 lg:mt-0 justify-end lg:absolute bottom-10 lg:bottom-0 xl:bottom-16 xl:right-[120px] md:right-[75px] right-[22px]">
             <a
               href="https://www.instagram.com/quadmor"
-              className="w-8 h-8 flex items-center justify-center hover:bg-opacity-10 transition-colors"
+              className="min-w-11 min-h-11 w-8 h-8 flex items-center justify-center hover:bg-opacity-10 transition-colors"
               aria-label="Quadri Morin on Instagram"
             >
               <div className="scale-75">
@@ -81,7 +86,7 @@ const Artist = () => {
 
             <a
               href="mailto:quadmor@hotmail.com"
-              className="w-8 h-8 flex items-center justify-center hover:bg-opacity-10 transition-colors"
+              className="min-w-11 min-h-11 w-8 h-8 flex items-center justify-center hover:bg-opacity-10 transition-colors"
               aria-label="Email Quadri Morin"
             >
               <svg

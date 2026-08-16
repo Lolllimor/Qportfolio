@@ -58,7 +58,7 @@ export default function Header() {
               aria-label={label}
               onMouseEnter={() => setIsHovered(key)}
               onMouseLeave={() => setIsHovered('')}
-              className="relative flex h-8 w-8 items-center justify-center"
+              className="relative flex min-h-11 min-w-11 items-center justify-center"
             >
               <span className={iconCircleClass(key)}>
                 <Icon color={active ? '#E66001' : '#414752'} />

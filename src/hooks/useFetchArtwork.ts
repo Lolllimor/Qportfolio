@@ -32,7 +32,6 @@ export function useFetchArtwork(id: string | number): UseFetchArtworkReturn {
         }
 
         const data = await response.json();
-// info
         if (isMounted) {
           setArtwork(data.artwork);
         }

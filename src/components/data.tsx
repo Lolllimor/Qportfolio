@@ -8,7 +8,7 @@ export const caseStudies: CaseStudy[] = [
     imageClass: 'w-full h-auto rounded-2xl',
     imageAlt: 'Changers Website Design',
     title: 'Changers Website Design',
-    linkText: 'Read Case Study',
+    linkText: 'Read the Changers UX case study',
     imageSrc:
       'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LKUz8yg5Pje3usvNlw1nqRtQd0x6XDaZpWhB2',
     role: 'LEAD UX DESIGNER',
@@ -23,7 +23,7 @@ export const caseStudies: CaseStudy[] = [
     imageAlt: 'Parking Management Companion App',
     title: 'Parking Management Companion App',
     role: 'LEAD RESEARCHER & UX DESIGNER',
-    linkText: 'Read Case Study',
+    linkText: 'Read the parking app case study',
     imageSrc:
       'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0L5SLuzS8ltFbLikoK7EwW6RaJHmQC8xG0NvcT',
     reverseLayout: true,
@@ -37,7 +37,7 @@ export const caseStudies: CaseStudy[] = [
     imageContainerClass: 'bg-[#DDDFE6] rounded-2xl',
     imageAlt: 'Pouchii Community Solution',
     title: 'Pouchii Community Solution',
-    linkText: 'Read Case Study',
+    linkText: 'Read the Pouchii redesign case study',
     role: 'LEAD UX DESIGNER',
     imageSrc:
       'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LxjUPASRBmcRrl8XHL65yj3AhpDb7t9os4gNa',
@@ -50,7 +50,7 @@ export const caseStudies: CaseStudy[] = [
     url: 'https://www.behance.net/gallery/199047341/Administrative-Dashboard',
     imageAlt: 'Multi-Level Admin Dashboard',
     title: 'Multi-Level Admin Dashboard',
-    linkText: 'READ CASE STUDY',
+    linkText: 'Read the admin dashboard case study',
     specialImageRender: true,
     role: 'LEAD UX DESIGNER',
     imageSrc:
@@ -65,7 +65,7 @@ export const caseStudies: CaseStudy[] = [
     imageAlt: 'Budgeting & Warranting System',
     imageClass: 'w-full h-auto rounded-2xl',
     title: 'Budgeting & Warranting System',
-    linkText: 'Read Case Study',
+    linkText: 'Read the budgeting system case study',
     role: 'LEAD UX DESIGNER',
     reverseLayout: false,
     imageSrc:
@@ -80,14 +80,14 @@ export const caseStudies: CaseStudy[] = [
     imageAlt: 'Enhanced Residential App System',
     title: 'Enhanced Residential App System',
     imageClass: 'w-full h-auto rounded-2xl',
-    linkText: 'Read Case Study',
+    linkText: 'Read the residential app case study',
     role: 'LEAD UX DESIGNER',
     imageSrc:
       'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LJjHdWRzBfg68sRqzw4duE5YHMPiyT7rnkbmV',
     reverseLayout: true,
   },
   {
-    year: '202-',
+    year: '2025',
     role: 'UX DESIGNER',
     title: 'Design System Case Study',
     description:
@@ -250,15 +250,15 @@ export const gallery = [
 
 export const graphics = [
   {
-    imageSrc: '/Emprinte cover.png',
-    imageAlt: 'Emprinte brand and product ecosystem case study cover',
+    imageSrc: '/emprinte-cover.webp',
+    imageAlt: 'Emprinte iOS app — brand and product design',
     category: 'Brand',
     company: 'Emprinte',
     title: 'Brand & Product Ecosystem Case Study',
     url: 'https://www.behance.net/gallery/250175837/BRAND-PRODUCT-ECOSYSTEM-CASE-STUDY',
   },
   {
-    imageSrc: '/Frame 2095586675.png',
+    imageSrc: '/cherry-strike-cover.webp',
     imageAlt: 'Cherry Strike social media and marketing designs cover',
     category: 'Social Media',
     company: 'Cherry Strike',

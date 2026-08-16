@@ -88,7 +88,7 @@ export default function Article() {
             <h1 className="font-garamond text-2xl font-medium text-[#353F50] sm:text-3xl">
               Articles
             </h1>
-            <p className="mt-1 font-campton text-sm leading-relaxed text-[#848484] sm:text-base">
+            <p className="mt-1 font-campton text-sm leading-relaxed text-[#5C5C5C] sm:text-base">
               Thinking out loud on design, AI, and how we work.
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function Article() {
               rel="noopener noreferrer"
               role="listitem"
               aria-label={`Read article: ${article.title}`}
-              className="group flex h-full min-h-[360px] flex-col overflow-hidden rounded-[10px] border border-[#F0F0F0] bg-[#FAFAFA] no-underline transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001] visited:[&_h3]:text-[#353F50]"
+              className="group flex h-full min-h-[360px] flex-col overflow-hidden rounded-[10px] border border-[#F0F0F0] bg-[#FAFAFA] no-underline transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001] visited:[&_h2]:text-[#353F50]"
             >
               <img
                 src={article.imageSrc}
@@ -127,14 +127,14 @@ export default function Article() {
 
               <div className="flex flex-1 flex-col items-start p-4">
                 <div className="flex w-full flex-col gap-1">
-                  <h3 className="line-clamp-2 font-campton text-base font-medium leading-snug text-[#353F50] transition-colors group-hover:text-[#E66001]">
+                  <h2 className="line-clamp-2 font-campton text-base font-medium leading-snug text-[#353F50] transition-colors group-hover:text-[#E66001]">
                     {article.title}
-                  </h3>
-                  <span className="font-campton text-[10px] font-normal text-[#848484] sm:text-[12px]">
+                  </h2>
+                  <span className="font-campton text-[10px] font-normal text-[#5C5C5C] sm:text-[12px]">
                     {article.date}
                   </span>
                 </div>
-                <p className="mt-2 font-campton text-xs font-normal leading-[16px] text-[#848484] sm:text-sm sm:leading-[20px]">
+                <p className="mt-2 font-campton text-xs font-normal leading-[16px] text-[#5C5C5C] sm:text-sm sm:leading-[20px]">
                   {article.description}
                 </p>
                 <span className="mt-auto font-campton text-xs font-normal text-[#353F50] transition-colors group-hover:text-[#E66001] sm:text-sm">

@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -48,43 +49,53 @@ const LandingPage = () => {
   return (
     <div className="flex font-montserrat flex-col min-h-screen  bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat md:px-[75px] py-[40px] xl:px-[120px] xl:py-[57px] px-6 text-white">
       <header className=" flex justify-between items-center w-full max-w-[1440px] mx-auto">
-        <h2 className="font-barbra text-[#57D791] text-3xl xl:text-5xl">
+        <p className="font-barbra text-[#57D791] text-3xl xl:text-5xl">
           Twenty- <span className="text-[#EB5D1D]">II</span>
-        </h2>
-        <button onClick={handleHamburgerMenuOpen} className="md:hidden block">
+        </p>
+        <button
+          type="button"
+          onClick={
+            isHamburgerMenuOpen
+              ? handleHamburgerMenuClose
+              : handleHamburgerMenuOpen
+          }
+          className="md:hidden flex min-h-11 min-w-11 items-center justify-center"
+          aria-label={isHamburgerMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isHamburgerMenuOpen}
+        >
           <HamburgerMenu />
         </button>
         {isHamburgerMenuOpen && (
-          <div className="absolute top-20 right-0 w-[249px] h-[132px] bg-black ">
+          <nav className="absolute top-20 right-0 z-50 flex w-[249px] flex-col items-start gap-4 bg-black p-[14px]">
+            <a href="/" className="inline-flex min-h-11 items-center font-semibold">
+              Back to Main Website
+            </a>
             <button
-              onClick={handleHamburgerMenuClose}
-              className="absolute flex flex-col items-start  p-[14px] gap-4"
+              type="button"
+              onClick={() => setOpenContact(true)}
+              className="inline-flex min-h-11 items-center bg-transparent p-0 font-semibold text-white"
             >
-              <a href="/" className="font-semibold">
-                Back to Main Website
-              </a>
-              <span
-                onClick={() => setOpenContact(true)}
-                className="font-semibold"
-              >
-                Contact
-              </span>
-              <a
-                href="https://www.instagram.com/twentyiiart/"
-                target="_blank"
-                rel="noopener noreferrerz"
-              >
-                <InstagramIcon />
-              </a>
+              Contact
             </button>
-          </div>
+            <a
+              href="https://www.instagram.com/twentyiiart/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twenty II on Instagram"
+              className="inline-flex min-h-11 min-w-11 items-center"
+            >
+              <InstagramIcon />
+            </a>
+          </nav>
         )}
         {openContact && (
           <div className=" absolute flex justify-center items-center h-full w-full inset-0 bg-black/50 z-99999">
             <div className=" bg-black flex flex-col items-start py-10 px-5 md:px-12 gap-4 relative w-69 md:w-93.5">
               <button
+                type="button"
                 onClick={() => setOpenContact(false)}
-                className="absolute md:top-4 md:right-4 top-3.5 right-3.5"
+                className="absolute md:top-4 md:right-4 top-3.5 right-3.5 flex min-h-11 min-w-11 items-center justify-center"
+                aria-label="Close contact"
               >
                 <div className="md:w-8 md:h-8 h-6 w-6">
                   <XIcon />
@@ -124,22 +135,50 @@ const LandingPage = () => {
         )}
         <nav className="hidden md:flex items-center gap-4 font-semibold text-sm xl:text-base">
           <a href="/">Back to Main Website</a>
-          <button onClick={() => setOpenContact(true)}>Contact</button>
+          <button
+            type="button"
+            onClick={() => setOpenContact(true)}
+            className="inline-flex min-h-11 items-center"
+          >
+            Contact
+          </button>
           <a
             href="https://www.instagram.com/twentyiiart/"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Twenty II on Instagram"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center"
           >
             <InstagramIcon />
           </a>
         </nav>
       </header>
+      <div className="mx-auto mt-8 max-w-[1440px] md:mt-12">
+        <h1 className="sr-only">Twenty II — Restacking the Odds</h1>
+        <p className="max-w-2xl text-sm leading-relaxed text-white/90 xl:text-base">
+          Twenty II — Restacking the Odds is a solo exhibition by Quadri Morin
+          at OneArt Gallery in Anthony Village, Lagos. The work sits between
+          product thinking and studio practice: digital painting, conceptual
+          storytelling, and a quiet insistence that identity can be rewritten.
+          Restacking the Odds is about discipline, courage, and the decision to
+          change when nobody is watching — to meet a future self that has
+          already begun. The exhibition opens 14 February 2026, 1PM–6PM.
+          Register to attend, or{' '}
+          <Link
+            href="/twenty-ii/artworks"
+            className="font-semibold underline underline-offset-2"
+          >
+            browse the collection
+          </Link>
+          .
+        </p>
+      </div>
       <main className="flex flex-col lg:flex-row lg:items-center justify-between w-full mt-10 md:mt-28.25 max-w-360 mx-auto">
         <div className="flex justify-center lg:justify-start w-full lg:w-auto lg:items-end">
           <div className="flex flex-col gap-4 items-end">
             <Image
               src="/restock.png"
-              alt="image"
+              alt="Twenty II — Restacking the Odds"
               width={650}
               height={410}
               loading="eager"

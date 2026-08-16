@@ -1,18 +1,13 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { ArrowRightIcon } from '@/components/icons/arrow-right';
 
 export const GoToTwentyII = () => {
-  const router = useRouter();
-
   return (
-    <button
-      type="button"
-      aria-label="Visit Twenty-II"
-      className="group relative block sm:h-[52px] h-9 w-[150px] sm:w-[206px] shrink-0 cursor-pointer overflow-hidden sm:rounded-xl rounded-md border-0 shadow-md outline-none ring-0 transition-[height,box-shadow] duration-300 ease-out lg:hover:h-[104px] lg:hover:shadow-lg focus-visible:ring-2 focus-visible:ring-[#57D791] focus-visible:ring-offset-2 p-6"
-      onClick={() => router.push('/twenty-ii')}
+    <Link
+      href="/twenty-ii"
+      aria-label="Visit Twenty II"
+      className="group relative block sm:h-[52px] h-9 w-[150px] sm:w-[206px] shrink-0 cursor-pointer overflow-hidden sm:rounded-xl rounded-md border-0 shadow-md outline-none ring-0 transition-[height,box-shadow] duration-300 ease-out lg:hover:h-[104px] lg:hover:shadow-lg focus-visible:ring-2 focus-visible:ring-[#57D791] focus-visible:ring-offset-2"
     >
       <div className="absolute bottom-0 left-0 h-9 sm:h-[52px] w-[150px] sm:w-[206px] overflow-hidden sm:rounded-xl rounded-md  bg-[#121212] bg-[url('/bg.png')] bg-cover bg-center text-left lg:group-hover:h-[104px]">
         <div className="relative lg:group-hover:py-6 py-0 flex sm:px-6 px-2 lg:group-hover:items-start items-center h-full justify-center  flex-col">
@@ -38,6 +33,6 @@ export const GoToTwentyII = () => {
           </div>
         </div>
       </div>
-    </button>
+    </Link>
   );
 };

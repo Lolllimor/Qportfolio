@@ -4,9 +4,18 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const profileImages = [
-  'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LYPLKCpofS2I805isUVR9oqgHn1AxXKTBwpOQ',
-  'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0L9BUQtWRV0IcDOVBPZeanA1YxTq5zwSf6bmHC',
-  'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LeEwdXoEiS0sOMNfCv9l5IEQRXhinyBV8dptT',
+  {
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LYPLKCpofS2I805isUVR9oqgHn1AxXKTBwpOQ',
+    alt: 'Quadri Morin, product designer — portrait',
+  },
+  {
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0L9BUQtWRV0IcDOVBPZeanA1YxTq5zwSf6bmHC',
+    alt: 'Quadri Morin — close-up portrait',
+  },
+  {
+    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LeEwdXoEiS0sOMNfCv9l5IEQRXhinyBV8dptT',
+    alt: 'Quadri Morin — profile photo',
+  },
 ];
 
 const FOLDED_GAP = 4;
@@ -48,7 +57,7 @@ export default function ProfileStack() {
       tabIndex={0}
       aria-label="Profile photos"
     >
-      {profileImages.map((src, index) => (
+      {profileImages.map(({ src, alt }, index) => (
         <motion.div
           key={`profile-img-${index}`}
           className="absolute top-0 h-[64px] w-[40px] overflow-hidden rounded-lg"
@@ -73,7 +82,7 @@ export default function ProfileStack() {
         >
           <img
             src={src}
-            alt=""
+            alt={alt}
             width={40}
             height={64}
             className="h-full w-full object-cover"

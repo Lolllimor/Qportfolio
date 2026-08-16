@@ -18,7 +18,7 @@ export const EntryPortal = ({
 
         <button
           onClick={handleEntryPortalClose}
-          className="absolute md:top-7 top-[22px] md:right-8 right-[22px] z-20 md:w-8 md:h-8 w-6 h-6 bg-white rounded flex items-center justify-center hover:opacity-80 transition-opacity"
+          className="absolute md:top-7 top-[22px] md:right-8 right-[22px] z-20 min-w-11 min-h-11 bg-white rounded flex items-center justify-center hover:opacity-80 transition-opacity"
           aria-label="Close modal"
         >
           <svg
@@ -39,9 +39,9 @@ export const EntryPortal = ({
         {/* Content */}
         <div className="relative z-10 w-full flex flex-col items-center">
           {/* Header */}
-          <h1 className="font-long-shot text-white text-xl md:text-[32px] md:text-3xl uppercase tracking-wider text-center mb-8">
+          <h2 className="font-long-shot text-white text-xl md:text-[32px] md:text-3xl uppercase tracking-wider text-center mb-8">
             ENTRY PORTAL
-          </h1>
+          </h2>
 
           {/* Main Message */}
           <p className="font-montserrat text-white text-2xl md:text-4xl  font-semibold lg:text-[40px] text-center md:leading-[44px] leading-7 mb-2 md:mb-6">

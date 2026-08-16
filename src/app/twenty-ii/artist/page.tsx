@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 
 import Artist from './ArtistClient';
-import { createPageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { createPageMetadata, twentyIiBreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'About the Artist — Twenty II',
@@ -11,5 +12,14 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function ArtistPage() {
-  return <Artist />;
+  return (
+    <>
+      <JsonLd
+        data={twentyIiBreadcrumbJsonLd([
+          { name: 'About the Artist', path: '/twenty-ii/artist' },
+        ])}
+      />
+      <Artist />
+    </>
+  );
 }

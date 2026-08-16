@@ -33,7 +33,7 @@ export const siteConfig = {
   name: 'Quadri Morin',
   title: 'Quadri Morin — Product & UX Designer',
   description:
-    'Product and UX designer crafting digital experiences across fintech, ed-tech, AI-powered tools, and social impact products. Currently designing at Interswitch.',
+    'Product and UX designer working across fintech, ed-tech, AI tools, and social-impact products used by millions.',
   url: normalizeSiteOrigin(process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL),
   ogImage: '/opengraph-image',
   email: 'quadrimorin@gmail.com',
@@ -42,6 +42,7 @@ export const siteConfig = {
     behance: 'https://www.behance.net/quadrimorin',
     github: 'https://github.com/Quadmor009',
     medium: 'https://medium.com/@quadmor009',
+    instagram: 'https://www.instagram.com/quadmor',
   },
 } as const;
 

@@ -1,15 +1,25 @@
 import type { Metadata } from 'next';
 
 import Home from '@/components/home/Home';
-import { createPageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { createPageMetadata, getWebsiteJsonLd } from '@/lib/seo';
+import { siteConfig } from '@/lib/site';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'Quadri Morin — Product & UX Designer',
+  title: {
+    absolute: 'Quadri Morin — Product & UX Designer',
+  },
   description:
-    'Product and UX designer crafting digital experiences across fintech, ed-tech, AI-powered tools, and social impact products. Currently designing at Interswitch.',
+    'Product and UX designer working across fintech, ed-tech, AI tools, and social-impact products used by millions.',
   path: '/',
+  image: siteConfig.ogImage,
 });
 
 export default function HomePage() {
-  return <Home />;
+  return (
+    <>
+      <JsonLd data={getWebsiteJsonLd()} />
+      <Home />
+    </>
+  );
 }

@@ -1,6 +1,9 @@
 'use client';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useIsLargeScreen } from '@/hooks/useIsLargeScreen';
+
+const MotionImage = motion.create(Image);
 
 export default function PouchiiPhone() {
   const isLargeScreen = useIsLargeScreen();
@@ -19,7 +22,7 @@ export default function PouchiiPhone() {
             'linear-gradient(156deg, #FFECE8 -1.47%, #F1EFFF 109.75%)',
         }}
       >
-        <motion.img
+        <MotionImage
           variants={{
             initial: {
               scale: 1,
@@ -41,9 +44,11 @@ export default function PouchiiPhone() {
             duration: 0.3,
           }}
           src="https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LMK0kwouYBft3HAjvzbU9WcRXPJSTnlapMxhK"
-          alt="Pouchii Phone"
+          alt="Pouchii app redesign — onboarding cut from 120s to 30s"
           width={400}
           height={500}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, 33vw"
           className="w-[234px] h-[485px] lg:left-[144px] lg:top-[92px] left-[75px] mt-[50px] lg:absolute "
         />
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#FFECE8]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -71,7 +76,7 @@ export default function PouchiiPhone() {
             Mobile App
           </span>
         </div>
-        <div className="flex min-h-4 flex-col justify-center self-stretch text-[#848484] text-center text-xs font-normal leading-4">
+        <div className="flex min-h-4 flex-col justify-center self-stretch text-[#5C5C5C] text-center text-xs font-normal leading-4">
           Activation · Retention · Onboarding flows
         </div>
       </div>
