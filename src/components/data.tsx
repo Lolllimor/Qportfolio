@@ -3,14 +3,26 @@ import { CaseStudy } from '@/types';
 export const caseStudies: CaseStudy[] = [
   {
     description:
+      'I led brand and product for Emprinte Readers Hub, a reading and accountability ecosystem for ambitious young Africans. Solo-led from strategy through App Store launch: identity, website, onboarding, and community experience. Live with 40+ members ahead of the September 2026 public launch.',
+    url: '/product/emprinte',
+    imageClass: 'w-full h-auto rounded-2xl',
+    imageAlt: 'Emprinte Readers Hub brand and product ecosystem cover',
+    title: 'Emprinte Readers Hub',
+    linkText: 'Read the Emprinte case study',
+    imageSrc: '/case-studies/emprinte/cover.webp',
+    role: 'LEAD PRODUCT DESIGNER & BRAND STRATEGIST',
+    reverseLayout: true,
+    year: '2026',
+  },
+  {
+    description:
       'CHANGERS is a platform connecting social-initiative advocates with development opportunities across Africa. I led the end-to-end design; creating a scalable design system, simplifying dual user journeys, and crafting an accessible, mobile-first experience that strengthened engagement and positioned the platform for growth.',
     url: 'https://www.behance.net/gallery/235856111/Changers-UX-Case-Study',
     imageClass: 'w-full h-auto rounded-2xl',
     imageAlt: 'Changers Website Design',
     title: 'Changers Website Design',
     linkText: 'Read the Changers UX case study',
-    imageSrc:
-      'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LKUz8yg5Pje3usvNlw1nqRtQd0x6XDaZpWhB2',
+    imageSrc: '/case-studies/changers/cover.webp',
     role: 'LEAD UX DESIGNER',
     reverseLayout: false,
     year: '2025',
@@ -255,7 +267,7 @@ export const graphics = [
     category: 'Brand',
     company: 'Emprinte',
     title: 'Brand & Product Ecosystem Case Study',
-    url: 'https://www.behance.net/gallery/250175837/BRAND-PRODUCT-ECOSYSTEM-CASE-STUDY',
+    url: '/product/emprinte',
   },
   {
     imageSrc: '/cherry-strike-cover.webp',

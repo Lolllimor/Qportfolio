@@ -78,8 +78,10 @@ export function ParkingCompanionStudy() {
           improve the experience. We also researched global parking standards,
           mapping common flows and comparing them with ours.
         </p>
+      </div>
 
-        <h2 className="pt-4 font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           Process
         </h2>
         <ol className="list-decimal space-y-1 pl-5">
@@ -92,8 +94,10 @@ export function ParkingCompanionStudy() {
           <li>Iteration and refinement</li>
           <li>Final deliverables and results</li>
         </ol>
+      </div>
 
-        <h2 className="pt-4 font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           Who we designed for
         </h2>
         <p>
@@ -147,7 +151,7 @@ export function ParkingCompanionStudy() {
         height={1100}
       />
 
-      <div className="mt-8 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           How we tested
         </h2>
@@ -166,8 +170,10 @@ export function ParkingCompanionStudy() {
           <li>Scan and activate session</li>
           <li>Complete payment and exit</li>
         </ol>
+      </div>
 
-        <h2 className="pt-4 font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           Generate QR code
         </h2>
       </div>
@@ -212,7 +218,7 @@ export function ParkingCompanionStudy() {
         width={1800}
         height={1013}
       />
-      <div className="max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <p>
           Global practice was clear: do not make the user generate anything
           at the gate. The system should already know them when they arrive.
@@ -228,8 +234,10 @@ export function ParkingCompanionStudy() {
           option for people without the app, and a notification such as
           “You’re close to X Mall. Your entry QR is ready.”
         </p>
+      </div>
 
-        <h2 className="pt-4 font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           Activate session
         </h2>
         <p>
@@ -248,8 +256,10 @@ export function ParkingCompanionStudy() {
           “Hold your phone screen against the scanner at the entrance gate,”
           and keeping the QR as the focus.
         </p>
+      </div>
 
-        <h2 className="pt-4 font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           Exit and payment
         </h2>
         <p>
@@ -284,7 +294,7 @@ export function ParkingCompanionStudy() {
         width={1800}
         height={1058}
       />
-      <div className="max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <p>
           People did not know how to get to payment. The blue session card
           did not look clickable. There were several steps before Pay Now.
@@ -308,8 +318,10 @@ export function ParkingCompanionStudy() {
         <blockquote className="border-l-2 border-[#E66001] pl-4">
           Probably button rearrangement: parking, parking history.
         </blockquote>
+      </div>
 
-        <h2 className="pt-4 font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           Iteration
         </h2>
         <p>
@@ -334,7 +346,7 @@ export function ParkingCompanionStudy() {
         height={2368}
       />
 
-      <div className="max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           Result
         </h2>

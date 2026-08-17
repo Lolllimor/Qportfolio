@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { graphics } from '../data';
 import { ArrowRight } from '../icons/arrow-right-o';
@@ -67,13 +68,24 @@ export const Graphics = () => {
           );
 
           if (item.url && !isComingSoon) {
+            const isInternal = item.url.startsWith('/');
+            const sharedProps = { className: cardClassName };
+
+            if (isInternal) {
+              return (
+                <Link key={index} href={item.url} {...sharedProps}>
+                  {cardContent}
+                </Link>
+              );
+            }
+
             return (
               <a
                 key={index}
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cardClassName}
+                {...sharedProps}
               >
                 {cardContent}
               </a>

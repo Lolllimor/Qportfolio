@@ -56,6 +56,10 @@ export const portfolioRoutes = [
 
 export const caseStudyRoutes = [
   {
+    path: '/product/emprinte',
+    label: 'Emprinte Readers Hub',
+  },
+  {
     path: '/product/parking-companion',
     label: 'Parking Management Companion App',
   },

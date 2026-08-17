@@ -163,6 +163,30 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   };
 }
 
+export function articleJsonLd(article: {
+  headline: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  image?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.headline,
+    description: article.description,
+    url: getCanonicalUrl(article.path),
+    datePublished: article.datePublished,
+    author: {
+      '@id': `${siteConfig.url}/#person`,
+    },
+    publisher: {
+      '@id': `${siteConfig.url}/#person`,
+    },
+    ...(article.image ? { image: article.image } : {}),
+  };
+}
+
 export function caseStudyJsonLd(study: {
   name: string;
   description: string;

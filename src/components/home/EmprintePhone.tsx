@@ -1,25 +1,25 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useIsLargeScreen } from '@/hooks/useIsLargeScreen';
 
 const MotionImage = motion.create(Image);
+const MotionLink = motion.create(Link);
 
-export default function PouchiiPhone() {
+export default function EmprintePhone() {
   const isLargeScreen = useIsLargeScreen();
 
   return (
     <div className="flex flex-col items-center gap-2 lg:w-auto w-full">
-      <motion.a
-        href="https://www.behance.net/gallery/188111073/Pouchii-Redesign"
-        target="_blank"
-        rel="noreferrer"
+      <MotionLink
+        href="/product/emprinte"
         whileHover={isLargeScreen ? 'hover' : undefined}
         initial="initial"
-        className="group cursor-pointer xl:w-[333px] xl:h-[472px] lg:w-[284px] lg:h-[384px] w-full h-[320px] rounded-lg relative overflow-hidden flex justify-center"
+        className="group relative flex h-[320px] w-full cursor-pointer justify-center overflow-hidden rounded-lg lg:h-[384px] lg:w-[284px] xl:h-[472px] xl:w-[333px]"
         style={{
           background:
-            'linear-gradient(156deg, #FFECE8 -1.47%, #F1EFFF 109.75%)',
+            'linear-gradient(156deg, #E8F3F0 -1.47%, #F1F6F5 109.75%)',
         }}
       >
         <MotionImage
@@ -43,25 +43,25 @@ export default function PouchiiPhone() {
             damping: 20,
             duration: 0.3,
           }}
-          src="https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LMK0kwouYBft3HAjvzbU9WcRXPJSTnlapMxhK"
-          alt="Pouchii app redesign — onboarding cut from 120s to 30s"
-          width={400}
-          height={500}
+          src="/home/emprinte-phone.webp"
+          alt="Emprinte app home — reading streaks, growth tracker, and community schedule"
+          width={489}
+          height={1024}
           loading="lazy"
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="w-[234px] h-[485px] lg:left-[144px] lg:top-[92px] left-[75px] mt-[50px] lg:absolute "
+          className="mt-[50px] h-[485px] w-[234px] rounded-[28px] left-[75px] lg:absolute lg:left-[144px] lg:top-[92px]"
         />
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#FFECE8]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#F1F6F5]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <p className="text-center font-campton text-sm font-medium leading-5 text-[#353F50] md:text-base md:leading-6">
-            Pouchii redesign cut onboarding from 120s to 30s (75% faster) and
-            accelerated white-label deployment for new customers.
+            Solo-led brand and product through App Store launch. Live with 40+
+            members ahead of the September 2026 public launch.
           </p>
         </div>
-      </motion.a>
-      <div className="flex flex-col items-center gap-1 w-[284px]">
+      </MotionLink>
+      <div className="flex w-[284px] flex-col items-center gap-1">
         <div className="flex h-6 items-center justify-center gap-1 self-stretch">
-          <span className="text-[#353F50] text-center text-base font-normal leading-10">
-            Pouchii
+          <span className="text-center font-normal text-base leading-10 text-[#353F50]">
+            Emprinte
           </span>
           <svg
             width="2"
@@ -72,12 +72,12 @@ export default function PouchiiPhone() {
           >
             <circle cx="1" cy="1" r="1" fill="#353F50" />
           </svg>
-          <span className="text-[#353F50] text-center text-base font-normal leading-10">
+          <span className="text-center font-normal text-base leading-10 text-[#353F50]">
             Mobile App
           </span>
         </div>
-        <div className="flex min-h-4 flex-col justify-center self-stretch text-[#5C5C5C] text-center text-xs font-normal leading-4">
-          Activation · Retention · Onboarding flows
+        <div className="flex min-h-4 flex-col justify-center self-stretch text-center text-xs font-normal leading-4 text-[#5C5C5C]">
+          Brand · Community · Accountability
         </div>
       </div>
     </div>

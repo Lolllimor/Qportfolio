@@ -3,7 +3,7 @@ import Link from 'next/link';
 import VibeCodedProjects from '@/components/home/VibeCodedProjects';
 import InterswitchPhone from '@/components/home/InterswitchPhone';
 import ChangersLaptop from '@/components/home/ChangersLaptop';
-import PouchiiPhone from '@/components/home/PouchiiPhone';
+import EmprintePhone from '@/components/home/EmprintePhone';
 import ProfileStack from '@/components/home/ProfileStack';
 
 export default function HomeComponent() {
@@ -70,7 +70,7 @@ export default function HomeComponent() {
           </div>
           <div className="flex flex-col lg:flex-row items-center lg:gap-2 gap-6 font-campton">
             <InterswitchPhone />
-            <PouchiiPhone />
+            <EmprintePhone />
             <ChangersLaptop />
           </div>
         </div>
