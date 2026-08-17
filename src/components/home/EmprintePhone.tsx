@@ -43,13 +43,13 @@ export default function EmprintePhone() {
             damping: 20,
             duration: 0.3,
           }}
-          src="/home/emprinte-phone.webp"
-          alt="Emprinte app home — reading streaks, growth tracker, and community schedule"
-          width={489}
-          height={1024}
+          src="/home/emprinte-dashboard.webp"
+          alt="Emprinte app home — reading streak, continue reading, growth tracker, and reading schedule"
+          width={729}
+          height={1531}
           loading="lazy"
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="mt-[50px] h-[485px] w-[234px] rounded-[28px] left-[75px] lg:absolute lg:left-[144px] lg:top-[92px]"
+          className="mt-[50px] h-auto w-[234px] rounded-[24px] left-[75px] lg:absolute lg:left-[144px] lg:top-[92px]"
         />
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#F1F6F5]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <p className="text-center font-campton text-sm font-medium leading-5 text-[#353F50] md:text-base md:leading-6">

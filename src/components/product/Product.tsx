@@ -27,11 +27,11 @@ export const ProductComponent = () => {
             role="tab"
             aria-selected={activeTab === item.value}
             key={item.value}
-            className="flex min-h-11 flex-col items-center gap-1 cursor-pointer bg-transparent border-0 p-0"
+            className="flex min-h-11 flex-col items-center justify-end gap-0 cursor-pointer bg-transparent border-0 p-0"
             onClick={() => setActiveTab(item.value)}
           >
             <span
-              className={` text-center text-base font-normal leading-snug font-campton ${
+              className={`text-center text-base font-normal leading-none font-campton pb-1.5 ${
                 activeTab === item.value ? 'text-[#000000]' : 'text-[#5C5C5C]'
               }`}
             >

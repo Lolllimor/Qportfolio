@@ -242,11 +242,18 @@ export function EmprinteReadersStudy() {
         </p>
       </div>
       <StudyImage
-        src="/case-studies/emprinte/app-flow.webp"
-        alt="Emprinte app case study board showing onboarding illustrations, home dashboard, community forum, bootcamp registration, and growth tracker screens."
-        caption="Onboarding, home, community, bootcamps, and growth tracker."
-        width={1800}
-        height={3954}
+        src="/case-studies/emprinte/product-onboarding.webp"
+        alt="Emprinte onboarding screens with copy about joining a movement, plus a cultural insight on motivation versus accountability."
+        caption="Onboarding: each screen leads with an emotional hook, then sign-in."
+        width={2400}
+        height={2054}
+      />
+      <StudyImage
+        src="/case-studies/emprinte/product-app-flow.webp"
+        alt="Emprinte app screens for accountability and community, then the log in, onboarding, home, bootcamp, and growth tracker flow."
+        caption="Accountability, community, and the core app flow."
+        width={2400}
+        height={3300}
       />
 
       <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
@@ -263,11 +270,11 @@ export function EmprinteReadersStudy() {
         <p>Emprinte was designed to make growth visible, communal, and sustainable.</p>
       </div>
       <StudyImage
-        src="/case-studies/emprinte/results.webp"
+        src="/case-studies/emprinte/product-results.webp"
         alt="Grid of Emprinte community graphics including Book of the Month posters, Read With Us, World Book Day, and a financial independence event flyer."
         caption="Monthly campaigns running on the same identity system."
-        width={1800}
-        height={1238}
+        width={2400}
+        height={1651}
       />
 
       <p className="max-w-[640px] font-campton text-base leading-relaxed text-[#5C5C5C]">
