@@ -28,21 +28,42 @@ export default function ProfileStack() {
   const [stackState, setStackState] = useState<StackState>('hidden');
   const [introDone, setIntroDone] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const showOpen = window.setTimeout(() => setStackState('open'), 500);
-    const foldClosed = window.setTimeout(() => setStackState('folded'), 1400);
-    const unlockHover = window.setTimeout(() => setIntroDone(true), 1900);
+    const foldClosed = isMobile
+      ? undefined
+      : window.setTimeout(() => setStackState('folded'), 1400);
+    const unlockHover = window.setTimeout(
+      () => setIntroDone(true),
+      isMobile ? 900 : 1900,
+    );
 
     return () => {
       window.clearTimeout(showOpen);
-      window.clearTimeout(foldClosed);
+      if (foldClosed) window.clearTimeout(foldClosed);
       window.clearTimeout(unlockHover);
     };
-  }, []);
+  }, [isMobile]);
 
-  const activeState: StackState =
-    introDone && hovered ? 'open' : stackState === 'hidden' ? 'folded' : stackState;
+  const activeState: StackState = isMobile
+    ? 'open'
+    : introDone && hovered
+      ? 'open'
+      : stackState === 'hidden'
+        ? 'folded'
+        : stackState;
 
   return (
     <motion.div

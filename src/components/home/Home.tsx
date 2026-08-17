@@ -12,8 +12,8 @@ export default function HomeComponent() {
       <div className="flex flex-col">
         <div className="flex justify-between items-center w-full">
           <div className="flex flex-col sm:gap-14 gap-8 md:w-[656px] sm:mb-[78px] mb-8 -mt-[10px]">
-            <div className="h-[64px] w-full flex items-center gap-4">
-              <h1 className="text-[#353F50] sm:text-[60px] md:text-[80px] text-[40px] font-normal leading-normal">
+            <div className="flex min-h-[64px] w-full items-center gap-4">
+              <h1 className="text-[40px] font-normal leading-[1.2] text-[#353F50] sm:text-[60px] sm:leading-normal md:text-[80px]">
                 Quadri Morin
                 <span className="sr-only">, Product & UX Designer</span>
               </h1>

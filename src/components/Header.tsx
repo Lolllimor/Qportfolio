@@ -45,7 +45,7 @@ export default function Header() {
 
   return (
     <header className="relative z-30 mx-auto mt-[51px] flex w-full max-w-[500px] items-end justify-end gap-4 px-6 pb-6 sm:mt-[62px] sm:flex-row sm:px-0 md:max-w-[868px] xl:max-w-[1074px]">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1">
         {links.map(({ key, label, href, Icon }) => {
           const active = isHovered === key;
 
