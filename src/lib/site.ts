@@ -33,7 +33,7 @@ export const siteConfig = {
   name: 'Quadri Morin',
   title: 'Quadri Morin — Product & UX Designer',
   description:
-    'Product and UX designer working across fintech, ed-tech, AI tools, and social-impact products used by millions.',
+    'Product and UX designer working across fintech, ed-tech, AI tools, and social-impact products. Case studies and articles on craft, AI, and UX.',
   url: normalizeSiteOrigin(process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL),
   ogImage: '/opengraph-image',
   email: 'quadrimorin@gmail.com',

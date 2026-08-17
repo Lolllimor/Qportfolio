@@ -10,7 +10,7 @@ import { getCanonicalUrl } from '@/lib/site';
 const PATH = '/product/emprinte';
 const TITLE = 'Emprinte Readers Hub';
 const DESCRIPTION =
-  'Brand and product ecosystem for Emprinte Readers Hub — a reading and accountability platform for ambitious young Africans. Solo-led from strategy to App Store launch.';
+  'Brand and product ecosystem for Emprinte Readers Hub, a reading and accountability platform for ambitious young Africans. Solo-led to App Store launch.';
 
 export const metadata = createPageMetadata({
   title: TITLE,

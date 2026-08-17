@@ -10,7 +10,7 @@ export const metadata: Metadata = createPageMetadata({
     absolute: 'Quadri Morin — Product & UX Designer',
   },
   description:
-    'Product and UX designer working across fintech, ed-tech, AI tools, and social-impact products used by millions.',
+    'Product and UX designer working across fintech, ed-tech, AI tools, and social-impact products. Case studies and articles on craft, AI, and UX.',
   path: '/',
   image: siteConfig.ogImage,
 });
