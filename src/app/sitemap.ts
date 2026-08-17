@@ -1,7 +1,12 @@
 import type { MetadataRoute } from 'next';
 
 import { getAllArtworkIds } from '@/lib/artworks';
-import { getCanonicalUrl, portfolioRoutes, twentyIiRoutes } from '@/lib/site';
+import {
+  caseStudyRoutes,
+  getCanonicalUrl,
+  portfolioRoutes,
+  twentyIiRoutes,
+} from '@/lib/site';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -11,6 +16,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: path === '/' ? 1 : 0.8,
+  }));
+
+  const caseStudyEntries = caseStudyRoutes.map(({ path }) => ({
+    url: getCanonicalUrl(path),
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
   }));
 
   const twentyIiEntries = twentyIiRoutes.map(({ path }) => ({
@@ -28,5 +40,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.55,
   }));
 
-  return [...portfolioEntries, ...twentyIiEntries, ...artworkEntries];
+  return [
+    ...portfolioEntries,
+    ...caseStudyEntries,
+    ...twentyIiEntries,
+    ...artworkEntries,
+  ];
 }

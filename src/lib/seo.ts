@@ -163,6 +163,30 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   };
 }
 
+export function caseStudyJsonLd(study: {
+  name: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  image?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: study.name,
+    description: study.description,
+    url: getCanonicalUrl(study.path),
+    datePublished: study.datePublished,
+    author: {
+      '@id': `${siteConfig.url}/#person`,
+    },
+    creator: {
+      '@id': `${siteConfig.url}/#person`,
+    },
+    ...(study.image ? { image: study.image } : {}),
+  };
+}
+
 export function artworkJsonLd(artwork: {
   title: string;
   url: string;

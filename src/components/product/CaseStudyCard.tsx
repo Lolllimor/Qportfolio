@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { CaseStudyCardProps } from '@/types';
 import { DotIcon } from '../icons/dot';
@@ -49,19 +50,31 @@ export const CaseStudyCard = ({
         </p>
         <div className="flex items-center">
           {url ? (
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group text-[#353F50] hover:text-[#E66001] text-base font-normal uppercase font-campton leading-tight flex items-center gap-2"
-            >
-              {linkText}
-              <div className="group-hover:opacity-100 opacity-0 -mt-1">
-                <ArrowRight />
-              </div>
-            </a>
+            url.startsWith('/') ? (
+              <Link
+                href={url}
+                className="group flex min-h-11 items-center gap-2 font-campton text-base font-normal leading-tight text-[#353F50] uppercase hover:text-[#E66001]"
+              >
+                {linkText}
+                <span className="-mt-1 opacity-0 group-hover:opacity-100">
+                  <ArrowRight />
+                </span>
+              </Link>
+            ) : (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex min-h-11 items-center gap-2 font-campton text-base font-normal leading-tight text-[#353F50] uppercase hover:text-[#E66001]"
+              >
+                {linkText}
+                <span className="-mt-1 opacity-0 group-hover:opacity-100">
+                  <ArrowRight />
+                </span>
+              </a>
+            )
           ) : (
-            <span className="text-[#5C5C5C] text-base font-normal uppercase font-campton leading-tight">
+            <span className="font-campton text-base font-normal leading-tight text-[#5C5C5C] uppercase">
               {linkText}
             </span>
           )}

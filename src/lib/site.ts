@@ -54,6 +54,13 @@ export const portfolioRoutes = [
   { path: '/articles', label: 'Articles' },
 ] as const;
 
+export const caseStudyRoutes = [
+  {
+    path: '/product/parking-companion',
+    label: 'Parking Management Companion App',
+  },
+] as const;
+
 export const twentyIiRoutes = [
   { path: '/twenty-ii', label: 'Twenty II' },
   { path: '/twenty-ii/artworks', label: 'Artworks' },
