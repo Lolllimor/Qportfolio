@@ -1,19 +1,19 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useIsLargeScreen } from '@/hooks/useIsLargeScreen';
 
 const MotionImage = motion.create(Image);
+const MotionLink = motion.create(Link);
 
 export default function ChangersLaptop() {
   const isLargeScreen = useIsLargeScreen();
 
   return (
     <div className="flex flex-col items-center gap-2 lg:w-auto w-full">
-      <motion.a
-        href="https://www.behance.net/gallery/235856111/Changers-UX-Case-Study"
-        target="_blank"
-        rel="noreferrer"
+      <MotionLink
+        href="/product/changers"
         whileHover={isLargeScreen ? 'hover' : undefined}
         initial="initial"
         className="group cursor-pointer xl:w-[333px] xl:h-[472px] lg:w-[284px] lg:h-[384px] w-full h-[320px] rounded-lg relative overflow-hidden flex justify-center"
@@ -57,7 +57,7 @@ export default function ChangersLaptop() {
             streamlined UX.
           </p>
         </div>
-      </motion.a>
+      </MotionLink>
       <div className="flex flex-col items-center gap-1 w-[284px]">
         <div className="flex h-6 items-center justify-center gap-1 self-stretch">
           <span className="text-[#353F50] text-center text-base font-normal leading-10">

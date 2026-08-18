@@ -17,7 +17,7 @@ export const caseStudies: CaseStudy[] = [
   {
     description:
       'CHANGERS is a platform connecting social-initiative advocates with development opportunities across Africa. I led the end-to-end design; creating a scalable design system, simplifying dual user journeys, and crafting an accessible, mobile-first experience that strengthened engagement and positioned the platform for growth.',
-    url: 'https://www.behance.net/gallery/235856111/Changers-UX-Case-Study',
+    url: '/product/changers',
     imageClass: 'w-full h-auto rounded-2xl',
     imageAlt: 'Changers Website Design',
     title: 'Changers Website Design',

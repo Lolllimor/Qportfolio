@@ -60,6 +60,10 @@ export const caseStudyRoutes = [
     label: 'Emprinte Readers Hub',
   },
   {
+    path: '/product/changers',
+    label: 'Changers Website Design',
+  },
+  {
     path: '/product/parking-companion',
     label: 'Parking Management Companion App',
   },
