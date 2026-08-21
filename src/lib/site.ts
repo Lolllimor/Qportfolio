@@ -56,6 +56,10 @@ export const portfolioRoutes = [
 
 export const caseStudyRoutes = [
   {
+    path: '/product/pawa',
+    label: 'Pawa',
+  },
+  {
     path: '/product/emprinte',
     label: 'Emprinte Readers Hub',
   },
