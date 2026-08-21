@@ -3,7 +3,7 @@ import { CaseStudy } from '@/types';
 export const caseStudies: CaseStudy[] = [
   {
     description:
-      'A solar power-sharing app for Nigerian apartment buildings, designed and built end to end with AI — from the first sketch to a live interactive prototype.',
+      'A prepaid power-sharing app for Nigerian apartment buildings — for landlords generating their own electricity and the tenants who buy it from them.',
     url: '/product/pawa',
     imageClass: 'w-full h-auto rounded-2xl',
     imageAlt: 'Eight Pawa app screens in a row on a dark background',
@@ -11,7 +11,7 @@ export const caseStudies: CaseStudy[] = [
     linkText: 'Read the Pawa case study',
     imageSrc: '/case-studies/pawa/pawa-hero.png',
     role: 'LEAD DESIGNER & DEVELOPER',
-    reverseLayout: true,
+    reverseLayout: false,
     year: '2026',
   },
   {

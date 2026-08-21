@@ -5,6 +5,7 @@ export const PROTOTYPE_WIDTH = 390;
 export const PROTOTYPE_HEIGHT = 844;
 const SCREEN_W = 320;
 const SCREEN_H = Math.round((PROTOTYPE_HEIGHT * SCREEN_W) / PROTOTYPE_WIDTH);
+const FRAME_W = Math.round(SCREEN_W / (1 - 0.044));
 
 function DynamicIsland() {
   return (
@@ -70,7 +71,7 @@ function StatusBarIcons() {
 
 function DeviceShell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative" style={{ containerType: 'inline-size' }}>
+    <div className="relative w-full" style={{ containerType: 'inline-size' }}>
       <div className="absolute top-[14%] left-[-3px] h-[5%] w-[3px] rounded-l-sm bg-[#3A3A3C]" />
       <div className="absolute top-[20%] left-[-3px] h-[8%] w-[3px] rounded-l-sm bg-[#3A3A3C]" />
       <div className="absolute top-[29%] left-[-3px] h-[8%] w-[3px] rounded-l-sm bg-[#3A3A3C]" />
@@ -99,7 +100,7 @@ function DeviceShell({ children }: { children: ReactNode }) {
 
 export function IphoneFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="relative shrink-0">
+    <div className="relative shrink-0" style={{ width: FRAME_W }}>
       <DeviceShell>
         <StatusBar />
         <div

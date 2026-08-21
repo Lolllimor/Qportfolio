@@ -8,9 +8,12 @@ import {
 import { getCanonicalUrl } from '@/lib/site';
 
 const PATH = '/product/pawa';
-const TITLE = 'Pawa — Solar Power Sharing App';
+const TITLE = {
+  absolute:
+    'Pawa — Prepaid Power for Nigerian Apartments · Live Prototype | Quadri Morin',
+};
 const DESCRIPTION =
-  'A solar power-sharing app for Nigerian apartment buildings, designed and built end to end with AI — from the first sketch to a live interactive prototype.';
+  'A prepaid power-sharing app for Nigerian apartment buildings — for landlords generating their own electricity and the tenants who buy it from them.';
 const HERO = '/case-studies/pawa/pawa-hero.png';
 
 export async function generateMetadata() {
@@ -35,7 +38,7 @@ export default function PawaPage() {
       />
       <JsonLd
         data={caseStudyJsonLd({
-          name: TITLE,
+          name: 'Pawa — Prepaid Power for Nigerian Apartments',
           description: DESCRIPTION,
           path: PATH,
           datePublished: '2026-08',

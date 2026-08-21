@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Nunito } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight } from '@/components/icons/arrow-right-o';
 import { PhoneScreenImage } from './IphoneFrame';
 import { PawaPrototypeViewer } from './PawaPrototypeViewer';
 
@@ -23,12 +24,12 @@ const paperPreview = [
     alt: 'Pawa home screen in the disconnected state, with zero balance and a Top up now button.',
   },
   {
-    src: '/case-studies/pawa/topup-amount.png',
-    alt: 'Pawa top-up amount screen with preset naira amounts and a live kilowatt-hour conversion.',
-  },
-  {
     src: '/case-studies/pawa/usage.png',
     alt: 'Pawa usage screen with a weekly consumption chart and live current-draw reading.',
+  },
+  {
+    src: '/case-studies/pawa/account.png',
+    alt: 'Pawa account screen with notification settings and a low-balance alert at 20 percent.',
   },
 ] as const;
 
@@ -39,7 +40,7 @@ const decisions = [
   },
   {
     title: 'Auto-disconnect and auto-reconnect',
-    body: 'When balance hits zero, power cuts automatically. When a tenant tops up, it reconnects automatically — no call, no WhatsApp, no waiting. The disconnected screen says one thing: “Top up to reconnect automatically. No action needed from your landlord.”',
+    body: 'When balance hits zero, power cuts automatically. When a tenant tops up, it reconnects automatically — no call, no WhatsApp, no waiting. The disconnected screen says one thing: “Top up to reconnect automatically. No action needed from your landlord.” A low-balance alert fires at 20%, so reaching zero is a choice, not a surprise.',
   },
   {
     title: 'A 200 kWh max balance',
@@ -47,7 +48,7 @@ const decisions = [
   },
   {
     title: 'Hours alongside kilowatt-hours',
-    body: 'The gauge shows kWh as the primary reading — the technical truth. But beneath it sits “Approx. 2.4 hours remaining.” The kWh is accurate but abstract. Hours are what most tenants actually understand. Both are always visible: one gives the fact, the other gives the meaning.',
+    body: 'The gauge shows kWh as the primary reading — the technical truth. But beneath it sits “Approx. 2.4 hours remaining.” The kWh is accurate but abstract. Hours are what most tenants actually understand. Both are always visible: one gives the fact, the other gives the meaning. The arc shifts from indigo to amber to red as balance drops. Urgency is in the colour, not in a label.',
   },
   {
     title: 'The circuit breakdown',
@@ -55,50 +56,7 @@ const decisions = [
   },
   {
     title: 'A three-step top-up flow',
-    body: 'Amount → Payment → Confirmation. A tenant running low at 11pm is not reading instructions. Payment is via stored card through Paystack Vault, with bank transfer as an alternative. The confirmation screen says “You’re back on” — not “Payment successful.”',
-  },
-] as const;
-
-const screens = [
-  {
-    src: '/case-studies/pawa/home-active-2.png',
-    name: 'Home — Active',
-    note: 'The gauge shifts from indigo to amber to red as balance drops. Urgency communicated without words.',
-  },
-  {
-    src: '/case-studies/pawa/home-disconnected.png',
-    name: 'Home — Disconnected',
-    note: 'Zero balance, one action. “No action needed from your landlord” removes the anxiety of waiting.',
-  },
-  {
-    src: '/case-studies/pawa/topup-amount.png',
-    name: 'Top-up — Amount',
-    note: 'Live kWh conversion as the tenant types. ₦1,500 = 17.6 kWh. Abstract units made concrete.',
-  },
-  {
-    src: '/case-studies/pawa/topup-payment.png',
-    name: 'Top-up — Payment',
-    note: '“Secured by Paystack” is doing trust work. “Your power will reconnect automatically” removes doubt.',
-  },
-  {
-    src: '/case-studies/pawa/topup-confirmation.png',
-    name: 'Top-up — Confirmation',
-    note: '“You’re back on” — written for how someone feels in that moment, not for what technically happened.',
-  },
-  {
-    src: '/case-studies/pawa/usage.png',
-    name: 'Usage',
-    note: 'The bar chart answers the question tenants were asking: where is my balance going?',
-  },
-  {
-    src: '/case-studies/pawa/account.png',
-    name: 'Account',
-    note: 'Notifications default on. Low balance alert at 20% — so reaching zero is always a choice, never a surprise.',
-  },
-  {
-    src: '/case-studies/pawa/home-active.png',
-    name: 'Home — Active variant',
-    note: 'Balance and hours in one card, with a running-low banner when action is needed.',
+    body: 'Amount → Payment → Confirmation. A tenant running low at 11pm is not reading instructions. The amount screen converts as they type: ₦1,500 is 17.6 kWh. Payment is via stored card through Paystack Vault, with bank transfer as an alternative. The confirmation screen says “You’re back on” — not “Payment successful.”',
   },
 ] as const;
 
@@ -108,12 +66,12 @@ const lessons = [
     body: 'When a tool can generate a working interface in minutes, the question becomes: where is your judgment visible in the output? If the answer is only in the case study write-up and not in the product itself, that’s a problem. The craft has to show through the thing, not around it.',
   },
   {
-    title: 'One sentence can change how a reviewer reads everything that follows.',
-    body: 'The solar interpretation was intentional, researched, and defensible — but without a single line of framing at the top, it looked like a deviation. Presentation is not a separate skill from design. It’s part of it.',
+    title: 'Interaction is where design judgment becomes legible.',
+    body: 'A gauge that loads at its value and one that fills from zero hold the same data and say different things. Static screens can hide the absence of a decision. Motion cannot.',
   },
   {
-    title: 'Feedback worth pushing back on is also feedback worth acting on.',
-    body: 'Contesting it and upgrading the work are not mutually exclusive. The best response to fair criticism is both.',
+    title: 'Copy carries more of the trust work than the interface does.',
+    body: '“You’re back on” and “No action needed from your landlord” do more for a tenant at 11pm than any layout choice on those screens.',
   },
 ] as const;
 
@@ -237,10 +195,17 @@ export function PawaStudy() {
       <h1 className="mt-2 font-apple-garamond text-[32px] leading-snug font-normal text-[#353F50] md:text-[40px] md:leading-tight">
         Pawa
       </h1>
+      <a
+        href="#prototype"
+        className="mt-3 inline-flex items-center gap-1.5 font-campton text-xs leading-tight text-[#5C5C5C] no-underline transition-colors hover:text-[#E66001] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001]"
+      >
+        Live prototype — try it
+        <ArrowRight />
+      </a>
       <p className="mt-4 max-w-[640px] font-campton text-base leading-relaxed text-[#5C5C5C]">
-        A solar power-sharing app for Nigerian apartment buildings, designed
-        and built end to end with AI — from the first sketch to a live
-        interactive prototype.
+        A prepaid power-sharing app for Nigerian apartment buildings — for
+        landlords generating their own electricity and the tenants who buy it
+        from them.
       </p>
 
       <StudyImage
@@ -260,8 +225,29 @@ export function PawaStudy() {
           Design an app for a power generator.
         </blockquote>
         <p>
-          That was the entire brief — eight words from a leading African
-          fintech as part of a senior design take-home exercise.
+          That was the entire brief: eight words from a leading African
+          fintech.
+        </p>
+      </div>
+
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
+          Reading the brief
+        </h2>
+        <p>
+          In a Nigerian apartment building, the “power generator” is usually a
+          person, not a machine. Someone with capacity — a genset, or
+          increasingly a solar system — selling electricity to the flats
+          around them.
+        </p>
+        <p>
+          The job is the same either way. Track what each flat uses. Take
+          payment. Cut off. Reconnect. The fuel doesn’t change the problem.
+        </p>
+        <p>
+          I went to solar because that’s where it’s growing, and where nobody
+          has built the management layer yet. Diesel has decades of informal
+          practice around it. Solar doesn’t.
         </p>
       </div>
 
@@ -303,8 +289,10 @@ export function PawaStudy() {
           <li>Vercel deploy</li>
         </ol>
         <p>
-          Designs created in Paper via MCP — the output of converting
-          hand-drawn sketches into structured UI.
+          The product was designed and built end to end with AI, from the
+          first sketch to a live interactive prototype. Designs were created
+          in Paper via MCP, converting hand-drawn sketches into structured UI,
+          then built in React and deployed.
         </p>
       </div>
 
@@ -333,47 +321,20 @@ export function PawaStudy() {
         ))}
       </div>
 
-      <h2 className="mt-16 font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
-        The design
-      </h2>
-      <p className="mt-4 max-w-[640px] font-campton text-base leading-relaxed text-[#5C5C5C]">
-        The Paper screens before the coded prototype. Each one carries a
-        decision about trust, urgency, or what a tenant needs to know in that
-        moment.
-      </p>
-      <div className="my-10 grid grid-cols-2 gap-6 md:grid-cols-4">
-        {screens.map((screen) => (
-          <FramedScreen
-            key={screen.src}
-            src={screen.src}
-            alt={`${screen.name} screen from the Pawa Paper designs.`}
-            caption={
-              <>
-                <span className="text-[#353F50]">{screen.name}. </span>
-                {screen.note}
-              </>
-            }
-            sizes="(max-width: 768px) 45vw, 240px"
-          />
-        ))}
-      </div>
-
       <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
-          The feedback that changed the prototype
+          What the first build was missing
         </h2>
         <p>
-          What came back was not a note on the idea. It was on how the product
-          moved. The screens worked, but the interactions still felt like
-          design defaults — states that appear, buttons that sit, a gauge that
-          is already at its value. Nothing was wrong. Nothing had been
-          decided.
+          Reviewing the shipped prototype, the screens worked. The
+          interactions were design defaults: states that appear, buttons that
+          sit, a gauge already at its value. Nothing was wrong. Nothing had
+          been decided.
         </p>
         <p>
-          If the judgment only lived in the write-up, it was not in the
-          product. I started with a short style guide so every screen had to
-          make a choice, then rebuilt the interactions so those choices could
-          be felt.
+          The judgment lived in the write-up rather than in the product. A
+          short style guide forced every screen to pick a side. The
+          interactions were rebuilt so those choices could be felt.
         </p>
       </div>
 
@@ -559,35 +520,34 @@ export function PawaStudy() {
           the new number. “You’re back on” lands before the kWh figure,
           because the feeling comes before the receipt.
         </p>
-        <p>
-          The point wasn’t to re-apply. The point was that the feedback was
-          right — and if this was going into a portfolio, it needed to show
-          the craft the submission didn’t make visible enough.
-        </p>
       </div>
-      <FramedScreen
-        src="/case-studies/pawa/topup-confirmation.png"
-        alt="Pawa confirmation screen: a checkmark, the heading You’re back on, and a new balance of 36.4 kWh."
-        caption="Checkmark, then heading, then balance. Built in sequence, not as a finished composition."
-        sizes="(max-width: 768px) 50vw, 320px"
-        className="my-10 max-w-[320px]"
-      />
 
-      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+      <div
+        id="prototype"
+        className="mt-16 max-w-[640px] scroll-mt-24 space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]"
+      >
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           The upgraded prototype
         </h2>
-        <p className="hidden md:block">
-          Try it yourself. The prototype is live in the frame. Switch between
-          the tenant app and the landlord dashboard.
-        </p>
-        <p className="md:hidden">
-          Try it yourself. The prototype is live. Open it full screen on this
-          phone.
+        <p>
+          Try it yourself. The prototype is live in the frame on desktop, and
+          full screen on a phone.
         </p>
       </div>
 
       <PawaPrototypeViewer />
+
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
+          The landlord dashboard
+        </h2>
+        <p>
+          The trust problem starts with him. He was fielding calls at night
+          and managing multiple apartments remotely. The dashboard shows
+          generation, battery, how load is distributed across units, and what
+          needs attention.
+        </p>
+      </div>
 
       <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
