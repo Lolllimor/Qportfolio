@@ -209,11 +209,10 @@ export function PawaStudy() {
       </p>
 
       <StudyImage
-        src="/case-studies/pawa/pawa-hero.png"
-        alt="Eight Pawa app screens arranged side by side: home, disconnected, top-up, payment, confirmation, usage, account, and the home gauge variant."
-        caption="Paper designs for the tenant app, before the coded prototype."
-        width={1200}
-        height={630}
+        src="/case-studies/pawa/pawa-cover.png"
+        alt="Pawa case study cover with a sun graphic and the line solar power-sharing app for Nigerian apartment buildings."
+        width={1672}
+        height={941}
         priority
       />
 

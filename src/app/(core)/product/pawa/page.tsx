@@ -14,7 +14,7 @@ const TITLE = {
 };
 const DESCRIPTION =
   'A prepaid power-sharing app for Nigerian apartment buildings — for landlords generating their own electricity and the tenants who buy it from them.';
-const HERO = '/case-studies/pawa/pawa-hero.png';
+const HERO = '/case-studies/pawa/pawa-cover.png';
 
 export async function generateMetadata() {
   return createPageMetadata({
