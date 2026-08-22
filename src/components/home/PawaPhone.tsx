@@ -59,8 +59,8 @@ export default function PawaPhone() {
             />
           </MotionDiv>
         </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-[#F6F3F1] via-[#F6F3F1]/90 to-transparent px-6 pt-16 pb-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <p className="text-center font-campton text-sm leading-5 font-medium text-[#353F50] md:text-base md:leading-6">
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#F6F3F1]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <p className="text-center font-campton text-sm font-medium leading-5 text-[#353F50] md:text-base md:leading-6">
             Prepaid power-sharing for Nigerian apartments. Designed and built
             end to end, with a live prototype you can try.
           </p>
@@ -85,7 +85,7 @@ export default function PawaPhone() {
           </span>
         </div>
         <div className="flex min-h-4 flex-col justify-center self-stretch text-center text-xs leading-4 font-normal text-[#5C5C5C]">
-          Energy · Payments · Product
+          Interactive prototype · Payments · Product
         </div>
       </div>
     </div>

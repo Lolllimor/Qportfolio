@@ -139,7 +139,7 @@ export default function VibeCodedProjects() {
                 className={`col-span-2 col-start-1 row-start-3 flex shrink-0 items-center gap-0.5 self-center font-campton text-xs text-[#5C5C5C] opacity-80 transition-opacity group-hover:opacity-100 sm:col-span-1 sm:col-start-4 sm:row-start-1 ${project.titleHoverColor}`}
               >
                 <span className="whitespace-nowrap">{project.cta}</span>
-                <ExternalLinkMarkIcon className="size-[18px] shrink-0 sm:size-[23px]" />
+                <ExternalLinkMarkIcon className="size-[18px] shrink-0 origin-center transition-transform duration-300 group-hover:rotate-45 sm:size-[23px]" />
               </span>
             </a>
             <div className="h-1 border-b border-[#D4D4D4] last:border-b-0" />

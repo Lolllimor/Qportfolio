@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { ArrowRight } from '@/components/icons/arrow-right-o';
 import VibeCodedProjects from '@/components/home/VibeCodedProjects';
 import InterswitchPhone from '@/components/home/InterswitchPhone';
 import EmprintePhone from '@/components/home/EmprintePhone';
@@ -63,9 +64,14 @@ export default function HomeComponent() {
             </h2>
             <Link
               href="/product"
-              className="shrink-0 font-campton text-sm font-normal text-[#353F50] underline underline-offset-4 transition-colors duration-200 hover:text-[#E66001] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001]"
+              className="group inline-flex shrink-0 items-center gap-0.5 font-campton text-sm font-normal text-[#353F50] underline underline-offset-4 transition-colors duration-200 hover:text-[#E66001] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001]"
             >
               View All Projects
+              <span className="inline-flex overflow-hidden">
+                <span className="-translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                  <ArrowRight />
+                </span>
+              </span>
             </Link>
           </div>
           <div className="flex flex-col lg:flex-row items-center lg:gap-2 gap-6 font-campton">
