@@ -7,32 +7,47 @@ import { IphoneFrame, PROTOTYPE_HEIGHT, PROTOTYPE_WIDTH } from './IphoneFrame';
 const TENANT_URL = 'https://pawa-khaki.vercel.app';
 const LANDLORD_URL = 'https://pawa-admin-lilac.vercel.app';
 
-function PrototypeOption({
-  label,
-  active,
-  onSelect,
+function ViewSwitch({
+  view,
+  onChange,
 }: {
-  label: string;
-  active: boolean;
-  onSelect: () => void;
+  view: 'tenant' | 'landlord';
+  onChange: (next: 'tenant' | 'landlord') => void;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onSelect}
-      className={`flex min-h-11 items-baseline gap-2 bg-transparent p-0 text-left font-campton text-base ${
-        active
-          ? 'text-[#E66001]'
-          : 'text-[#353F50] underline underline-offset-4 transition-colors hover:text-[#E66001]'
-      }`}
-    >
-      {label}
-      {active ? (
-        <span className="font-campton text-xs font-normal text-[#5C5C5C] no-underline">
-          Currently viewing
-        </span>
-      ) : null}
-    </button>
+    <div>
+      <p className="mb-2 font-campton text-xs text-[#5C5C5C]">Viewing</p>
+      <div
+        role="tablist"
+        aria-label="Prototype"
+        className="inline-flex rounded-full bg-[#F6F3F1] p-1"
+      >
+        {(
+          [
+            { id: 'tenant', label: 'Tenant' },
+            { id: 'landlord', label: 'Landlord' },
+          ] as const
+        ).map((option) => {
+          const selected = view === option.id;
+          return (
+            <button
+              key={option.id}
+              type="button"
+              role="tab"
+              aria-selected={selected}
+              onClick={() => onChange(option.id)}
+              className={`min-h-11 rounded-full px-4 font-campton text-sm transition-colors ${
+                selected
+                  ? 'bg-white text-[#353F50] shadow-sm'
+                  : 'text-[#5C5C5C] hover:text-[#353F50]'
+              }`}
+            >
+              {option.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -60,38 +75,30 @@ export function PawaPrototypeViewer() {
             }}
           />
         </IphoneFrame>
-        <div className="flex flex-col gap-4">
-          <PrototypeOption
-            label="Tenant app"
-            active={isTenant}
-            onSelect={() => setView('tenant')}
-          />
-          <PrototypeOption
-            label="Landlord dashboard"
-            active={!isTenant}
-            onSelect={() => setView('landlord')}
-          />
-        </div>
+        <ViewSwitch view={view} onChange={setView} />
       </div>
-      <div className="my-8 flex max-w-[640px] flex-col items-start gap-4 md:hidden">
-        <a
-          href={TENANT_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1C1816] px-6 font-campton text-base text-white"
-        >
-          Open tenant app
-          <ArrowRight color="#FFFFFF" />
-        </a>
-        <a
-          href={LANDLORD_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center gap-2 font-campton text-base text-[#353F50]"
-        >
-          Open landlord dashboard
-          <ArrowRight />
-        </a>
+      <div className="my-8 flex max-w-[640px] flex-col items-start gap-3 md:hidden">
+        <p className="font-campton text-xs text-[#5C5C5C]">Open on your phone</p>
+        <div className="flex flex-wrap gap-x-5 gap-y-2">
+          <a
+            href={TENANT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center gap-1.5 font-campton text-sm text-[#353F50] underline underline-offset-4 hover:text-[#E66001]"
+          >
+            Tenant app
+            <ArrowRight />
+          </a>
+          <a
+            href={LANDLORD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center gap-1.5 font-campton text-sm text-[#353F50] underline underline-offset-4 hover:text-[#E66001]"
+          >
+            Landlord dashboard
+            <ArrowRight />
+          </a>
+        </div>
       </div>
     </>
   );

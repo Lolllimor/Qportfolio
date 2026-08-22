@@ -3,7 +3,7 @@ import { CaseStudy } from '@/types';
 export const caseStudies: CaseStudy[] = [
   {
     description:
-      'A prepaid power-sharing app for Nigerian apartment buildings — for landlords generating their own electricity and the tenants who buy it from them.',
+      'A prepaid power-sharing app for Nigerian apartment buildings, for landlords generating their own electricity and the tenants who buy it from them.',
     url: '/product/pawa',
     imageClass: 'w-full h-auto rounded-2xl',
     imageAlt: 'Pawa case study cover: title, sun graphic, and the line solar power-sharing app for Nigerian apartment buildings',

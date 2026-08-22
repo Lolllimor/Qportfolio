@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight } from '@/components/icons/arrow-right-o';
 import { PhoneScreenImage } from './IphoneFrame';
 import { PawaPrototypeViewer } from './PawaPrototypeViewer';
+import { PawaScreenStrip } from './PawaScreenStrip';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -14,57 +15,174 @@ const nunito = Nunito({
 
 const TENANT_URL = 'https://pawa-khaki.vercel.app';
 
-const paperPreview = [
+const iteration3Screens = [
   {
-    src: '/case-studies/pawa/home-active.png',
-    alt: 'Pawa home screen in the active state, showing available balance and a Top up button.',
+    src: '/case-studies/pawa/live/home-disconnected.png',
+    alt: 'Pawa home in the disconnected state: empty gauge with X marks and a black Top up now button.',
   },
   {
-    src: '/case-studies/pawa/home-disconnected.png',
-    alt: 'Pawa home screen in the disconnected state, with zero balance and a Top up now button.',
+    src: '/case-studies/pawa/live/home-active.png',
+    alt: 'Pawa home in the active state, with the gauge at 59 percent.',
   },
   {
-    src: '/case-studies/pawa/usage.png',
-    alt: 'Pawa usage screen with a weekly consumption chart and live current-draw reading.',
+    src: '/case-studies/pawa/live/usage-consumption.png',
+    alt: 'Pawa usage screen on the Consumption tab.',
   },
   {
-    src: '/case-studies/pawa/account.png',
-    alt: 'Pawa account screen with notification settings and a low-balance alert at 20 percent.',
+    src: '/case-studies/pawa/live/usage-payments.png',
+    alt: 'Pawa usage screen on the Payments tab.',
+  },
+  {
+    src: '/case-studies/pawa/live/account.png',
+    alt: 'Pawa account screen with saved card and notification toggles.',
   },
 ] as const;
 
+function ProcessIcon({ children }: { children: ReactNode }) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className="shrink-0 text-[#E66001]"
+    >
+      {children}
+    </svg>
+  );
+}
+
+function PencilIcon() {
+  return (
+    <ProcessIcon>
+      <path
+        d="M14 5.5 18.5 10M4 20l1.4-5.2L15 5.2a2.1 2.1 0 0 1 3 3L8.2 18.1 4 20Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </ProcessIcon>
+  );
+}
+
+function CodeIcon() {
+  return (
+    <ProcessIcon>
+      <path
+        d="M8 8 4 12l4 4M16 8l4 4-4 4M13.5 6.5l-3 11"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </ProcessIcon>
+  );
+}
+
+function PaperIcon() {
+  return (
+    <ProcessIcon>
+      <rect
+        x="6"
+        y="3.5"
+        width="12"
+        height="17"
+        rx="1.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M9 9h6M9 12.5h6M9 16h3.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </ProcessIcon>
+  );
+}
+
+function ReactIcon() {
+  return (
+    <ProcessIcon>
+      <circle cx="12" cy="12" r="1.4" fill="currentColor" />
+      <ellipse
+        cx="12"
+        cy="12"
+        rx="10"
+        ry="3.8"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <ellipse
+        cx="12"
+        cy="12"
+        rx="10"
+        ry="3.8"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        transform="rotate(60 12 12)"
+      />
+      <ellipse
+        cx="12"
+        cy="12"
+        rx="10"
+        ry="3.8"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        transform="rotate(120 12 12)"
+      />
+    </ProcessIcon>
+  );
+}
+
+function VercelIcon() {
+  return (
+    <ProcessIcon>
+      <path
+        d="M12 4.5 21 20.5H3L12 4.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </ProcessIcon>
+  );
+}
+
 const processSteps = [
-  'Hand sketches',
-  'Claude Code + MCP',
-  'Paper designs',
-  'React build',
-  'Vercel deploy',
+  { label: 'Hand sketches', Icon: PencilIcon },
+  { label: 'Claude Code + MCP', Icon: CodeIcon },
+  { label: 'Paper designs', Icon: PaperIcon },
+  { label: 'React build', Icon: ReactIcon },
+  { label: 'Vercel deploy', Icon: VercelIcon },
 ] as const;
 
 const decisions = [
   {
     title: 'Prepaid over postpaid',
-    body: 'Charging tenants at the end of the month means the landlord chases debt from people he lives next to. Prepaid removes that tension entirely — the money moves before the power does. This is also how Nigerians already think about electricity. NEPA meters run on tokens. Tenants aren’t learning something new.',
+    body: 'Charging tenants at the end of the month means the landlord chases debt from people he lives next to. Prepaid removes that tension entirely. The money moves before the power does. This is also how Nigerians already think about electricity. NEPA meters run on tokens. Tenants aren’t learning something new.',
   },
   {
     title: 'Auto-disconnect and auto-reconnect',
-    body: 'When balance hits zero, power cuts automatically. When a tenant tops up, it reconnects automatically — no call, no WhatsApp, no waiting. The disconnected screen says one thing: “Top up to reconnect automatically. No action needed from your landlord.” A low-balance alert fires at 20%, so reaching zero is a choice, not a surprise.',
+    body: 'When balance hits zero, power cuts automatically. When a tenant tops up, it reconnects automatically. No call, no WhatsApp, no waiting. The disconnected screen says one thing: “Top up to reconnect automatically. No action needed from your landlord.” A low-balance alert fires at 20%, so reaching zero is a choice, not a surprise.',
   },
   {
     title: 'A 200 kWh max balance',
-    body: 'The cap exists for the same reason prepaid electricity meters always have one: a solar system has finite capacity, and without a ceiling, one tenant can hold more than the system can serve. It also keeps the gauge meaningful — without a fixed maximum, the arc has no reference point.',
+    body: 'The cap exists for the same reason prepaid electricity meters always have one: a solar system has finite capacity, and without a ceiling, one tenant can hold more than the system can serve. It also keeps the gauge meaningful. Without a fixed maximum, the arc has no reference point.',
   },
   {
     title: 'Hours alongside kilowatt-hours',
-    body: 'The gauge shows kWh as the primary reading — the technical truth. But beneath it sits “Approx. 2.4 hours remaining.” The kWh is accurate but abstract. Hours are what most tenants actually understand. Both are always visible: one gives the fact, the other gives the meaning. The arc shifts from indigo to amber to red as balance drops. Urgency is in the colour, not in a label.',
+    body: 'The gauge shows kWh as the primary reading, the technical truth. But beneath it sits “Approx. 2.4 hours remaining.” The kWh is accurate but abstract. Hours are what most tenants actually understand. Both are always visible: one gives the fact, the other gives the meaning. The arc shifts from indigo to amber to red as balance drops. Urgency is in the colour, not in a label.',
   },
   {
     title: 'The circuit breakdown',
-    body: 'Tenants reported not knowing why their balance dropped faster than expected. The “What’s drawing power” panel shows consumption by circuit in real time — Air Conditioning, Lighting, Kitchen, Other — as a segmented bar with live kW values. It answers the question before it becomes a complaint.',
+    body: 'Tenants reported not knowing why their balance dropped faster than expected. The “What’s drawing power” panel shows consumption by circuit in real time: Air Conditioning, Lighting, Kitchen, Other, as a segmented bar with live kW values. It answers the question before it becomes a complaint.',
   },
   {
     title: 'A three-step top-up flow',
-    body: 'Amount → Payment → Confirmation. A tenant running low at 11pm is not reading instructions. The amount screen converts as they type: ₦1,500 is 17.6 kWh. Payment is via stored card through Paystack Vault, with bank transfer as an alternative. The confirmation screen says “You’re back on” — not “Payment successful.”',
+    body: 'Amount → Payment → Confirmation. A tenant running low at 11pm is not reading instructions. The amount screen converts as they type: ₦1,500 is 17.6 kWh. Payment is via stored card through Paystack Vault, with bank transfer as an alternative. The confirmation screen says “You’re back on,” not “Payment successful.”',
   },
 ] as const;
 
@@ -207,11 +325,11 @@ export function PawaStudy() {
         href="#prototype"
         className="mt-3 inline-flex items-center gap-1.5 font-campton text-xs leading-tight text-[#5C5C5C] no-underline transition-colors hover:text-[#E66001] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001]"
       >
-        Live prototype — try it
+        Live prototype. Try it
         <ArrowRight />
       </a>
       <p className="mt-4 max-w-[640px] font-campton text-base leading-relaxed text-[#5C5C5C]">
-        A prepaid power-sharing app for Nigerian apartment buildings — for
+        A prepaid power-sharing app for Nigerian apartment buildings, for
         landlords generating their own electricity and the tenants who buy it
         from them.
       </p>
@@ -248,7 +366,7 @@ export function PawaStudy() {
         </p>
         <p>
           A power generator could be a mechanical generator, a solar
-          generator — which is becoming common in Nigeria — or a hydroelectric
+          generator, which is becoming common in Nigeria, or a hydroelectric
           generator.
         </p>
         <p>
@@ -291,31 +409,32 @@ export function PawaStudy() {
           From sketch to shipped
         </h2>
         <ol className="md:hidden">
-          {processSteps.map((step, index) => (
-            <li key={step} className="relative flex gap-3 pb-5 last:pb-0">
-              <div className="flex w-2.5 shrink-0 flex-col items-center">
-                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-[#E66001]" />
+          {processSteps.map(({ label, Icon }, index) => (
+            <li key={label} className="relative flex gap-3 pb-5 last:pb-0">
+              <div className="flex w-6 shrink-0 flex-col items-center">
+                <Icon />
                 {index < processSteps.length - 1 ? (
                   <span className="mt-1 w-px flex-1 bg-[#E66001]/30" />
                 ) : null}
               </div>
-              <p>{step}</p>
+              <p className="pt-0.5">{label}</p>
             </li>
           ))}
         </ol>
         <div className="relative hidden md:block">
           <div
             aria-hidden="true"
-            className="absolute top-[5px] right-[10%] left-[10%] h-px bg-[#E66001]/30"
+            className="absolute top-[41px] right-[10%] left-[10%] h-px bg-[#E66001]/30"
           />
           <ol className="grid grid-cols-5 gap-2">
-            {processSteps.map((step) => (
+            {processSteps.map(({ label, Icon }) => (
               <li
-                key={step}
+                key={label}
                 className="relative flex flex-col items-center text-center"
               >
-                <span className="z-10 h-2.5 w-2.5 rounded-full bg-[#E66001] ring-4 ring-white" />
-                <p className="mt-3 text-sm leading-snug">{step}</p>
+                <Icon />
+                <span className="z-10 mt-3 h-2.5 w-2.5 rounded-full bg-[#E66001] ring-4 ring-white" />
+                <p className="mt-3 text-sm leading-snug">{label}</p>
               </li>
             ))}
           </ol>
@@ -326,17 +445,6 @@ export function PawaStudy() {
           in Paper via MCP, converting hand-drawn sketches into structured UI,
           then built in React and deployed.
         </p>
-      </div>
-
-      <div className="my-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-        {paperPreview.map((screen) => (
-          <PhoneScreenImage
-            key={screen.src}
-            src={screen.src}
-            alt={screen.alt}
-            sizes="(max-width: 768px) 45vw, 240px"
-          />
-        ))}
       </div>
 
       <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
@@ -355,34 +463,12 @@ export function PawaStudy() {
 
       <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
-          What the first build was missing
-        </h2>
-        <p>
-          Reviewing the AI designs from my sketches, the features worked
-          technically. The UI did not feel intuitive enough, and the UX could
-          be better felt.
-        </p>
-        <p>
-          I wrote a prompt to create a style guide and improve the
-          presentation of some elements, like the gauge.
-        </p>
-      </div>
-
-      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
-        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           A simple style guide
         </h2>
         <p>
-          The first pass looked like a lot of AI output: a coloured primary
-          button on every screen, drop shadows on cards, a default sans for
-          everything. None of that was wrong. None of it was a decision.
-        </p>
-        <p>
-          I wrote a short guide — not a design system. Enough rules that every
-          screen had to pick a side. Terracotta is for power, not for every
-          call to action. Primary buttons are black pills. Cards sit on the
-          surface; they don’t float. Status is a colour and a word. The icons
-          could be improved.
+          I wrote a short guide, not a design system. Enough rules that every
+          screen had to pick a side. Terracotta is for power. Primary buttons
+          are black pills.
         </p>
         <p>
           Nunito carries the interface. It is round enough to feel human at
@@ -465,47 +551,154 @@ export function PawaStudy() {
         </figcaption>
       </figure>
 
-      <div className="max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
-        <ol className="list-decimal space-y-3 pl-5">
-          <li>
-            Primary actions are black pills. If every button is terracotta,
-            nothing is urgent.
-          </li>
-          <li>
-            No drop shadows. Depth comes from the stone surface behind the
-            card, not from a floating layer.
-          </li>
-          <li>
-            Active nav is a filled circle. The rest are outlines. One filled
-            state at a time.
-          </li>
-          <li>
-            Disconnected is red. Active is calm. The gauge does the urgency,
-            not the chrome.
-          </li>
-        </ol>
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
+          Two iterations
+        </h2>
+
+        <h3 className="font-apple-garamond text-xl font-normal text-[#353F50]">
+          01 · First build
+        </h3>
+        <p>
+          The first React build was functional but generic. Balance displayed
+          as flat text, no visual weight, no urgency. The layout was clean but
+          the AI tooling showed: everything was competent, nothing was
+          distinctive. Individual craft wasn’t visible in the output.
+        </p>
       </div>
+      <figure className="my-10">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {[
+            {
+              src: '/case-studies/pawa/home-active.png',
+              alt: 'First-build Pawa home with balance as flat text and no gauge.',
+            },
+            {
+              src: '/case-studies/pawa/home-disconnected.png',
+              alt: 'First-build Pawa home in the disconnected state, with zero balance as red text.',
+            },
+            {
+              src: '/case-studies/pawa/usage.png',
+              alt: 'First-build Pawa usage screen with a weekly consumption chart.',
+            },
+            {
+              src: '/case-studies/pawa/account.png',
+              alt: 'First-build Pawa account screen with payment methods and notification toggles.',
+            },
+          ].map((screen) => (
+            <PhoneScreenImage
+              key={screen.src}
+              src={screen.src}
+              alt={screen.alt}
+              sizes="(max-width: 768px) 45vw, 220px"
+              safeArea={false}
+            />
+          ))}
+        </div>
+        <figcaption className="mt-3 font-campton text-sm leading-relaxed text-[#5C5C5C]">
+          The first build. No gauge, flat layout, AI defaults.
+        </figcaption>
+      </figure>
+
+      <div className="mt-8 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <div className="space-y-3">
+          <p className="font-campton text-xs tracking-wide text-[#353F50] uppercase">
+            Feedback
+          </p>
+          <p>
+            The prototype leaned on AI-generated defaults, making it harder to
+            see individual visual craft and interaction design judgment in the
+            work.
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
+        <h3 className="font-apple-garamond text-xl font-normal text-[#353F50]">
+          02 · The rebuild
+        </h3>
+        <p>
+          So I went back. The disconnected state became a concept. No power
+          means the app feels dead. The gauge shows X marks (dead eyes), the button
+          turns black, the stat cards grey out. The goal was for the app to
+          communicate absence through its entire visual state.
+        </p>
+        <p>
+          The top-up flow moved to a bottom sheet. The confirmation screen
+          builds sequentially: payment confirmed → kWh added → power
+          reconnected.
+        </p>
+        <p>
+          Every button has a 95% scale micro-interaction on press.
+        </p>
+      </div>
+      <PawaScreenStrip
+        screens={iteration3Screens}
+        caption="Iteration 3. The final design. Every decision visible in the product, not just the write-up."
+      />
 
       <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           The gauge
         </h2>
         <p>
-          On first load the needle sat at the current value. That is accurate
-          and lifeless — the same as a number in a card. The rebuild animates
-          the arc from empty to the current balance, with an ease-out so it
-          settles like a physical meter. 27% stops being a label and becomes a
-          remaining amount you can feel.
+          The home screen is the gauge. When there is power, the arc fills
+          from empty to the current balance, with an ease-out so it settles
+          like a physical meter. 59% is not a label. It is a remaining amount
+          you can feel.
+        </p>
+        <p>
+          When there is no power, the same object does the opposite. The arc
+          goes grey. Two X marks sit where the percentage was. The button
+          turns black. The stat cards lose colour. The goal is for the page to
+          feel dead the moment someone opens it, the same as the apartment.
+        </p>
+        <p>
+          A zero can still look like a reading. An X cannot. It says the meter
+          is not running. While there is power, the arc carries the urgency:
+          red at 20% or below, amber from 21 to 40, green above that.
         </p>
       </div>
-      <FramedScreen
-        src="/case-studies/pawa/home-active-2.png"
-        alt="Pawa home screen with a semi-circular gauge showing 27 percent remaining and 2.4 kWh out of 11.8 kWh."
-        caption="The gauge now fills from zero on load. The ease-out is the judgment — it should feel like a meter, not a progress bar."
-        sizes="(max-width: 768px) 50vw, 320px"
-        className="my-10"
-        captionSide
-      />
+      <figure className="my-10">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+          {[
+            {
+              src: '/case-studies/pawa/live/gauge-empty.png',
+              alt: 'Pawa gauge disconnected: grey arc, two red X marks, and No power.',
+              caption: 'Empty. X marks replace the reading.',
+            },
+            {
+              src: '/case-studies/pawa/live/gauge-low.png',
+              alt: 'Pawa gauge at 18 percent, red arc, low balance.',
+              caption: 'Low. Red at 20% or below.',
+            },
+            {
+              src: '/case-studies/pawa/live/gauge-mid.png',
+              alt: 'Pawa gauge at 32 percent, amber arc, active.',
+              caption: 'Mid. Amber from 21 to 40%.',
+            },
+            {
+              src: '/case-studies/pawa/live/gauge-healthy.png',
+              alt: 'Pawa gauge at 59 percent, green arc, active.',
+              caption: 'Healthy. Green above 40%.',
+            },
+          ].map((gauge) => (
+            <div key={gauge.src}>
+              <Image
+                src={gauge.src}
+                alt={gauge.alt}
+                width={780}
+                height={408}
+                sizes="(max-width: 768px) 45vw, 220px"
+                className="h-auto w-full"
+              />
+              <p className="mt-3 text-center whitespace-nowrap font-campton text-sm text-[#5C5C5C]">
+                {gauge.caption}
+              </p>
+            </div>
+          ))}
+        </div>
+      </figure>
 
       <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
@@ -513,32 +706,58 @@ export function PawaStudy() {
         </h2>
         <p>
           Amount → Payment → Confirmation was already the right sequence. What
-          was missing was direction. Each step now moves with the flow, so
+          was missing was direction. The flow now lives in a bottom sheet, so
           going forward and going back feel different. A tenant topping up at
           11pm should feel like they are walking a short path, not swapping
           static slides.
         </p>
       </div>
-      <div className="my-10 grid grid-cols-3 gap-4">
-        <FramedScreen
-          src="/case-studies/pawa/topup-amount.png"
-          alt="Pawa top-up amount screen with preset naira amounts and a live kilowatt-hour conversion."
-          caption="Amount"
-          sizes="(max-width: 768px) 30vw, 240px"
-        />
-        <FramedScreen
-          src="/case-studies/pawa/topup-payment.png"
-          alt="Pawa payment screen with order summary, saved Mastercard, and Paystack security note."
-          caption="Payment"
-          sizes="(max-width: 768px) 30vw, 240px"
-        />
-        <FramedScreen
-          src="/case-studies/pawa/topup-confirmation.png"
-          alt="Pawa confirmation screen with the heading You’re back on and the new balance."
-          caption="Confirmation"
-          sizes="(max-width: 768px) 30vw, 240px"
-        />
-      </div>
+      <figure className="my-10">
+        <div className="grid grid-cols-2 items-end gap-4 rounded-2xl bg-[#F6F3F1] px-4 py-8 md:grid-cols-4">
+          {[
+            {
+              src: '/case-studies/pawa/live/sheet-topup-empty.png',
+              alt: 'Pawa top-up sheet with no amount selected and Continue disabled.',
+              caption: 'Nothing selected',
+              height: 1246,
+            },
+            {
+              src: '/case-studies/pawa/live/sheet-topup-amount.png',
+              alt: 'Pawa top-up sheet with ₦10,000 selected and Continue enabled.',
+              caption: 'Amount',
+              height: 1298,
+            },
+            {
+              src: '/case-studies/pawa/live/sheet-topup-payment.png',
+              alt: 'Pawa payment sheet with order summary and Pay ₦10,000.',
+              caption: 'Payment',
+              height: 1376,
+            },
+            {
+              src: '/case-studies/pawa/live/sheet-topup-confirmation.png',
+              alt: 'Pawa confirmation sheet with the heading You’re back on.',
+              caption: 'Confirmation',
+              height: 1132,
+            },
+          ].map((sheet) => (
+            <div key={sheet.src}>
+              <div className="overflow-hidden rounded-t-2xl bg-white pt-3">
+                <Image
+                  src={sheet.src}
+                  alt={sheet.alt}
+                  width={780}
+                  height={sheet.height}
+                  sizes="(max-width: 768px) 45vw, 220px"
+                  className="h-auto w-full"
+                />
+              </div>
+              <p className="mt-3 text-center font-campton text-sm leading-relaxed text-[#5C5C5C]">
+                {sheet.caption}
+              </p>
+            </div>
+          ))}
+        </div>
+      </figure>
 
       <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
@@ -546,10 +765,8 @@ export function PawaStudy() {
         </h2>
         <p>
           The confirmation screen does not appear all at once. Checkmark first,
-          heading second, balance card last. That is the order someone
-          processes relief: the signal that it worked, then the words, then
-          the new number. “You’re back on” lands before the kWh figure,
-          because the feeling comes before the receipt.
+          heading second, balance card last. “You’re back on” lands before the
+          kWh figure, because the feeling comes before the receipt.
         </p>
       </div>
 
@@ -558,31 +775,20 @@ export function PawaStudy() {
         className="mt-16 max-w-[640px] scroll-mt-24 space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]"
       >
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
-          Iteration — The upgraded prototype
+          Interactive prototype
         </h2>
         <p>
-          Putting everything I highlighted into consideration, I developed an
-          even better prototype. You can try it yourself.
+          The tenant app is live in the frame. Switch to the landlord
+          dashboard for generation, battery, how load is spread across units,
+          and what needs attention. The view he needed when he was fielding
+          calls at night.
         </p>
-        <p className="text-sm">
-          Note: The prototype is live in the frame on desktop, and full screen
-          on a phone.
+        <p>
+          On a phone, both open full screen.
         </p>
       </div>
 
       <PawaPrototypeViewer />
-
-      <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
-        <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
-          The landlord dashboard
-        </h2>
-        <p>
-          The trust problem starts with him. He was fielding calls at night
-          and managing multiple apartments remotely. The dashboard shows
-          generation, battery, how load is distributed across units, and what
-          needs attention.
-        </p>
-      </div>
 
       <div className="mt-16 max-w-[640px] space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]">
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
@@ -618,7 +824,7 @@ export function PawaStudy() {
           what gets built next.
         </p>
         <p>
-          The prototype was shared with the landlord and two tenants — both
+          The prototype was shared with the landlord and two tenants. Both
           tenants grasped the app’s purpose without guidance, and the landlord
           confirmed the product reflected how he currently manages the system.
         </p>

@@ -10,10 +10,10 @@ import { getCanonicalUrl } from '@/lib/site';
 const PATH = '/product/pawa';
 const TITLE = {
   absolute:
-    'Pawa — Prepaid Power for Nigerian Apartments · Live Prototype | Quadri Morin',
+    'Pawa: Prepaid Power for Nigerian Apartments · Live Prototype | Quadri Morin',
 };
 const DESCRIPTION =
-  'A prepaid power-sharing app for Nigerian apartment buildings — for landlords generating their own electricity and the tenants who buy it from them.';
+  'A prepaid power-sharing app for Nigerian apartment buildings, for landlords generating their own electricity and the tenants who buy it from them.';
 const HERO = '/case-studies/pawa/pawa-cover.png';
 
 export async function generateMetadata() {
@@ -38,7 +38,7 @@ export default function PawaPage() {
       />
       <JsonLd
         data={caseStudyJsonLd({
-          name: 'Pawa — Prepaid Power for Nigerian Apartments',
+          name: 'Pawa: Prepaid Power for Nigerian Apartments',
           description: DESCRIPTION,
           path: PATH,
           datePublished: '2026-08',

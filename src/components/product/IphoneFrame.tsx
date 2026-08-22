@@ -10,8 +10,8 @@ const FRAME_W = Math.round(SCREEN_W / (1 - 0.044));
 function DynamicIsland() {
   return (
     <div
-      className="pointer-events-none absolute top-[8px] left-1/2 z-20 w-[31%] -translate-x-1/2 rounded-full bg-black"
-      style={{ aspectRatio: '126 / 36' }}
+      className="pointer-events-none absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black"
+      style={{ width: '27cqi', height: '5.2cqi' }}
       aria-hidden="true"
     />
   );
@@ -19,17 +19,17 @@ function DynamicIsland() {
 
 function StatusBar() {
   return (
-    <div className="relative flex h-9 shrink-0 items-center bg-white px-5">
+    <div className="relative flex h-9 shrink-0 items-center bg-white px-4">
+      <DynamicIsland />
       <span
-        className="w-12 text-[13px] font-semibold text-black"
+        className="relative z-10 w-10 text-[11px] font-semibold text-black"
         style={{
           fontFamily: '-apple-system, BlinkMacSystemFont, system-ui, sans-serif',
         }}
       >
         9:41
       </span>
-      <div className="flex-1" />
-      <div className="flex w-12 justify-end text-black">
+      <div className="relative z-10 ml-auto text-black">
         <StatusBarIcons />
       </div>
     </div>
@@ -72,26 +72,25 @@ function StatusBarIcons() {
 function DeviceShell({ children }: { children: ReactNode }) {
   return (
     <div className="relative w-full" style={{ containerType: 'inline-size' }}>
-      <div className="absolute top-[14%] left-[-3px] h-[5%] w-[3px] rounded-l-sm bg-[#3A3A3C]" />
-      <div className="absolute top-[20%] left-[-3px] h-[8%] w-[3px] rounded-l-sm bg-[#3A3A3C]" />
-      <div className="absolute top-[29%] left-[-3px] h-[8%] w-[3px] rounded-l-sm bg-[#3A3A3C]" />
-      <div className="absolute top-[22%] right-[-3px] h-[10%] w-[3px] rounded-r-sm bg-[#3A3A3C]" />
+      <div className="absolute top-[16%] left-[-2px] h-[4%] w-[2px] rounded-l-sm bg-[#3A3A3C]" />
+      <div className="absolute top-[22%] left-[-2px] h-[7%] w-[2px] rounded-l-sm bg-[#3A3A3C]" />
+      <div className="absolute top-[31%] left-[-2px] h-[7%] w-[2px] rounded-l-sm bg-[#3A3A3C]" />
+      <div className="absolute top-[24%] right-[-2px] h-[9%] w-[2px] rounded-r-sm bg-[#3A3A3C]" />
       <div
         className="overflow-hidden"
         style={{
-          padding: '2.2cqi',
-          borderRadius: '11cqi',
+          padding: '3.6cqi',
+          borderRadius: '13cqi',
           background: '#1C1C1E',
           boxShadow:
-            'inset 0 0 0 1px rgba(255,255,255,0.08), 0 0 0 1.5px #3A3A3C',
+            'inset 0 0 0 1px rgba(255,255,255,0.1), 0 0 0 1px #2C2C2E',
         }}
       >
         <div
-          className="relative overflow-hidden bg-white"
-          style={{ borderRadius: '8.8cqi' }}
+          className="relative isolate overflow-hidden bg-white"
+          style={{ borderRadius: '9.4cqi' }}
         >
           {children}
-          <DynamicIsland />
         </div>
       </div>
     </div>
@@ -131,24 +130,30 @@ export function PhoneScreenImage({
   alt,
   sizes,
   priority = false,
+  safeArea = true,
 }: {
   src: string;
   alt: string;
   sizes: string;
   priority?: boolean;
+  safeArea?: boolean;
 }) {
   return (
     <DeviceShell>
+      {safeArea ? <StatusBar /> : null}
       <Image
         src={src}
         alt={alt}
-        width={473}
-        height={1024}
+        width={780}
+        height={1688}
         priority={priority}
         loading={priority ? undefined : 'lazy'}
         sizes={sizes}
         className="h-auto w-full"
       />
+      <div className="flex h-3.5 shrink-0 items-end justify-center bg-white pb-1">
+        <div className="h-[3px] w-[34%] rounded-full bg-black/20" />
+      </div>
     </DeviceShell>
   );
 }
