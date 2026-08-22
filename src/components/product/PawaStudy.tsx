@@ -33,6 +33,14 @@ const paperPreview = [
   },
 ] as const;
 
+const processSteps = [
+  'Hand sketches',
+  'Claude Code + MCP',
+  'Paper designs',
+  'React build',
+  'Vercel deploy',
+] as const;
+
 const decisions = [
   {
     title: 'Prepaid over postpaid',
@@ -71,7 +79,7 @@ const lessons = [
   },
   {
     title: 'Copy carries more of the trust work than the interface does.',
-    body: '“You’re back on” and “No action needed from your landlord” do more for a tenant at 11pm than any layout choice on those screens.',
+    body: '“You’re back on” does more for a tenant at 11pm than any layout choice on those screens.',
   },
 ] as const;
 
@@ -234,19 +242,19 @@ export function PawaStudy() {
           Reading the brief
         </h2>
         <p>
-          In a Nigerian apartment building, the “power generator” is usually a
-          person, not a machine. Someone with capacity — a genset, or
-          increasingly a solar system — selling electricity to the flats
-          around them.
+          For me, when I read “a power generator,” my mind didn’t drift to the
+          mechanical generators commonly used in Nigeria. It drifted toward a
+          solar power generator.
         </p>
         <p>
-          The job is the same either way. Track what each flat uses. Take
-          payment. Cut off. Reconnect. The fuel doesn’t change the problem.
+          A power generator could be a mechanical generator, a solar
+          generator — which is becoming common in Nigeria — or a hydroelectric
+          generator.
         </p>
         <p>
-          I went to solar because that’s where it’s growing, and where nobody
-          has built the management layer yet. Diesel has decades of informal
-          practice around it. Solar doesn’t.
+          I went for solar because it is a growing industry in Nigeria, and
+          where nobody has built the management layer yet. Diesel has decades
+          of informal practice around it. Solar doesn’t.
         </p>
       </div>
 
@@ -255,17 +263,19 @@ export function PawaStudy() {
           Finding the real problem
         </h2>
         <p>
-          I called a friend, a solar engineer who built his own system at home
-          and started supplying excess power to his tenants. I asked him how he
-          was managing it, and where it was breaking down.
+          I spoke to a friend, a solar engineer who built his own system at
+          home and started supplying excess power to his tenants. I asked him
+          how he was managing it, and where he was facing the highest
+          friction.
         </p>
         <p>
-          His answer started with his tenants. Power would cut off at the worst
-          possible moment: night, mid-cooking, during a work call, with no
-          warning. They’d call him to reconnect, sometimes after already making
-          payment. Many felt their balance was draining faster than expected
-          with no way to verify it. On his end, managing multiple apartments
-          remotely while monitoring the solar hardware had become exhausting.
+          His answers started with his tenants. Power would cut off at the
+          worst possible moment: in the night, while cooking or working,
+          during a work call, with no warning. They’d have to call him to
+          reconnect, sometimes after already making payment. Many also felt
+          their balance was draining faster than expected with no way to
+          verify it. On his end, managing multiple apartments, sometimes
+          remotely while monitoring the solar system, had become exhausting.
         </p>
         <p>The infrastructure existed. The management layer didn’t.</p>
         <blockquote className="border-l-2 border-[#E66001] pl-4">
@@ -280,13 +290,36 @@ export function PawaStudy() {
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
           From sketch to shipped
         </h2>
-        <ol className="list-decimal space-y-1 pl-5">
-          <li>Hand sketches</li>
-          <li>Claude Code + MCP</li>
-          <li>Paper designs</li>
-          <li>React build</li>
-          <li>Vercel deploy</li>
+        <ol className="md:hidden">
+          {processSteps.map((step, index) => (
+            <li key={step} className="relative flex gap-3 pb-5 last:pb-0">
+              <div className="flex w-2.5 shrink-0 flex-col items-center">
+                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-[#E66001]" />
+                {index < processSteps.length - 1 ? (
+                  <span className="mt-1 w-px flex-1 bg-[#E66001]/30" />
+                ) : null}
+              </div>
+              <p>{step}</p>
+            </li>
+          ))}
         </ol>
+        <div className="relative hidden md:block">
+          <div
+            aria-hidden="true"
+            className="absolute top-[5px] right-[10%] left-[10%] h-px bg-[#E66001]/30"
+          />
+          <ol className="grid grid-cols-5 gap-2">
+            {processSteps.map((step) => (
+              <li
+                key={step}
+                className="relative flex flex-col items-center text-center"
+              >
+                <span className="z-10 h-2.5 w-2.5 rounded-full bg-[#E66001] ring-4 ring-white" />
+                <p className="mt-3 text-sm leading-snug">{step}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
         <p>
           The product was designed and built end to end with AI, from the
           first sketch to a live interactive prototype. Designs were created
@@ -325,15 +358,13 @@ export function PawaStudy() {
           What the first build was missing
         </h2>
         <p>
-          Reviewing the shipped prototype, the screens worked. The
-          interactions were design defaults: states that appear, buttons that
-          sit, a gauge already at its value. Nothing was wrong. Nothing had
-          been decided.
+          Reviewing the AI designs from my sketches, the features worked
+          technically. The UI did not feel intuitive enough, and the UX could
+          be better felt.
         </p>
         <p>
-          The judgment lived in the write-up rather than in the product. A
-          short style guide forced every screen to pick a side. The
-          interactions were rebuilt so those choices could be felt.
+          I wrote a prompt to create a style guide and improve the
+          presentation of some elements, like the gauge.
         </p>
       </div>
 
@@ -349,8 +380,9 @@ export function PawaStudy() {
         <p>
           I wrote a short guide — not a design system. Enough rules that every
           screen had to pick a side. Terracotta is for power, not for every
-          call to action. Primary buttons are black pills. Cards sit on a
-          warmer surface; they don’t float. Status is a colour and a word.
+          call to action. Primary buttons are black pills. Cards sit on the
+          surface; they don’t float. Status is a colour and a word. The icons
+          could be improved.
         </p>
         <p>
           Nunito carries the interface. It is round enough to feel human at
@@ -526,11 +558,15 @@ export function PawaStudy() {
         className="mt-16 max-w-[640px] scroll-mt-24 space-y-6 font-campton text-base leading-relaxed text-[#5C5C5C]"
       >
         <h2 className="font-apple-garamond text-2xl font-normal text-[#353F50] md:text-[28px]">
-          The upgraded prototype
+          Iteration — The upgraded prototype
         </h2>
         <p>
-          Try it yourself. The prototype is live in the frame on desktop, and
-          full screen on a phone.
+          Putting everything I highlighted into consideration, I developed an
+          even better prototype. You can try it yourself.
+        </p>
+        <p className="text-sm">
+          Note: The prototype is live in the frame on desktop, and full screen
+          on a phone.
         </p>
       </div>
 
