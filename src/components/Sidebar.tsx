@@ -81,7 +81,7 @@ export default function Sidebar() {
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <aside className=" mt-[56px] sm:mt-[162px] flex lg:flex-col flex-row fixed lg:sticky bottom-0 lg:bottom-auto lg:top-[162px] items-center lg:items-start justify-center lg:gap-6 sm:gap-16 gap-8 z-9999 bg-white/80 py-5 lg:py-0 w-full mx-auto lg:mx-0 lg:w-[150px] lg:shrink-0 shadow-[0_-6px_16px_rgba(0,0,0,0.04)] lg:shadow-none h-fit lg:self-start">
+    <aside className=" mt-[56px] sm:mt-[162px] flex lg:flex-col flex-row fixed lg:sticky bottom-0 lg:bottom-auto lg:top-[162px] items-center lg:items-start justify-center lg:gap-6 sm:gap-16 gap-8 z-9999 bg-white/80 pt-2.5 pb-1.5 lg:py-0 w-full mx-auto lg:mx-0 lg:w-[150px] lg:shrink-0 shadow-[0_-6px_16px_rgba(0,0,0,0.04)] lg:shadow-none h-fit lg:self-start">
       {navItems.map(({ href, key, label }) => {
         const active = isActive(href);
 

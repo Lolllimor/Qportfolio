@@ -77,28 +77,26 @@ export function PawaPrototypeViewer() {
         </IphoneFrame>
         <ViewSwitch view={view} onChange={setView} />
       </div>
-      <div className="my-8 flex max-w-[640px] flex-col items-start gap-3 md:hidden">
+      <div className="my-8 flex w-full max-w-[640px] flex-col gap-3 md:hidden">
         <p className="font-campton text-xs text-[#5C5C5C]">Open on your phone</p>
-        <div className="flex flex-wrap gap-x-5 gap-y-2">
-          <a
-            href={TENANT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-1.5 font-campton text-sm text-[#353F50] underline underline-offset-4 hover:text-[#E66001]"
-          >
-            Tenant app
-            <ArrowRight />
-          </a>
-          <a
-            href={LANDLORD_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-1.5 font-campton text-sm text-[#353F50] underline underline-offset-4 hover:text-[#E66001]"
-          >
-            Landlord dashboard
-            <ArrowRight />
-          </a>
-        </div>
+        <a
+          href={TENANT_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-12 w-full touch-manipulation items-center justify-between rounded-full bg-[#353F50] px-5 font-campton text-sm text-white no-underline transition-transform duration-150 active:scale-[0.95]"
+        >
+          Tenant app
+          <ArrowRight />
+        </a>
+        <a
+          href={LANDLORD_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-12 w-full touch-manipulation items-center justify-between rounded-full bg-[#F6F3F1] px-5 font-campton text-sm text-[#353F50] no-underline transition-transform duration-150 active:scale-[0.95]"
+        >
+          Landlord dashboard
+          <ArrowRight />
+        </a>
       </div>
     </>
   );

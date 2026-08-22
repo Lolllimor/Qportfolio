@@ -692,7 +692,7 @@ export function PawaStudy() {
                 sizes="(max-width: 768px) 45vw, 220px"
                 className="h-auto w-full"
               />
-              <p className="mt-3 text-center whitespace-nowrap font-campton text-sm text-[#5C5C5C]">
+              <p className="mt-3 px-1 text-center font-campton text-sm leading-snug text-[#5C5C5C] md:whitespace-nowrap">
                 {gauge.caption}
               </p>
             </div>

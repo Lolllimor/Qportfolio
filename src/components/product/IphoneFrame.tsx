@@ -10,8 +10,14 @@ const FRAME_W = Math.round(SCREEN_W / (1 - 0.044));
 function DynamicIsland() {
   return (
     <div
-      className="pointer-events-none absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black"
-      style={{ width: '27cqi', height: '5.2cqi' }}
+      className="pointer-events-none absolute z-20 rounded-full bg-black"
+      style={{
+        top: 'calc(1.8cqi + 8px)',
+        left: '50%',
+        width: '16cqi',
+        height: '4.4cqi',
+        transform: 'translateX(-50%)',
+      }}
       aria-hidden="true"
     />
   );
@@ -19,17 +25,27 @@ function DynamicIsland() {
 
 function StatusBar() {
   return (
-    <div className="relative flex h-9 shrink-0 items-center bg-white px-4">
-      <DynamicIsland />
+    <div
+      className="grid shrink-0 grid-cols-3 items-center bg-white"
+      style={{ height: '8.4cqi', paddingInline: '3cqi' }}
+    >
       <span
-        className="relative z-10 w-10 text-[11px] font-semibold text-black"
+        className="justify-self-start font-semibold leading-none text-black"
         style={{
           fontFamily: '-apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+          fontSize: '3.4cqi',
         }}
       >
         9:41
       </span>
-      <div className="relative z-10 ml-auto text-black">
+      <div className="flex justify-center">
+        <div
+          className="rounded-full bg-black"
+          style={{ width: '16cqi', height: '4.4cqi' }}
+          aria-hidden="true"
+        />
+      </div>
+      <div className="justify-self-end text-black">
         <StatusBarIcons />
       </div>
     </div>
@@ -37,21 +53,23 @@ function StatusBar() {
 }
 
 function StatusBarIcons() {
+  const icon = { height: '2.7cqi', width: 'auto' } as const;
+
   return (
-    <div className="flex items-center gap-[3px]">
-      <svg width="17" height="12" viewBox="0 0 17 12" aria-hidden="true" className="h-[10px] w-auto">
+    <div className="flex items-center" style={{ gap: '0.6cqi' }}>
+      <svg viewBox="0 0 17 12" aria-hidden="true" style={icon}>
         <rect x="0" y="7" width="3" height="5" rx="0.6" fill="currentColor" />
         <rect x="4.5" y="5" width="3" height="7" rx="0.6" fill="currentColor" />
         <rect x="9" y="2.5" width="3" height="9.5" rx="0.6" fill="currentColor" />
         <rect x="13.5" y="0" width="3" height="12" rx="0.6" fill="currentColor" />
       </svg>
-      <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true" className="h-[10px] w-auto">
+      <svg viewBox="0 0 16 12" aria-hidden="true" style={icon}>
         <path
           d="M8 9.6a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8Zm0-3.3c1.4 0 2.7.5 3.7 1.4l-1.1 1.1A3.6 3.6 0 0 0 8 7.7c-.9 0-1.8.3-2.5.8L4.4 7.4A5.3 5.3 0 0 1 8 6.3Zm0-3.3c2.3 0 4.4.9 6 2.4L12.9 6.5A6.7 6.7 0 0 0 8 4.6c-1.9 0-3.6.7-4.9 1.9L1.9 5.4A8.6 8.6 0 0 1 8 3Z"
           fill="currentColor"
         />
       </svg>
-      <svg width="27" height="13" viewBox="0 0 27 13" aria-hidden="true" className="h-[11px] w-auto">
+      <svg viewBox="0 0 27 13" aria-hidden="true" style={{ height: '2.9cqi', width: 'auto' }}>
         <rect
           x="0.5"
           y="0.5"
@@ -117,7 +135,7 @@ export function IphoneFrame({ children }: { children: ReactNode }) {
             {children}
           </div>
         </div>
-        <div className="flex h-4 items-end justify-center bg-white pb-1.5">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-4 items-end justify-center pb-1.5">
           <div className="h-[4px] w-[34%] rounded-full bg-black/25" />
         </div>
       </DeviceShell>
@@ -140,19 +158,27 @@ export function PhoneScreenImage({
 }) {
   return (
     <DeviceShell>
-      {safeArea ? <StatusBar /> : null}
-      <Image
-        src={src}
-        alt={alt}
-        width={780}
-        height={1688}
-        priority={priority}
-        loading={priority ? undefined : 'lazy'}
-        sizes={sizes}
-        className="h-auto w-full"
-      />
-      <div className="flex h-3.5 shrink-0 items-end justify-center bg-white pb-1">
-        <div className="h-[3px] w-[34%] rounded-full bg-black/20" />
+      {safeArea ? <StatusBar /> : <DynamicIsland />}
+      <div className="relative overflow-hidden">
+        <Image
+          src={src}
+          alt={alt}
+          width={780}
+          height={1688}
+          priority={priority}
+          loading={priority ? undefined : 'lazy'}
+          sizes={sizes}
+          className="h-auto w-full"
+        />
+      </div>
+      <div
+        className="flex shrink-0 items-end justify-center bg-white"
+        style={{ height: '4.2cqi', paddingBottom: '1.4cqi' }}
+      >
+        <div
+          className="rounded-full bg-black/20"
+          style={{ height: '0.9cqi', width: '34%' }}
+        />
       </div>
     </DeviceShell>
   );
