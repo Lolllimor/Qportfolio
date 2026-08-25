@@ -25,7 +25,7 @@ const longShot = localFont({
 export const metadata = createPageMetadata({
   title: 'Twenty II',
   description:
-    'Twenty II — Restacking the Odds, a solo art exhibition by Quadri Morin exploring focus, courage, and inner transformation.',
+    'Twenty II — Restacking the Odds, a solo exhibition by Quadri Morin, shown at OneArt Gallery in Lagos on 14 February 2026.',
   path: '/twenty-ii',
 });
 

@@ -126,7 +126,7 @@ const ExhibitionPage = ({
                 </span>
                 <span className="text-[#5C5C5C]">
                   {' '}
-                  presents a collection of artworks that explore the themes of
+                  presented a collection of artworks that explore the themes of
                   focus, courage, and transformation. Each piece reflects how
                   discipline, intentional action, and the drive for change can
                   realign one's life and identity. Through this curated body of
@@ -137,18 +137,21 @@ const ExhibitionPage = ({
                 </span>
                 <span className="text-[#5C5C5C]">
                   {' '}
-                  invites viewers to reflect on how meaningful change begins
+                  invited viewers to reflect on how meaningful change begins
                   from within and unfolds through conscious, personal shifts.
                 </span>
               </p>
 
               {/* Buttons */}
               <div className="flex flex-col lg:flex-row items-center gap-4 xl:w-[588px] lg:w-[470px] w-full lg:h-14 font-montserrat">
-                <button className=" xl:h-14 h-10   bg-[#EB5D1D] flex justify-center items-center gap-2.5 xl:w-[286px] lg:w-[200px] w-full">
+                <Link
+                  href="/twenty-ii"
+                  className=" xl:h-14 h-10   bg-[#EB5D1D] flex justify-center items-center gap-2.5 xl:w-[286px] lg:w-[200px] w-full"
+                >
                   <span className="text-white text-center font-medium xl:text-xl text-base">
-                 Register
+                    The exhibition
                   </span>
-                </button>
+                </Link>
                 <Link 
                   href="/twenty-ii/artist"
                   className="xl:h-14 h-10 py-2 border border-black flex justify-center items-center gap-2.5 xl:w-[286px] lg:w-[200px] w-full hover:bg-black transition-colors group"

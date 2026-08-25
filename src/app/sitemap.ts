@@ -19,6 +19,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: path === '/' ? 1 : 0.8,
   }));
 
+  const exploreArtEntry = {
+    url: getCanonicalUrl('/gallery/explore'),
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  };
+
   const caseStudyEntries = caseStudyRoutes.map(({ path }) => ({
     url: getCanonicalUrl(path),
     lastModified: now,
@@ -50,6 +57,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...portfolioEntries,
+    exploreArtEntry,
     ...articleEntries,
     ...caseStudyEntries,
     ...twentyIiEntries,

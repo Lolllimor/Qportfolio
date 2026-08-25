@@ -156,19 +156,18 @@ const LandingPage = () => {
       <div className="mx-auto mt-8 max-w-[1440px] md:mt-12">
         <h1 className="sr-only">Twenty II — Restacking the Odds</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-white/90 xl:text-base">
-          Twenty II — Restacking the Odds is a solo exhibition by Quadri Morin
+          Twenty II — Restacking the Odds was a solo exhibition by Quadri Morin
           at OneArt Gallery in Anthony Village, Lagos. The work sits between
           product thinking and studio practice: digital painting, conceptual
           storytelling, and a quiet insistence that identity can be rewritten.
           Restacking the Odds is about discipline, courage, and the decision to
           change when nobody is watching — to meet a future self that has
-          already begun. The exhibition opens 14 February 2026, 1PM–6PM.
-          Register to attend, or{' '}
+          already begun. The show ran 14 February 2026, 1PM–6PM.{' '}
           <Link
             href="/twenty-ii/artworks"
             className="font-semibold underline underline-offset-2"
           >
-            browse the collection
+            Browse the collection
           </Link>
           .
         </p>
@@ -215,23 +214,21 @@ const LandingPage = () => {
                 <button
                   onClick={handleEntryPortalOpen}
                   
-                  className="border border-[#ffffff] py-3 xl:py-4 cursor-not-allowed text-white w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl group disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="border border-[#ffffff] py-3 xl:py-4 cursor-pointer text-white w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span className="group-hover:scale-75 transition-transform duration-300 inline-block font-medium text-sm">
                     Experience the Art
                   </span>
                 </button>
-                <button
-                  onClick={() =>
-                    window.open('https://pv.rsvp/twenty-ii', '_blank')
-                  }
-                  className="bg-[#EB5D1D] group py-3 px-7 xl:py-4 xl:px-10 text-white font-medium w-full md:w-[180px] xl:w-[269px] text-base xl:text-xl cursor-pointer relative"
+                <Link
+                  href="/twenty-ii/artworks"
+                  className="bg-[#EB5D1D] group flex items-center justify-center whitespace-nowrap py-3 px-7 xl:py-4 xl:px-10 text-white font-medium w-full md:w-auto text-base xl:text-xl cursor-pointer relative"
                 >
-                  <span className="group-hover:scale-75 transition-transform duration-300 inline-block font-medium text-sm">
-                    Register
+                  <span className="group-hover:scale-75 transition-transform duration-300 inline-block whitespace-nowrap font-medium text-sm">
+                    From the Event
                     <ArrowRightIcon className="absolute  top-1/2 -translate-y-1/2 inline-block opacity-0 -translate-x-4 ml-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                   </span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -246,15 +243,15 @@ const LandingPage = () => {
             Experience the Art
           </span>
         </button>
-        <button
-          onClick={() => window.open('https://pv.rsvp/twenty-ii', '_blank')}
-          className="bg-[#EB5D1D] group py-3 px-7 xl:py-4 xl:px-10 text-white font-medium w-[191px] xl:w-[269px] text-base xl:text-xl cursor-pointer relative"
+        <Link
+          href="/twenty-ii/artworks"
+          className="bg-[#EB5D1D] group flex items-center justify-center whitespace-nowrap py-3 px-7 xl:py-4 xl:px-10 text-white font-medium w-auto min-w-[191px] xl:min-w-[269px] text-base xl:text-xl cursor-pointer relative"
         >
-          <span className="group-hover:scale-75 transition-transform duration-300 inline-block font-medium">
-            Register
+          <span className="group-hover:scale-75 transition-transform duration-300 inline-block whitespace-nowrap font-medium">
+            From the Event
             <ArrowRightIcon className="absolute  top-1/2 -translate-y-1/2 inline-block opacity-0 -translate-x-4 ml-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
           </span>
-        </button>
+        </Link>
       </div>
       {isEntryPortalOpen && (
         <EntryPortal handleEntryPortalClose={handleEntryPortalClose} />

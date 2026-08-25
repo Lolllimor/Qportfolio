@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+
 import { EmailIcon } from './icons/inactive/header/EmailIcon';
 import { LinkedInIcon } from './icons/inactive/header/LinkedInIcon';
 import { BehanceIcon } from './icons/inactive/header/BehanceIcon';
@@ -34,6 +36,8 @@ const links = [
 ] as const;
 
 export default function Header() {
+  const pathname = usePathname();
+  const isExplore = pathname === '/gallery/explore';
   const [isHovered, setIsHovered] = useState('');
 
   const iconCircleClass = (key: string) =>
@@ -44,7 +48,13 @@ export default function Header() {
     }`;
 
   return (
-    <header className="relative z-30 mx-auto mt-[51px] flex w-full max-w-[500px] items-end justify-end gap-4 px-6 pb-6 sm:mt-[62px] sm:flex-row sm:px-0 md:max-w-[868px] xl:max-w-[1074px]">
+    <header
+      className={
+        isExplore
+          ? 'fixed top-4 right-4 z-50 m-0 flex w-auto max-w-none items-end justify-end p-0 sm:top-6 sm:right-8'
+          : 'relative z-30 mx-auto mt-[51px] flex w-full max-w-[500px] items-end justify-end gap-4 px-6 pb-6 sm:mt-[62px] sm:flex-row sm:px-0 md:max-w-[868px] xl:max-w-[1074px]'
+      }
+    >
       <div className="flex items-center gap-1">
         {links.map(({ key, label, href, Icon }) => {
           const active = isHovered === key;

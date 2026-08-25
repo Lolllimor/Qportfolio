@@ -7,6 +7,6 @@ export const contentType = ogContentType;
 export default async function OpenGraphImage() {
   return createOgImage({
     kicker: 'Artworks',
-    subtitle: 'Original digital pieces exploring identity and transformation.',
+    subtitle: 'Studio work and Restacking the Odds at OneArt Gallery.',
   });
 }

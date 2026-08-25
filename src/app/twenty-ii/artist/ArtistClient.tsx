@@ -65,7 +65,7 @@ const Artist = () => {
               compositions that feel both intimate and expansive.
             </p>
             <p className="mt-4">
-              Twenty II, Restacking the Odds, gathers that inquiry into a
+              Twenty II, Restacking the Odds, gathered that inquiry into a
               single body of work: discipline, courage, and the quiet decision
               to change. Quadri continues to experiment with form, medium, and
               narrative — as a product designer by day and as an artist

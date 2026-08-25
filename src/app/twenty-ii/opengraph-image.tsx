@@ -7,6 +7,6 @@ export const contentType = ogContentType;
 export default async function OpenGraphImage() {
   return createOgImage({
     kicker: 'Twenty II',
-    subtitle: 'Restacking the Odds — an art exhibition by Quadri Morin.',
+    subtitle: 'Restacking the Odds — shown at OneArt Gallery, Lagos, February 2026.',
   });
 }

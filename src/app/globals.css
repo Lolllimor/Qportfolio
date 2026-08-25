@@ -43,3 +43,42 @@ body {
 .animate-breathing {
   animation: breathing 2s ease-in-out infinite;
 }
+
+@keyframes gallery-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(var(--float-x, 0px), var(--float-y, -14px), 0);
+  }
+}
+
+.gallery-float {
+  animation: gallery-float var(--float-duration, 5.2s) ease-in-out
+    var(--float-delay, 0s) infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-float {
+    animation: none;
+  }
+}
+
+.gallery-artboard {
+  background-color: #f3f1ec;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.62 0 0 0 0 0.6 0 0 0 0 0.55 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(
+      0deg,
+      rgb(80 65 50 / 0.01) 0 1px,
+      transparent 1px 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgb(80 65 50 / 0.008) 0 1px,
+      transparent 1px 4px
+    );
+  background-size: 180px 180px, auto, auto;
+}

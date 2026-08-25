@@ -1,7 +1,17 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+
 const footerLinkClassName =
   'inline-block origin-center text-center font-apple-garamond-light text-base font-normal text-[#353F50] underline transition-[color,transform] duration-200 hover:scale-[1.125] hover:text-[#E66001]';
 
 export const Footer = () => {
+  const pathname = usePathname();
+
+  if (pathname === '/gallery/explore') {
+    return null;
+  }
+
   return (
     <div className="flex items-center gap-6 pb-[100px] w-full justify-center">
       <a

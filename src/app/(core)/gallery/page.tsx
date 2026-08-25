@@ -5,7 +5,7 @@ import { createPageMetadata, pageBreadcrumbJsonLd } from '@/lib/seo';
 export const metadata = createPageMetadata({
   title: 'Artworks',
   description:
-    'A gallery of original artworks and visual pieces by Quadri Morin.',
+    "Studio artworks and Restacking the Odds, Quadri Morin's solo exhibition at OneArt Gallery, Lagos.",
   path: '/gallery',
 });
 

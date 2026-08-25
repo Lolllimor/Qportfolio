@@ -7,6 +7,6 @@ export const contentType = ogContentType;
 export default async function OpenGraphImage() {
   return createOgImage({
     kicker: 'Twenty II Artworks',
-    subtitle: 'The Restacking the Odds collection — digital works on identity and change.',
+    subtitle: 'The Restacking the Odds collection, shown at OneArt Gallery, Lagos.',
   });
 }

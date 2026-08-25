@@ -76,12 +76,19 @@ function InactiveIcon({ iconKey }: { iconKey: NavKey }) {
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const isExplore = pathname === '/gallery/explore';
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <aside className=" mt-[56px] sm:mt-[162px] flex lg:flex-col flex-row fixed lg:sticky bottom-0 lg:bottom-auto lg:top-[162px] items-center lg:items-start justify-center lg:gap-6 sm:gap-16 gap-8 z-9999 bg-white/80 pt-2.5 pb-1.5 lg:py-0 w-full mx-auto lg:mx-0 lg:w-[150px] lg:shrink-0 shadow-[0_-6px_16px_rgba(0,0,0,0.04)] lg:shadow-none h-fit lg:self-start">
+    <aside
+      className={
+        isExplore
+          ? 'fixed bottom-4 left-0 right-0 z-50 flex h-fit w-full flex-row items-center justify-center gap-7 bg-transparent px-4 lg:bottom-auto lg:left-6 lg:right-auto lg:top-1/2 lg:w-auto lg:-translate-y-1/2 lg:flex-col lg:gap-7 lg:px-0'
+          : ' mt-[56px] sm:mt-[162px] flex lg:flex-col flex-row fixed lg:sticky bottom-0 lg:bottom-auto lg:top-[162px] items-center lg:items-start justify-center lg:gap-6 sm:gap-16 gap-8 z-9999 bg-white/80 pt-2.5 pb-1.5 lg:py-0 w-full mx-auto lg:mx-0 lg:w-[150px] lg:shrink-0 shadow-[0_-6px_16px_rgba(0,0,0,0.04)] lg:shadow-none h-fit lg:self-start'
+      }
+    >
       {navItems.map(({ href, key, label }) => {
         const active = isActive(href);
 
@@ -89,8 +96,13 @@ export default function Sidebar() {
           <Link
             key={href}
             href={href}
+            aria-label={label}
             aria-current={active ? 'page' : undefined}
-            className="group flex flex-col gap-1 lg:flex-row-reverse lg:w-[150px] items-center justify-center lg:justify-between cursor-pointer transition-all lg:px-2 lg:py-1.5 lg:rounded-md lg:hover:bg-[#F5F5F5] lg:hover:px-3 lg:hover:py-2.5"
+            className={
+              isExplore
+                ? 'group flex min-h-11 min-w-11 items-center justify-center'
+                : 'group flex flex-col gap-1 lg:flex-row-reverse lg:w-[150px] items-center justify-center lg:justify-between cursor-pointer transition-all lg:px-2 lg:py-1.5 lg:rounded-md lg:hover:bg-[#F5F5F5] lg:hover:px-3 lg:hover:py-2.5'
+            }
           >
             <div className="relative flex h-5 w-5 items-center justify-center">
               {active ? (
@@ -106,13 +118,15 @@ export default function Sidebar() {
                 </>
               )}
             </div>
-            <p
-              className={`flex text-[10px] lg:text-sm font-campton transition-colors ${
-                active ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
-              } ${active ? '' : 'group-hover:text-[#E66001]'}`}
-            >
-              {label}
-            </p>
+            {isExplore ? null : (
+              <p
+                className={`flex text-[10px] lg:text-sm font-campton transition-colors ${
+                  active ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
+                } ${active ? '' : 'group-hover:text-[#E66001]'}`}
+              >
+                {label}
+              </p>
+            )}
           </Link>
         );
       })}
