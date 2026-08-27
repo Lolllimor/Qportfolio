@@ -21,7 +21,8 @@ export interface ScreenItem {
   imageSrc: string;
   imageAlt: string;
   title: string;
-  date: string;
+  width: number;
+  height: number;
 }
 
 export interface Artwork {
