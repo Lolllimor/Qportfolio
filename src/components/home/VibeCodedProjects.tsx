@@ -63,7 +63,7 @@ const projects: ProjectRow[] = [
     titleHoverColor: 'group-hover:text-[#EB5D1D]',
     description:
       'I saw an opportunity to help Designers actively train their visual eye, so I built it. Design Gym helps designers sharpens their visual judgment through quick, side-by-side comparison rounds focused on the basic foundation of a good designs.',
-    href: 'https://design-quiz-rho.vercel.app',
+    href: 'https://designgym.xyz',
     cta: 'Open Design Gym',
   },
   {
