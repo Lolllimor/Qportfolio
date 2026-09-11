@@ -1,5 +1,6 @@
 import type { Art, Artwork } from '@/types';
 
+import { getFallbackArtworks } from './fallbackArtworks';
 import { getStrapiClient, getStrapiMediaBase } from './strapiServer';
 
 export type ArtworksResult = {
@@ -119,33 +120,55 @@ async function withRetry<T>(fn: () => Promise<T>, attempts = 3): Promise<T> {
   throw lastError;
 }
 
+function paginateFallback(page = 1, pageSize = 25): ArtworksResult {
+  const all = getFallbackArtworks();
+  const pageCount = Math.max(1, Math.ceil(all.length / pageSize));
+  const safePage = Math.min(Math.max(page, 1), pageCount);
+  const start = (safePage - 1) * pageSize;
+
+  return {
+    artworks: all.slice(start, start + pageSize),
+    pagination: {
+      page: safePage,
+      pageSize,
+      pageCount,
+      total: all.length,
+    },
+  };
+}
+
 export async function getArtworks(
   page = 1,
   pageSize = 25
 ): Promise<ArtworksResult> {
   const client = getStrapiClient();
   if (!client) {
-    throw new Error('Strapi is not configured');
+    return paginateFallback(page, pageSize);
   }
 
-  const response = await withRetry(() =>
-    client.collection('artworks').find({
-      populate: '*',
-      pagination: { page, pageSize },
-    })
-  );
+  try {
+    const response = await withRetry(() =>
+      client.collection('artworks').find({
+        populate: '*',
+        pagination: { page, pageSize },
+      })
+    );
 
-  return {
-    artworks: response.data.map((item) => transformArtwork(item)),
-    pagination: response.meta?.pagination
-      ? {
-          page: response.meta.pagination.page,
-          pageSize: response.meta.pagination.pageSize,
-          pageCount: response.meta.pagination.pageCount,
-          total: response.meta.pagination.total,
-        }
-      : undefined,
-  };
+    return {
+      artworks: response.data.map((item) => transformArtwork(item)),
+      pagination: response.meta?.pagination
+        ? {
+            page: response.meta.pagination.page,
+            pageSize: response.meta.pagination.pageSize,
+            pageCount: response.meta.pagination.pageCount,
+            total: response.meta.pagination.total,
+          }
+        : undefined,
+    };
+  } catch (error) {
+    console.error('Strapi artworks fetch failed, using fallback:', error);
+    return paginateFallback(page, pageSize);
+  }
 }
 
 export async function getArtwork(id: string): Promise<Artwork | null> {

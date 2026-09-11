@@ -271,7 +271,7 @@ export const gallery = [
   {
     name: 'Fvck Love',
     date: 'Feb, 2025',
-    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LrHHiTemJKVx791W2ngaewvd0AErMkYsDPyiT',
+    src: '/twenty-ii/fvck-love.png',
   },
   {
     name: 'Shine',
@@ -295,7 +295,7 @@ export const gallery = [
   },
   {
     name: 'On Form',
-    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LBqh5QUisG5HaZJ4dczlgnojeYMmAFEi1LDP2',
+    src: '/twenty-ii/on-form.png',
     date: 'Jan, 2025',
   },
   {
@@ -309,7 +309,7 @@ export const gallery = [
     date: 'Mar, 2024',
   },
   {
-    name: 'Bazuka',
+    name: 'WOMD',
     src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LH3Falcpycq0LimIsOJUD576hfzurv1oWBjZN',
     date: 'Mar, 2024',
   },
@@ -326,7 +326,7 @@ export const gallery = [
 
   {
     name: 'Moon Girl',
-    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LU6hGHrjBfBe26QZNXiSWrylK0VnkmIaxpTEc',
+    src: '/twenty-ii/moon-girl.png',
     date: 'Mar, 2025',
   },
 
