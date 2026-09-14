@@ -104,7 +104,7 @@ export default function Sidebar() {
                 : 'group flex flex-col gap-1 lg:flex-row-reverse lg:w-[150px] items-center justify-center lg:justify-between cursor-pointer transition-all lg:px-2 lg:py-1.5 lg:rounded-md lg:hover:bg-[#F5F5F5] lg:hover:px-3 lg:hover:py-2.5'
             }
           >
-            <div className="relative flex h-5 w-5 items-center justify-center">
+            <div className="relative flex h-6 w-6 items-center justify-center">
               {active ? (
                 <ActiveIcon iconKey={key} />
               ) : (
@@ -120,7 +120,7 @@ export default function Sidebar() {
             </div>
             {isExplore ? null : (
               <p
-                className={`flex text-[10px] lg:text-sm font-campton transition-colors ${
+                className={`flex leading-none text-[10px] lg:text-sm font-campton transition-colors ${
                   active ? 'text-[#E66001] font-semibold' : 'text-[#353F50]'
                 } ${active ? '' : 'group-hover:text-[#E66001]'}`}
               >
