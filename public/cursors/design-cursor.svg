@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 16 22" fill="none">
+  <!-- Classic design-tool pointer (Photoshop / system arrow), no move badge. Hotspot: (1, 1) -->
+  <path
+    d="M1.2 1.1 L1.2 17.4 L4.85 13.9 L8.1 21.1 L11.05 19.85 L7.85 12.7 L13.4 12.7 Z"
+    fill="#111111"
+    stroke="#ffffff"
+    stroke-width="1.2"
+    stroke-linejoin="round"
+  />
+</svg>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { ArrowRight } from '@/components/icons/arrow-right-o';
 import VibeCodedProjects from '@/components/home/VibeCodedProjects';
+import ScreenMarquee from '@/components/home/ScreenMarquee';
 import InterswitchPhone from '@/components/home/InterswitchPhone';
 import EmprintePhone from '@/components/home/EmprintePhone';
 import PawaPhone from '@/components/home/PawaPhone';
@@ -49,9 +50,10 @@ export default function HomeComponent() {
                 href="https://docs.google.com/document/d/1RYYdLsKFfPM6eUOkGXyi4YDR9bKg5-LhG5oHIHXhGy0/edit?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-cursor-normal
                 className="mt-2 inline-flex w-fit items-center justify-center rounded-lg border border-[#F0F0F0] bg-[#F5F5F5] px-5 py-3 font-campton text-sm font-normal leading-none text-[#353F50] no-underline transition-[color,background-color,transform] duration-200 hover:scale-105 hover:bg-[#EFEFEF] hover:text-[#E66001] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001]"
               >
-                Download resume
+                Open Resume
               </a>
             </div>
           </div>
@@ -64,6 +66,7 @@ export default function HomeComponent() {
             </h2>
             <Link
               href="/product"
+              data-cursor-normal
               className="group inline-flex shrink-0 items-center gap-0.5 font-campton text-sm font-normal text-[#353F50] underline underline-offset-4 transition-colors duration-200 hover:text-[#E66001] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001]"
             >
               View All Projects
@@ -83,6 +86,7 @@ export default function HomeComponent() {
 
         <div className="mt-[80px] mb-[111px]">
           <VibeCodedProjects />
+          <ScreenMarquee />
         </div>
       </div>
     </main>

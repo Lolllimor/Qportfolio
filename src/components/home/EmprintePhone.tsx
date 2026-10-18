@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { ProjectHoverZone } from '@/components/common/ProjectCursor';
 import { useIsLargeScreen } from '@/hooks/useIsLargeScreen';
 
 const MotionDiv = motion.div;
@@ -12,56 +13,58 @@ export default function EmprintePhone() {
 
   return (
     <div className="flex w-full flex-col items-center gap-2 lg:w-auto">
-      <MotionLink
-        href="/product/emprinte"
-        whileHover={isLargeScreen ? 'hover' : undefined}
-        initial="initial"
-        className="group relative flex h-[320px] w-full cursor-pointer items-start justify-center overflow-hidden rounded-lg lg:h-[384px] lg:w-[284px] xl:h-[472px] xl:w-[333px]"
-        style={{
-          background:
-            'linear-gradient(156deg, #E8F3F0 -1.47%, #F1F6F5 109.75%)',
-        }}
-      >
-        <MotionDiv
-          variants={{
-            initial: {
-              scale: 1,
-              rotate: 0,
-              x: 0,
-              y: 0,
-            },
-            hover: {
-              scale: 1.3,
-              rotate: -15,
-              x: -25,
-              y: 30,
-            },
+      <ProjectHoverZone>
+        <MotionLink
+          href="/product/emprinte"
+          whileHover={isLargeScreen ? 'hover' : undefined}
+          initial="initial"
+          className="group relative flex h-[320px] w-full cursor-pointer items-start justify-center overflow-hidden rounded-lg lg:h-[384px] lg:w-[284px] xl:h-[472px] xl:w-[333px]"
+          style={{
+            background:
+              'linear-gradient(156deg, #E8F3F0 -1.47%, #F1F6F5 109.75%)',
           }}
-          transition={{
-            type: 'tween',
-            stiffness: 300,
-            damping: 20,
-            duration: 0.3,
-          }}
-          className="relative mt-[50px] w-[234px] lg:absolute lg:left-[144px] lg:top-[92px] lg:mt-0"
         >
-          <Image
-            src="/home/emprinte-dashboard.webp"
-            alt="Emprinte app home — reading streak, continue reading, growth tracker, and reading schedule"
-            width={234}
-            height={491}
-            loading="lazy"
-            sizes="234px"
-            className="h-auto w-[234px] rounded-[24px]"
-          />
-        </MotionDiv>
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#F1F6F5]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <p className="text-center font-campton text-sm font-medium leading-5 text-[#353F50] md:text-base md:leading-6">
-            Solo-led brand and product through App Store launch. Live with 40+
-            members ahead of the September 2026 public launch.
-          </p>
-        </div>
-      </MotionLink>
+          <MotionDiv
+            variants={{
+              initial: {
+                scale: 1,
+                rotate: 0,
+                x: 0,
+                y: 0,
+              },
+              hover: {
+                scale: 1.3,
+                rotate: -15,
+                x: -25,
+                y: 30,
+              },
+            }}
+            transition={{
+              type: 'tween',
+              stiffness: 300,
+              damping: 20,
+              duration: 0.3,
+            }}
+            className="relative mt-[50px] w-[234px] lg:absolute lg:left-[144px] lg:top-[92px] lg:mt-0"
+          >
+            <Image
+              src="/home/emprinte-dashboard.webp"
+              alt="Emprinte app home — reading streak, continue reading, growth tracker, and reading schedule"
+              width={234}
+              height={491}
+              loading="lazy"
+              sizes="234px"
+              className="h-auto w-[234px] rounded-[24px]"
+            />
+          </MotionDiv>
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#F1F6F5]/90 px-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <p className="text-center font-campton text-sm font-medium leading-5 text-[#353F50] md:text-base md:leading-6">
+              Solo-led brand and product through App Store launch. Live with 40+
+              members ahead of the September 2026 public launch.
+            </p>
+          </div>
+        </MotionLink>
+      </ProjectHoverZone>
       <div className="flex w-[284px] flex-col items-center gap-1">
         <div className="flex h-6 items-center justify-center gap-1 self-stretch">
           <span className="text-center font-normal text-base leading-10 text-[#353F50]">

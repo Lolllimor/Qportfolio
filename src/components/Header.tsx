@@ -92,6 +92,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
+              data-cursor-normal
               onMouseEnter={() => setHoveredIndex(index)}
               className="relative flex min-h-11 min-w-11 items-center justify-center"
             >

@@ -44,6 +44,28 @@ body {
   animation: breathing 2s ease-in-out infinite;
 }
 
+/* Soft rightward screen strip under vibe-coded projects */
+@keyframes screen-marquee-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.screen-marquee {
+  animation: screen-marquee-right 140s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-marquee {
+    animation: none;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @keyframes gallery-float {
   0%,
   100% {

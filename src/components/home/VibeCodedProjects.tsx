@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 
+import { ProjectHoverZone } from '@/components/common/ProjectCursor';
 import {
   DesignGymIcon,
   EmprinteIconMark,
@@ -107,41 +108,42 @@ export default function VibeCodedProjects() {
       <div className="mt-3 flex flex-col sm:mt-6" role="list">
         {projects.map((project) => (
           <div key={project.title}>
-            <a
-              key={project.title}
-              href={project.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              role="listitem"
-              className={`group -mx-3 grid grid-cols-[auto_1fr] grid-rows-[auto_auto_auto] gap-x-3 gap-y-2 rounded-lg px-5 py-4 my-3 items-center last:border-b-0 sm:-mx-5 sm:grid-cols-[auto_minmax(0,11rem)_minmax(0,1fr)_auto] sm:grid-rows-1 sm:gap-x-5 sm:gap-y-0 sm:px-8 sm:my-4 md:gap-x-8 lg:-mx-6 lg:gap-x-14 lg:px-10 lg:py-3.5 ${project.hoverBg}`}
-            >
-              <div className="col-start-1 row-start-1 self-center">
-                {project.rowIcon}
-              </div>
-
-              <div className="col-start-2 row-start-1 min-w-0 self-center">
-                <h3
-                  className={`font-campton text-base font-medium md:text-base lg:text-lg  ${project.titleColor}`}
-                >
-                  {project.title}
-                </h3>
-                <span className="mt-0.5 block font-campton text-[10px] text-[#5C5C5C] sm:text-[12px]">
-                  {project.date}
-                  <span className="text-[#5C5C5C]"> · {project.platform}</span>
-                </span>
-              </div>
-
-              <p className="col-span-2 col-start-1 row-start-2 min-w-0 self-center font-campton text-xs leading-relaxed text-[#5C5C5C] sm:col-span-1 sm:col-start-3 sm:row-start-1 sm:max-w-[475px] sm:text-sm sm:leading-relaxed">
-                {project.description}
-              </p>
-
-              <span
-                className={`col-span-2 col-start-1 row-start-3 flex shrink-0 items-center gap-0.5 self-center font-campton text-xs text-[#5C5C5C] opacity-80 transition-opacity group-hover:opacity-100 sm:col-span-1 sm:col-start-4 sm:row-start-1 ${project.titleHoverColor}`}
+            <ProjectHoverZone label="Open project">
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                role="listitem"
+                className={`group -mx-3 grid grid-cols-[auto_1fr] grid-rows-[auto_auto_auto] gap-x-3 gap-y-2 rounded-lg px-5 py-4 my-3 items-center last:border-b-0 sm:-mx-5 sm:grid-cols-[auto_minmax(0,11rem)_minmax(0,1fr)_auto] sm:grid-rows-1 sm:gap-x-5 sm:gap-y-0 sm:px-8 sm:my-4 md:gap-x-8 lg:-mx-6 lg:gap-x-14 lg:px-10 lg:py-3.5 ${project.hoverBg}`}
               >
-                <span className="whitespace-nowrap">{project.cta}</span>
-                <ExternalLinkMarkIcon className="size-[18px] shrink-0 origin-center transition-transform duration-300 group-hover:rotate-45 sm:size-[23px]" />
-              </span>
-            </a>
+                <div className="col-start-1 row-start-1 self-center">
+                  {project.rowIcon}
+                </div>
+
+                <div className="col-start-2 row-start-1 min-w-0 self-center">
+                  <h3
+                    className={`font-campton text-base font-medium md:text-base lg:text-lg  ${project.titleColor}`}
+                  >
+                    {project.title}
+                  </h3>
+                  <span className="mt-0.5 block font-campton text-[10px] text-[#5C5C5C] sm:text-[12px]">
+                    {project.date}
+                    <span className="text-[#5C5C5C]"> · {project.platform}</span>
+                  </span>
+                </div>
+
+                <p className="col-span-2 col-start-1 row-start-2 min-w-0 self-center font-campton text-xs leading-relaxed text-[#5C5C5C] sm:col-span-1 sm:col-start-3 sm:row-start-1 sm:max-w-[475px] sm:text-sm sm:leading-relaxed">
+                  {project.description}
+                </p>
+
+                <span
+                  className={`col-span-2 col-start-1 row-start-3 flex shrink-0 items-center gap-0.5 self-center font-campton text-xs text-[#5C5C5C] opacity-80 transition-opacity group-hover:opacity-100 sm:col-span-1 sm:col-start-4 sm:row-start-1 ${project.titleHoverColor}`}
+                >
+                  <span className="whitespace-nowrap">{project.cta}</span>
+                  <ExternalLinkMarkIcon className="size-[18px] shrink-0 origin-center transition-transform duration-300 group-hover:rotate-45 sm:size-[23px]" />
+                </span>
+              </a>
+            </ProjectHoverZone>
             <div className="h-1 border-b border-[#D4D4D4] last:border-b-0" />
           </div>
         ))}

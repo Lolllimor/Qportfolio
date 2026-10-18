@@ -73,6 +73,7 @@ export const Footer = () => {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
+          data-cursor-normal
           onMouseEnter={() => setHoveredIndex(index)}
           className={footerLinkClassName}
           style={{

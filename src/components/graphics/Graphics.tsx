@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { ProjectHoverZone } from '@/components/common/ProjectCursor';
 import { graphics } from '../data';
 import { ArrowRight } from '../icons/arrow-right-o';
 
@@ -51,7 +54,7 @@ export const Graphics = () => {
                   </span>
                 </div>
                 {!isComingSoon && (
-                  <div className="absolute bottom-4 right-4 w-fit h-fit bg-[#E66001] p-3 rounded-full lg:opacity-0 opacity-100 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-4 right-4 w-fit h-fit bg-[#E66001] p-3 rounded-full opacity-100 transition-opacity duration-300 lg:hidden">
                     <ArrowRight color="#fff" />
                   </div>
                 )}
@@ -69,26 +72,28 @@ export const Graphics = () => {
 
           if (item.url && !isComingSoon) {
             const isInternal = item.url.startsWith('/');
-            const sharedProps = { className: cardClassName };
 
             if (isInternal) {
               return (
-                <Link key={index} href={item.url} {...sharedProps}>
-                  {cardContent}
-                </Link>
+                <ProjectHoverZone key={index}>
+                  <Link href={item.url} className={cardClassName}>
+                    {cardContent}
+                  </Link>
+                </ProjectHoverZone>
               );
             }
 
             return (
-              <a
-                key={index}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                {...sharedProps}
-              >
-                {cardContent}
-              </a>
+              <ProjectHoverZone key={index}>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cardClassName}
+                >
+                  {cardContent}
+                </a>
+              </ProjectHoverZone>
             );
           }
 
