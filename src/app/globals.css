@@ -24,10 +24,15 @@
   }
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   background: #ffffff;
   color: #353f50;
   font-family: var(--font-apple-garamond), serif;
+  overflow-x: clip;
 }
 
 @keyframes breathing {

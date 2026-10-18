@@ -8,36 +8,66 @@ import { screens } from '@/components/data';
 /** Soft infinite strip of product screens, drifting to the right. */
 export default function ScreenMarquee() {
   const strip = [...screens, ...screens];
-  const measureRef = useRef<HTMLDivElement>(null);
-  const [bleedLeft, setBleedLeft] = useState(0);
+  const shellRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [bleed, setBleed] = useState<{ left: number; width: number } | null>(
+    null
+  );
+  const [trackHeight, setTrackHeight] = useState(0);
 
   useLayoutEffect(() => {
     const sync = () => {
-      const el = measureRef.current;
-      if (!el) return;
-      // Align strip to the real viewport left (calc(50%-50vw) fails when the
-      // content column is offset by the sidebar).
-      setBleedLeft(-el.getBoundingClientRect().left);
+      const shell = shellRef.current;
+      const track = trackRef.current;
+      if (!shell) return;
+
+      // clientWidth excludes scrollbar — unlike 100vw, so no page-wide X scroll
+      const width = document.documentElement.clientWidth;
+      const left = shell.getBoundingClientRect().left;
+      setBleed({ left, width });
+
+      if (track) {
+        setTrackHeight(track.offsetHeight);
+      }
     };
 
     sync();
     window.addEventListener('resize', sync);
     window.addEventListener('scroll', sync, { passive: true });
+
+    const ro = new ResizeObserver(sync);
+    if (trackRef.current) ro.observe(trackRef.current);
+
     return () => {
       window.removeEventListener('resize', sync);
       window.removeEventListener('scroll', sync);
+      ro.disconnect();
     };
   }, []);
 
   return (
-    <div ref={measureRef} className="mt-10 w-full min-w-0 sm:mt-14">
+    <div
+      ref={shellRef}
+      className="relative mt-10 w-full min-w-0 sm:mt-14"
+      style={{ height: trackHeight || undefined }}
+      aria-label="Interface screens slideshow"
+    >
       <div
+        ref={trackRef}
         className="overflow-hidden"
-        style={{
-          width: '100vw',
-          marginLeft: bleedLeft,
-        }}
-        aria-label="Interface screens slideshow"
+        style={
+          bleed
+            ? {
+                position: 'absolute',
+                top: 0,
+                left: -bleed.left,
+                width: bleed.width,
+              }
+            : {
+                position: 'relative',
+                width: '100%',
+              }
+        }
       >
         <div className="screen-marquee flex w-max gap-4 sm:gap-5">
           {strip.map((screen, index) => (

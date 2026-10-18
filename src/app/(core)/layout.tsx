@@ -10,11 +10,11 @@ export default function CoreLayout({
 }>) {
   return (
     <ProjectCursorProvider>
-      <div className="lg:max-w-[1510px] md:w-[656px] sm:w-[500px] mx-auto lg:w-full relative">
+      <div className="relative mx-auto w-full max-w-[1510px] sm:w-[500px] md:w-[656px] lg:w-full">
         <Header />
-        <div className="flex  xl:gap-[73px] gap-[50px] mx-auto justify-center relative">
+        <div className="relative mx-auto flex justify-center gap-[50px] xl:gap-[73px]">
           <Sidebar />
-          <div className="w-full max-w-[1014px] min-w-0">{children}</div>
+          <div className="w-full min-w-0 max-w-[1014px]">{children}</div>
         </div>
         <Footer />
       </div>
