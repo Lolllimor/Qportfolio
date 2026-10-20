@@ -4,7 +4,7 @@ Before the product went live, we had run tests and this never came up. Testers h
 
 I walked him through it and he was genuinely excited, because he said it was the only missing feature that had ever crossed his mind. But then, we still had to go back to the drawing board.
 
-Later that evening, I was in a meeting with the operations team. They brought up a discussion around incentivising our table-topper. It prompted me to mention that I had spoken to him, about how the app fitted into his everyday life and a feature he had thought wasn’t working. One other person on the call said they had encountered the same issue and assumed it was their device. And that is the thing about the Illusion of Transparency: it is almost inevitable, but the cure involves finding these gaps quickly and fixing them just as fast. I compared this with other feedback and it seemed isolated to a few users; but they were important users. The users in second and third position on the leaderboard had no problem at all. Same product. Same feature. Different experience.
+Later that evening, I was in a meeting with the operations team. They brought up a discussion around incentivising our table-topper. It prompted me to mention that I had spoken to him, about how the app fitted into his everyday life and a feature he had thought wasn’t working. One other person on the call said they had encountered the same issue and assumed it was their device. And that is the thing about the Illusion of Transparency: it is almost inevitable, but the cure involves finding these gaps quickly and fixing them just as fast. I compared this with other feedback and it seemed isolated to a few users, but they were important users. The users in second and third position on the leaderboard had no problem at all. Same product. Same feature. Different experience.
 
 The fix was a simple guide pill. A small, contextual nudge that made the path visible. We had assumed it was obvious. It wasn’t, at least not to everyone.
 
@@ -12,7 +12,7 @@ The fix was a simple guide pill. A small, contextual nudge that made the path vi
 
 The Illusion of Transparency shows up everywhere in product design. It is a cognitive bias where you overestimate how clearly your thoughts, design rationale, or product intent are communicated to others. The more time you spend inside a product, the more invisible its complexity becomes to you. What feels self-evident to the builder is often anything but to the user. And being aware of this bias, as I learned, is not the same as being protected from it.
 
-It is especially prominent among the people closest to the build. Designers, engineers, and product managers develop an internal map of the product that users might not have. Beyond that, humans differ; culturally, contextually, geographically, and what feels like a natural default to one user is a completely foreign starting point for another. Two users can look at the same screen and arrive at entirely different expectations.
+It is especially prominent among the people closest to the build. Designers, engineers, and product managers develop an internal map of the product that users might not have. Beyond that, humans differ — culturally, contextually, geographically — and what feels like a natural default to one user is a completely foreign starting point for another. Two users can look at the same screen and arrive at entirely different expectations.
 
 ## How to check yourself
 
