@@ -58,7 +58,7 @@ export function ArticlePost({ article }: { article: ArticleMeta }) {
 
       {article.mediumUrl ? (
         <p className="mt-16 max-w-[640px] font-campton text-sm leading-relaxed text-[#5C5C5C]">
-          First published on{' '}
+          {article.mediumFirst === false ? 'Also on ' : 'First published on '}
           <a
             href={article.mediumUrl}
             target="_blank"
