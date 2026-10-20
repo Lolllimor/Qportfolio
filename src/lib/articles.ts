@@ -7,13 +7,25 @@ export type ArticleMeta = {
   date: string;
   displayDate: string;
   description: string;
-  mediumUrl: string;
+  mediumUrl?: string;
   cover: string;
   coverAlt: string;
   coverCaption?: string;
 };
 
 export const articles: ArticleMeta[] = [
+  {
+    slug: 'the-illusion-of-transparency-in-design-and-how-to-overcome-it',
+    title: 'The Illusion of Transparency in Design and How to Overcome It',
+    date: '2026-10-20',
+    displayDate: 'Oct 2026',
+    description:
+      'A power user couldn’t find a feature I thought was obvious. That gap is the Illusion of Transparency, and knowing the bias doesn’t protect you from it.',
+    cover:
+      '/articles/the-illusion-of-transparency-in-design-and-how-to-overcome-it/cover.jpg',
+    coverAlt:
+      'Portrait of a man against a yellow background, with a double exposure of his hands near his face',
+  },
   {
     slug: 'the-new-cost-of-learning-and-proficiency-for-creatives-the-impact-on-craftsmanship',
     title:

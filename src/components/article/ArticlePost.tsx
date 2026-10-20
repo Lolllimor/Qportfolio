@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { ArticleShare } from '@/components/article/ArticleShare';
 import { MarkdownBody } from '@/components/article/MarkdownBody';
 import {
   getAdjacentArticles,
@@ -31,6 +32,11 @@ export function ArticlePost({ article }: { article: ArticleMeta }) {
         {article.description}
       </p>
 
+      <ArticleShare
+        title={article.title}
+        path={`/articles/${article.slug}`}
+      />
+
       <figure className="my-10">
         <Image
           src={article.cover}
@@ -50,18 +56,20 @@ export function ArticlePost({ article }: { article: ArticleMeta }) {
 
       <MarkdownBody content={content} />
 
-      <p className="mt-16 max-w-[640px] font-campton text-sm leading-relaxed text-[#5C5C5C]">
-        First published on{' '}
-        <a
-          href={article.mediumUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[#353F50] underline decoration-[#E66001]/40 underline-offset-4 transition-colors hover:text-[#E66001] hover:decoration-[#E66001]"
-        >
-          Medium
-        </a>
-        .
-      </p>
+      {article.mediumUrl ? (
+        <p className="mt-16 max-w-[640px] font-campton text-sm leading-relaxed text-[#5C5C5C]">
+          First published on{' '}
+          <a
+            href={article.mediumUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#353F50] underline decoration-[#E66001]/40 underline-offset-4 transition-colors hover:text-[#E66001] hover:decoration-[#E66001]"
+          >
+            Medium
+          </a>
+          .
+        </p>
+      ) : null}
 
       <nav
         className="mt-12 flex max-w-[640px] flex-col gap-4 border-t border-[#F0F0F0] pt-8 sm:flex-row sm:justify-between"
