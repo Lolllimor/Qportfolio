@@ -51,6 +51,7 @@ type ProjectRow = {
   platform: string;
   href: string;
   cta: string;
+  hero: string;
 };
 
 const projects: ProjectRow[] = [
@@ -66,6 +67,7 @@ const projects: ProjectRow[] = [
       'I saw an opportunity to help Designers actively train their visual eye, so I built it. Design Gym helps designers sharpens their visual judgment through quick, side-by-side comparison rounds focused on the basic foundation of a good designs.',
     href: 'https://designgym.xyz',
     cta: 'Open Design Gym',
+    hero: '/home/design-gym-live.jpg',
   },
   {
     title: 'Reference Overlay',
@@ -79,6 +81,7 @@ const projects: ProjectRow[] = [
       'Context-switching mid-design was often frustrating and killing my flow, so I built a solution. Reference Overlay keeps your reference images and PRD docs in a floating panel inside Figma, always visible, never blocking your canvas.',
     href: 'https://www.figma.com/community/plugin/1608990953292975108',
     cta: 'Open Reference Overlay',
+    hero: '/articles/design-faster-smarter-with-reference-overlay-figma-plugin/cover.jpg',
   },
   {
     title: 'Emprinte',
@@ -92,6 +95,7 @@ const projects: ProjectRow[] = [
       'As a founding member of Emprinte Readers Hub, I led the design of the full product experience from concept to a live App Store launch, onboarding, core flows, and visual identity. Emprinte is building the largest reading community in Africa.',
     href: 'https://apps.apple.com/ng/app/emprinte/id6762211251',
     cta: 'View Emprinte on the App Store',
+    hero: '/home/emprinte-live.jpg',
   },
 ];
 
@@ -105,7 +109,7 @@ export default function VibeCodedProjects() {
         Things I got tired of waiting for someone else to build.
       </p>
 
-      <div className="mt-3 flex flex-col sm:mt-6" role="list">
+      <div className="relative z-10 mt-3 flex flex-col sm:mt-6" role="list">
         {projects.map((project) => (
           <div key={project.title}>
             <ProjectHoverZone label="Open project">
@@ -114,15 +118,13 @@ export default function VibeCodedProjects() {
                 target="_blank"
                 rel="noopener noreferrer"
                 role="listitem"
-                className={`group -mx-3 grid grid-cols-[auto_1fr] grid-rows-[auto_auto_auto] gap-x-3 gap-y-2 rounded-lg px-5 py-4 my-3 items-center last:border-b-0 sm:-mx-5 sm:grid-cols-[auto_minmax(0,11rem)_minmax(0,1fr)_auto] sm:grid-rows-1 sm:gap-x-5 sm:gap-y-0 sm:px-8 sm:my-4 md:gap-x-8 lg:-mx-6 lg:gap-x-14 lg:px-10 lg:py-3.5 ${project.hoverBg}`}
+                className={`group relative z-0 -mx-3 my-3 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-3 rounded-lg px-5 py-4 hover:z-20 focus-within:z-20 sm:-mx-5 sm:gap-x-5 sm:px-8 lg:-mx-6 lg:px-10 lg:py-3.5 ${project.hoverBg}`}
               >
-                <div className="col-start-1 row-start-1 self-center">
-                  {project.rowIcon}
-                </div>
+                <div className="self-center">{project.rowIcon}</div>
 
-                <div className="col-start-2 row-start-1 min-w-0 self-center">
+                <div className="min-w-0 self-center">
                   <h3
-                    className={`font-campton text-base font-medium md:text-base lg:text-lg  ${project.titleColor}`}
+                    className={`font-campton text-base font-medium lg:text-lg ${project.titleColor}`}
                   >
                     {project.title}
                   </h3>
@@ -130,18 +132,33 @@ export default function VibeCodedProjects() {
                     {project.date}
                     <span className="text-[#5C5C5C]"> · {project.platform}</span>
                   </span>
+                  <p className="sr-only">{project.description}</p>
                 </div>
 
-                <p className="col-span-2 col-start-1 row-start-2 min-w-0 self-center font-campton text-xs leading-relaxed text-[#5C5C5C] sm:col-span-1 sm:col-start-3 sm:row-start-1 sm:max-w-[475px] sm:text-sm sm:leading-relaxed">
-                  {project.description}
-                </p>
-
                 <span
-                  className={`col-span-2 col-start-1 row-start-3 flex shrink-0 items-center gap-0.5 self-center font-campton text-xs text-[#5C5C5C] opacity-80 transition-opacity group-hover:opacity-100 sm:col-span-1 sm:col-start-4 sm:row-start-1 ${project.titleHoverColor}`}
+                  className={`flex shrink-0 items-center gap-0.5 self-center font-campton text-xs text-[#5C5C5C] opacity-80 transition-opacity group-hover:opacity-100 ${project.titleHoverColor}`}
                 >
                   <span className="whitespace-nowrap">{project.cta}</span>
                   <ExternalLinkMarkIcon className="size-[18px] shrink-0 origin-center transition-transform duration-300 group-hover:rotate-45 sm:size-[23px]" />
                 </span>
+
+                <div className="pointer-events-none absolute top-1/2 right-3 z-20 w-[min(520px,68%)] -translate-y-1/2">
+                  <div
+                    aria-hidden
+                    className="vibe-preview overflow-hidden rounded-2xl border border-[#F0F0F0] bg-white shadow-[0_18px_50px_rgba(17,17,17,0.12)]"
+                  >
+                    <div className="flex w-[48%] shrink-0 items-center self-center">
+                      <img
+                        src={project.hero}
+                        alt=""
+                        className="h-auto w-full object-contain"
+                      />
+                    </div>
+                    <p className="flex items-center px-4 py-3.5 font-campton text-[13px] leading-5 text-[#5C5C5C]">
+                      {project.description}
+                    </p>
+                  </div>
+                </div>
               </a>
             </ProjectHoverZone>
             <div className="h-1 border-b border-[#D4D4D4] last:border-b-0" />

@@ -7,7 +7,15 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from 'framer-motion';
 
 type ProjectCursorContextValue = {
   enabled: boolean;
@@ -38,7 +46,47 @@ function isClickable(target: EventTarget | null) {
 const expandEase = { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const };
 const textEase = { duration: 0.12, ease: 'easeOut' as const };
 
+// Overdamped springs: each dot lags the ring without oscillating.
+const TRAIL = [
+  { stiffness: 90, damping: 22, mass: 0.6, size: 7, opacity: 0.42 },
+  { stiffness: 55, damping: 18, mass: 0.7, size: 5, opacity: 0.28 },
+  { stiffness: 34, damping: 16, mass: 0.8, size: 4, opacity: 0.16 },
+] as const;
+
+function TrailDot({
+  mouseX,
+  mouseY,
+  stiffness,
+  damping,
+  mass,
+  size,
+  opacity,
+}: {
+  mouseX: MotionValue<number>;
+  mouseY: MotionValue<number>;
+  stiffness: number;
+  damping: number;
+  mass: number;
+  size: number;
+  opacity: number;
+}) {
+  const x = useSpring(mouseX, { stiffness, damping, mass });
+  const y = useSpring(mouseY, { stiffness, damping, mass });
+  const transform = useTransform([x, y], ([latestX, latestY]) => {
+    return `translate3d(${latestX}px, ${latestY}px, 0) translate(-50%, -50%)`;
+  });
+
+  return (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none fixed top-0 left-0 z-[10040] rounded-full bg-[#E66001]"
+      style={{ transform, width: size, height: size, opacity }}
+    />
+  );
+}
+
 export function ProjectCursorProvider({ children }: { children: ReactNode }) {
+  const reduceMotion = useReducedMotion();
   const [enabled, setEnabled] = useState(false);
   const [visible, setVisible] = useState(false);
   const [hoveringClickable, setHoveringClickable] = useState(false);
@@ -62,8 +110,11 @@ export function ProjectCursorProvider({ children }: { children: ReactNode }) {
     const onMove = (event: MouseEvent) => {
       mouseX.set(event.clientX);
       mouseY.set(event.clientY);
-      setVisible(true);
-      setHoveringClickable(isClickable(event.target));
+      setVisible((current) => (current ? current : true));
+      const nextHover = isClickable(event.target);
+      setHoveringClickable((current) =>
+        current === nextHover ? current : nextHover
+      );
     };
 
     const onLeave = () => {
@@ -82,6 +133,16 @@ export function ProjectCursorProvider({ children }: { children: ReactNode }) {
   return (
     <ProjectCursorContext.Provider value={{ enabled }}>
       {children}
+      {enabled && visible && !reduceMotion
+        ? TRAIL.map((dot) => (
+            <TrailDot
+              key={dot.stiffness}
+              mouseX={mouseX}
+              mouseY={mouseY}
+              {...dot}
+            />
+          ))
+        : null}
       {enabled && visible ? (
         <motion.div
           aria-hidden

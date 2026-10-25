@@ -2,18 +2,18 @@ import Link from 'next/link';
 
 import { ArrowRight } from '@/components/icons/arrow-right-o';
 import VibeCodedProjects from '@/components/home/VibeCodedProjects';
+import WorkedWith from '@/components/home/WorkedWith';
 import ScreenMarquee from '@/components/home/ScreenMarquee';
 import InterswitchPhone from '@/components/home/InterswitchPhone';
 import EmprintePhone from '@/components/home/EmprintePhone';
 import PawaPhone from '@/components/home/PawaPhone';
 import ProfileStack from '@/components/home/ProfileStack';
-
 export default function HomeComponent() {
   return (
     <main className=" mt-[56px] sm:mt-[162px] min-h-screen bg-white  max-[700px]:max-w-[500px] md-w-full px-6 sm:px-0">
       <div className="flex flex-col">
         <div className="flex justify-between items-center w-full">
-          <div className="flex flex-col sm:gap-14 gap-8 md:w-[656px] sm:mb-[78px] mb-8 -mt-[10px]">
+            <div className="flex flex-col sm:gap-14 gap-8 md:w-[656px] mb-10 sm:mb-16 -mt-[10px]">
             <div className="flex min-h-[64px] w-full items-center gap-4">
               <h1 className="text-[40px] font-normal leading-[1.2] text-[#353F50] sm:text-[60px] sm:leading-normal md:text-[80px]">
                 Quadri Morin
@@ -58,6 +58,8 @@ export default function HomeComponent() {
             </div>
           </div>
         </div>
+
+        <WorkedWith />
 
         <div className="flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">
