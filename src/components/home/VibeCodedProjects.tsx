@@ -66,7 +66,7 @@ const projects: ProjectRow[] = [
     description:
       'I saw an opportunity to help Designers actively train their visual eye, so I built it. Design Gym helps designers sharpens their visual judgment through quick, side-by-side comparison rounds focused on the basic foundation of a good designs.',
     href: 'https://designgym.xyz',
-    cta: 'Open Design Gym',
+    cta: 'Open',
     hero: '/home/design-gym-live.jpg',
   },
   {
@@ -80,7 +80,7 @@ const projects: ProjectRow[] = [
     description:
       'Context-switching mid-design was often frustrating and killing my flow, so I built a solution. Reference Overlay keeps your reference images and PRD docs in a floating panel inside Figma, always visible, never blocking your canvas.',
     href: 'https://www.figma.com/community/plugin/1608990953292975108',
-    cta: 'Open Reference Overlay',
+    cta: 'Open',
     hero: '/articles/design-faster-smarter-with-reference-overlay-figma-plugin/cover.jpg',
   },
   {
@@ -94,7 +94,7 @@ const projects: ProjectRow[] = [
     description:
       'As a founding member of Emprinte Readers Hub, I led the design of the full product experience from concept to a live App Store launch, onboarding, core flows, and visual identity. Emprinte is building the largest reading community in Africa.',
     href: 'https://apps.apple.com/ng/app/emprinte/id6762211251',
-    cta: 'View Emprinte on the App Store',
+    cta: 'View',
     hero: '/home/emprinte-live.jpg',
   },
 ];
@@ -124,11 +124,11 @@ export default function VibeCodedProjects() {
 
                 <div className="min-w-0 self-center">
                   <h3
-                    className={`font-campton text-base font-medium lg:text-lg ${project.titleColor}`}
+                    className={`font-campton text-base font-medium whitespace-nowrap lg:text-lg ${project.titleColor}`}
                   >
                     {project.title}
                   </h3>
-                  <span className="mt-0.5 block font-campton text-[10px] text-[#5C5C5C] sm:text-[12px]">
+                  <span className="mt-0.5 block font-campton text-[10px] whitespace-nowrap text-[#5C5C5C] sm:text-[12px]">
                     {project.date}
                     <span className="text-[#5C5C5C]"> · {project.platform}</span>
                   </span>
