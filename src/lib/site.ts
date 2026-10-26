@@ -47,34 +47,44 @@ export const siteConfig = {
 } as const;
 
 export const portfolioRoutes = [
-  { path: '/', label: 'Quadmor' },
-  { path: '/product', label: 'Products' },
-  { path: '/graphics', label: 'Graphics' },
-  { path: '/gallery', label: 'Artworks' },
-  { path: '/articles', label: 'Articles' },
+  { path: '/', label: 'Quadmor', updated: '2026-10-26' },
+  { path: '/product', label: 'Products', updated: '2026-08-27' },
+  { path: '/graphics', label: 'Graphics', updated: '2026-08-27' },
+  { path: '/gallery', label: 'Artworks', updated: '2026-08-27' },
+  { path: '/articles', label: 'Articles', updated: '2026-10-20' },
 ] as const;
+
+export const exploreArtRoute = {
+  path: '/gallery/explore',
+  label: 'Explore artworks',
+  updated: '2026-08-27',
+} as const;
 
 export const caseStudyRoutes = [
   {
     path: '/product/pawa',
     label: 'Pawa',
+    updated: '2026-08-27',
   },
   {
     path: '/product/emprinte',
     label: 'Emprinte Readers Hub',
+    updated: '2026-08-27',
   },
   {
     path: '/product/changers',
     label: 'Changers Website Design',
+    updated: '2026-08-27',
   },
   {
     path: '/product/parking-companion',
     label: 'Parking Management Companion App',
+    updated: '2026-08-27',
   },
 ] as const;
 
 export const twentyIiRoutes = [
-  { path: '/twenty-ii', label: 'Twenty II' },
-  { path: '/twenty-ii/artworks', label: 'Artworks' },
-  { path: '/twenty-ii/artist', label: 'Artist' },
+  { path: '/twenty-ii', label: 'Twenty II', updated: '2026-09-11' },
+  { path: '/twenty-ii/artworks', label: 'Artworks', updated: '2026-08-27' },
+  { path: '/twenty-ii/artist', label: 'Artist', updated: '2026-08-27' },
 ] as const;

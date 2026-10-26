@@ -49,6 +49,34 @@ body {
   animation: breathing 2s ease-in-out infinite;
 }
 
+@keyframes clip-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.clip-in {
+  animation: clip-in 280ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes pin-set {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pin-set {
+  animation: pin-set 280ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
 /* Soft rightward screen strip under vibe-coded projects */
 @keyframes screen-marquee-right {
   from {
@@ -68,6 +96,10 @@ body {
   .screen-marquee {
     animation: none;
     transform: translate3d(0, 0, 0);
+  }
+
+  .pin-set {
+    animation: clip-in 280ms cubic-bezier(0.23, 1, 0.32, 1) both;
   }
 }
 

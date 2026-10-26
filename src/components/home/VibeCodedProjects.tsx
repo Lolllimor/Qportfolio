@@ -103,7 +103,7 @@ export default function VibeCodedProjects() {
   return (
     <div className="flex w-full min-w-0 flex-col max-w-[845px] xl:max-w-full">
       <h2 className="font-garamond text-2xl font-medium text-[#353F50] sm:text-3xl">
-        Top Vibe coded projects
+        Things I built
       </h2>
       <p className="mt-1 font-campton text-sm leading-relaxed text-[#5C5C5C] sm:text-base">
         Things I got tired of waiting for someone else to build.

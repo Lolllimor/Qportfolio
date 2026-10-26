@@ -198,23 +198,48 @@ export async function getArtwork(id: string): Promise<Artwork | null> {
   return transformArtwork(response.data[0]);
 }
 
+function artworkLastModified(artwork: Artwork): Date {
+  const candidates = [artwork.updatedAt, artwork.publishedAt, artwork.Date];
+  for (const candidate of candidates) {
+    const parsed = new Date(candidate as unknown as string | Date);
+    if (!Number.isNaN(parsed.getTime())) return parsed;
+  }
+  return new Date('2024-01-01T00:00:00.000Z');
+}
+
+async function getAllArtworks(): Promise<Artwork[]> {
+  const { artworks, pagination } = await getArtworks(1, 100);
+  const all = [...artworks];
+  if (pagination && pagination.pageCount > 1) {
+    for (let page = 2; page <= pagination.pageCount; page += 1) {
+      const next = await getArtworks(page, 100);
+      all.push(...next.artworks);
+    }
+  }
+  return all;
+}
+
 export async function getAllArtworkIds(): Promise<string[]> {
   try {
-    const { artworks, pagination } = await getArtworks(1, 100);
-    const ids = artworks
+    const artworks = await getAllArtworks();
+    return artworks
       .map((artwork) => artwork.documentId || String(artwork.id))
       .filter(Boolean);
-    if (pagination && pagination.pageCount > 1) {
-      for (let page = 2; page <= pagination.pageCount; page += 1) {
-        const next = await getArtworks(page, 100);
-        ids.push(
-          ...next.artworks
-            .map((artwork) => artwork.documentId || String(artwork.id))
-            .filter(Boolean)
-        );
-      }
-    }
-    return ids;
+  } catch {
+    return [];
+  }
+}
+
+export async function getArtworkSitemapEntries(): Promise<
+  { id: string; updatedAt: Date }[]
+> {
+  try {
+    const artworks = await getAllArtworks();
+    return artworks.flatMap((artwork) => {
+      const id = artwork.documentId || String(artwork.id);
+      if (!id) return [];
+      return [{ id, updatedAt: artworkLastModified(artwork) }];
+    });
   } catch {
     return [];
   }

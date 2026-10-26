@@ -8,7 +8,7 @@ export type ArticleMeta = {
   displayDate: string;
   description: string;
   mediumUrl?: string;
-  /** False when this site is the original and Medium is the copy. */
+  /** True only when Medium is the original and this page is the copy. */
   mediumFirst?: boolean;
   cover: string;
   coverAlt: string;
@@ -25,7 +25,6 @@ export const articles: ArticleMeta[] = [
       'A power user couldn’t find a feature I thought was obvious. That gap is the Illusion of Transparency, and knowing the bias doesn’t protect you from it.',
     mediumUrl:
       'https://medium.com/@quadmor009/the-illusion-of-transparency-in-design-and-how-to-overcome-it-2e2688cd6cc9',
-    mediumFirst: false,
     cover:
       '/articles/the-illusion-of-transparency-in-design-and-how-to-overcome-it/cover.jpg',
     coverAlt:
