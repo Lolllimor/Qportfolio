@@ -2,11 +2,15 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 import { ProjectHoverZone } from '@/components/common/ProjectCursor';
+import { CaseStudyGate } from '@/components/product/CaseStudyGate';
 import { CaseStudyCardProps } from '@/types';
 import { DotIcon } from '../icons/dot';
 import { ArrowRight } from '../icons/arrow-right-o';
+
+const PRIVATE_STUDY = '/product/parking-companion';
 
 export const CaseStudyCard = ({
   caseStudy,
@@ -26,6 +30,13 @@ export const CaseStudyCard = ({
     imageClass = 'w-full h-auto rounded-2xl',
     specialImageRender = false,
   } = caseStudy;
+  const [locked, setLocked] = useState(false);
+  const isPrivate = url === PRIVATE_STUDY;
+  const openLock = (event: { preventDefault: () => void }) => {
+    if (!isPrivate) return;
+    event.preventDefault();
+    setLocked(true);
+  };
 
   const layoutClass = reverseLayout
     ? 'flex flex-col lg:flex-row-reverse items-center gap-6 lg:gap-[38px]'
@@ -90,6 +101,7 @@ export const CaseStudyCard = ({
               <ProjectHoverZone>
                 <Link
                   href={url}
+                  onClick={openLock}
                   className="group flex min-h-11 items-center gap-2 font-campton text-base font-normal leading-tight text-[#353F50] uppercase hover:text-[#E66001]"
                 >
                   {linkText}
@@ -123,7 +135,7 @@ export const CaseStudyCard = ({
       {url ? (
         url.startsWith('/') ? (
           <ProjectHoverZone>
-            <Link href={url} className="block no-underline">
+            <Link href={url} onClick={openLock} className="block no-underline">
               {imageBlock}
             </Link>
           </ProjectHoverZone>
@@ -142,6 +154,9 @@ export const CaseStudyCard = ({
       ) : (
         imageBlock
       )}
+      {isPrivate ? (
+        <CaseStudyGate open={locked} onClose={() => setLocked(false)} />
+      ) : null}
     </div>
   );
 };

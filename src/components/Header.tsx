@@ -8,12 +8,13 @@ import { LinkedInIcon } from './icons/inactive/header/LinkedInIcon';
 import { BehanceIcon } from './icons/inactive/header/BehanceIcon';
 import { GitHubIcon } from './icons/inactive/header/GitHubIcon';
 import { hoverArcDotStyle, useHoverArcDot } from '@/hooks/useHoverArcDot';
+import { siteConfig } from '@/lib/site';
 
 const links = [
   {
     key: 'email',
     label: 'Email',
-    href: 'mailto:quadrimorin@gmail.com',
+    href: `mailto:${siteConfig.email}`,
     Icon: EmailIcon,
   },
   {

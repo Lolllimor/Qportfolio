@@ -7,7 +7,9 @@ import ScreenMarquee from '@/components/home/ScreenMarquee';
 import InterswitchPhone from '@/components/home/InterswitchPhone';
 import EmprintePhone from '@/components/home/EmprintePhone';
 import PawaPhone from '@/components/home/PawaPhone';
-import LatestArticleClip from '@/components/home/LatestArticleClip';
+import LatestArticleClip, {
+  LatestArticleBanner,
+} from '@/components/home/LatestArticleClip';
 import ProfileStack from '@/components/home/ProfileStack';
 export default function HomeComponent() {
   return (
@@ -15,15 +17,12 @@ export default function HomeComponent() {
       <div className="flex flex-col">
         <div className="relative mb-10 w-full sm:mb-16">
             <div className="-mt-[10px] flex w-full min-w-0 max-w-full flex-col gap-8 sm:gap-14 md:w-[656px]">
-            <div className="flex min-h-[64px] w-full min-w-0 flex-wrap items-center gap-4 lg:flex-nowrap">
-              <h1 className="text-[40px] font-normal leading-[1.2] text-[#353F50] sm:text-[60px] sm:leading-normal md:text-[80px]">
+            <div className="flex min-h-[64px] w-full min-w-0 flex-nowrap items-center gap-3 sm:gap-4">
+              <h1 className="min-w-0 whitespace-nowrap text-[34px] font-normal leading-[1.2] text-[#353F50] min-[360px]:text-[40px] sm:text-[60px] sm:leading-normal md:text-[80px]">
                 Quadri Morin
                 <span className="sr-only">, Product & UX Designer</span>
               </h1>
               <ProfileStack />
-            </div>
-            <div className="flex w-full justify-end pr-8 lg:hidden">
-              <LatestArticleClip />
             </div>
 
             <div className="group flex max-w-full flex-col gap-4 font-campton sm:max-w-[500px] sm:gap-2.5 md:max-w-full">
@@ -64,6 +63,10 @@ export default function HomeComponent() {
             <div className="absolute top-1 right-1 hidden lg:block">
               <LatestArticleClip />
             </div>
+        </div>
+
+        <div className="lg:hidden">
+          <LatestArticleBanner />
         </div>
 
         <WorkedWith />

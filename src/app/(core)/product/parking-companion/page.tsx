@@ -1,5 +1,9 @@
+import { cookies } from 'next/headers';
+
 import { ParkingCompanionStudy } from '@/components/product/ParkingCompanionStudy';
+import { LockedStudy } from '@/components/product/CaseStudyGate';
 import { JsonLd } from '@/components/JsonLd';
+import { hasStudyAccess, INTERSWITCH_STUDY_COOKIE } from '@/lib/caseStudyGate';
 import {
   breadcrumbJsonLd,
   caseStudyJsonLd,
@@ -12,14 +16,24 @@ const TITLE = 'Parking Management Companion App';
 const DESCRIPTION =
   'Usability research and redesign of the Quickteller parking companion app. 14 participants over 7 weeks. Score moved from 7.3 to 9.4.';
 
-export const metadata = createPageMetadata({
-  title: TITLE,
-  description: DESCRIPTION,
-  path: PATH,
-  type: 'article',
-});
+export const metadata = {
+  ...createPageMetadata({
+    title: TITLE,
+    description: DESCRIPTION,
+    path: PATH,
+    type: 'article',
+  }),
+  robots: { index: false, follow: false },
+};
 
-export default function ParkingCompanionPage() {
+export default async function ParkingCompanionPage() {
+  const jar = await cookies();
+  const unlocked = hasStudyAccess(jar.get(INTERSWITCH_STUDY_COOKIE)?.value);
+
+  if (!unlocked) {
+    return <LockedStudy />;
+  }
+
   return (
     <>
       <JsonLd

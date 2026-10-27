@@ -36,12 +36,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   };
 
-  const caseStudyEntries = caseStudyRoutes.map(({ path, updated }) => ({
-    url: getCanonicalUrl(path),
-    lastModified: new Date(updated),
-    changeFrequency: 'monthly' as const,
-    priority: 0.75,
-  }));
+  const caseStudyEntries = caseStudyRoutes
+    .filter((route) => !('private' in route && route.private))
+    .map(({ path, updated }) => ({
+      url: getCanonicalUrl(path),
+      lastModified: new Date(updated),
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
+    }));
 
   const twentyIiEntries = twentyIiRoutes.map(({ path, updated }) => ({
     url: getCanonicalUrl(path),

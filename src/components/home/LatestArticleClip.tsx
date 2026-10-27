@@ -3,6 +3,16 @@ import Link from 'next/link';
 
 import { articles } from '@/lib/articles';
 
+function fullDate(iso: string) {
+  const [year, month, day] = iso.split('-').map(Number);
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
 function Pushpin() {
   const id = useId().replace(/:/g, '');
 
@@ -36,6 +46,31 @@ function Pushpin() {
   );
 }
 
+export function LatestArticleBanner() {
+  const article = articles[0];
+  if (!article) return null;
+
+  return (
+    <Link
+      href={`/articles/${article.slug}`}
+      data-cursor-normal
+      className="mb-8 flex w-full flex-col gap-1 rounded-xl border border-[#F0F0F0] bg-[#FFFCF7] px-4 py-3.5 no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E66001]"
+    >
+      <span className="flex items-center justify-between gap-3">
+        <span className="font-campton text-[11px] leading-none text-[#E66001]">
+          Latest Article
+        </span>
+        <span className="font-campton text-[11px] leading-none text-[#8A8F98]">
+          {fullDate(article.date)}
+        </span>
+      </span>
+      <span className="font-garamond text-lg leading-snug text-[#353F50]">
+        {article.title}
+      </span>
+    </Link>
+  );
+}
+
 export default function LatestArticleClip() {
   const article = articles[0];
   if (!article) return null;
@@ -53,7 +88,7 @@ export default function LatestArticleClip() {
           Latest Article
         </span>
         <span className="mt-2 font-campton text-[11px] leading-none text-[#8A8F98]">
-          {article.displayDate}
+          {fullDate(article.date)}
         </span>
         <span className="mt-2.5 line-clamp-5 font-garamond text-[17px] leading-snug text-[#353F50] sm:text-lg">
           {article.title}

@@ -36,7 +36,7 @@ export const siteConfig = {
     'Product and UX designer working across fintech, ed-tech, AI tools, and social-impact products. Case studies and articles on craft, AI, and UX.',
   url: normalizeSiteOrigin(process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL),
   ogImage: '/opengraph-image',
-  email: 'quadrimorin@gmail.com',
+  email: 'quadmor009@gmail.com',
   links: {
     linkedin: 'https://www.linkedin.com/in/quadmor/',
     behance: 'https://www.behance.net/quadrimorin',
@@ -80,6 +80,7 @@ export const caseStudyRoutes = [
     path: '/product/parking-companion',
     label: 'Parking Management Companion App',
     updated: '2026-08-27',
+    private: true,
   },
 ] as const;
 

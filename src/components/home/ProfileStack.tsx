@@ -65,11 +65,14 @@ export default function ProfileStack() {
         ? 'folded'
         : stackState;
 
+  const spread = activeState === 'open' ? OPEN_GAP : FOLDED_GAP;
+  const stackWidth = 40 + (profileImages.length - 1) * spread;
+
   return (
     <motion.div
-      className="relative h-[64px] w-[136px] cursor-pointer"
-      initial={{ opacity: 0, x: 24 }}
-      animate={{ opacity: 1, x: 0 }}
+      className="relative h-[64px] shrink-0 cursor-pointer"
+      initial={{ opacity: 0, x: 24, width: stackWidth }}
+      animate={{ opacity: 1, x: 0, width: stackWidth }}
       transition={{ duration: 0.5, ease: EASE }}
       onMouseEnter={() => introDone && setHovered(true)}
       onMouseLeave={() => setHovered(false)}

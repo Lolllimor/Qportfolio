@@ -1,8 +1,10 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ProjectHoverZone } from '@/components/common/ProjectCursor';
+import { CaseStudyGate } from '@/components/product/CaseStudyGate';
 import { useIsLargeScreen } from '@/hooks/useIsLargeScreen';
 
 const MotionImage = motion.create(Image);
@@ -10,12 +12,17 @@ const MotionLink = motion.create(Link);
 
 export default function InterswitchPhone() {
   const isLargeScreen = useIsLargeScreen();
+  const [locked, setLocked] = useState(false);
 
   return (
     <div className="flex flex-col items-center gap-2 lg:w-auto w-full">
       <ProjectHoverZone>
         <MotionLink
           href="/product/parking-companion"
+          onClick={(event) => {
+            event.preventDefault();
+            setLocked(true);
+          }}
           whileHover={isLargeScreen ? 'hover' : undefined}
           initial="initial"
           className="group cursor-pointer xl:w-[333px] xl:h-[472px] lg:w-[284px] lg:h-[384px] w-full h-[320px] rounded-lg relative overflow-hidden flex justify-center"
@@ -83,6 +90,7 @@ export default function InterswitchPhone() {
           Usability Research · Payment · A/B Testing
         </div>
       </div>
+      <CaseStudyGate open={locked} onClose={() => setLocked(false)} />
     </div>
   );
 }
