@@ -31,10 +31,10 @@ const motionSlides = [
     media: 'video' as const,
   },
   {
-    imageSrc: '/home/motion/frost-shrink.mp4',
-    imageAlt: 'Frost shrinking on Pay',
+    imageSrc: '/home/motion/upload.gif',
+    imageAlt: 'Upload button',
     title: 'Interaction',
-    media: 'video' as const,
+    media: 'gif' as const,
   },
 ];
 
@@ -46,7 +46,7 @@ const slideOrder = [
   '/screens/pink-aura.png',
   '/screens/frame-4617.png',
   '/screens/frame-4620.png',
-  '/home/motion/frost-shrink.mp4',
+  '/home/motion/upload.gif',
   '/screens/frame-4615.png',
   '/screens/frame-4825543.png',
   '/home/motion/pay-button.gif',
