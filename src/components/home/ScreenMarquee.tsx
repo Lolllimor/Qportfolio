@@ -7,34 +7,34 @@ import { screens } from '@/components/data';
 
 const motionSlides = [
   {
-    imageSrc: '/home/motion/pay-button.gif',
+    imageSrc: '/home/motion/pay-button.mp4',
     imageAlt: 'Pay button',
     title: 'Interaction',
-    media: 'gif' as const,
+    fit: 'contain' as const,
   },
   {
-    imageSrc: '/home/motion/pay-roll.gif',
+    imageSrc: '/home/motion/pay-roll.mp4',
     imageAlt: 'Pay button rolling away',
     title: 'Interaction',
-    media: 'gif' as const,
+    fit: 'contain' as const,
   },
   {
-    imageSrc: '/home/motion/pay-melt.gif',
+    imageSrc: '/home/motion/pay-melt.mp4',
     imageAlt: 'Pay button melting',
     title: 'Interaction',
-    media: 'gif' as const,
+    fit: 'contain' as const,
   },
   {
     imageSrc: '/home/motion/frost-grow.mp4',
     imageAlt: 'Frost growing on Pay',
     title: 'Interaction',
-    media: 'video' as const,
+    fit: 'cover' as const,
   },
   {
-    imageSrc: '/home/motion/upload.gif',
+    imageSrc: '/home/motion/upload.mp4',
     imageAlt: 'Upload button',
     title: 'Interaction',
-    media: 'gif' as const,
+    fit: 'contain' as const,
   },
 ];
 
@@ -42,18 +42,18 @@ const slideOrder = [
   '/home/motion/frost-grow.mp4',
   '/screens/frame-4627.png',
   '/screens/frame-4623.png',
-  '/home/motion/pay-melt.gif',
+  '/home/motion/pay-melt.mp4',
   '/screens/pink-aura.png',
   '/screens/frame-4617.png',
   '/screens/frame-4620.png',
-  '/home/motion/upload.gif',
+  '/home/motion/upload.mp4',
   '/screens/frame-4615.png',
   '/screens/frame-4825543.png',
-  '/home/motion/pay-button.gif',
+  '/home/motion/pay-button.mp4',
   '/screens/frame-4614.png',
   '/screens/frame-2095586295.png',
   '/screens/screenshot-2026-05-10.png',
-  '/home/motion/pay-roll.gif',
+  '/home/motion/pay-roll.mp4',
   '/screens/frame-4626.png',
   '/screens/frame-4619.png',
   '/screens/frame-4616.png',
@@ -80,6 +80,20 @@ export default function ScreenMarquee() {
     null
   );
   const [trackHeight, setTrackHeight] = useState(0);
+  const [playMotion, setPlayMotion] = useState(false);
+
+  useLayoutEffect(() => {
+    const shell = shellRef.current;
+    if (!shell) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) setPlayMotion(true);
+      },
+      { rootMargin: '400px 0px' },
+    );
+    observer.observe(shell);
+    return () => observer.disconnect();
+  }, []);
 
   useLayoutEffect(() => {
     const sync = () => {
@@ -154,25 +168,29 @@ export default function ScreenMarquee() {
             >
               <div
                 className={`relative h-[200px] w-full overflow-hidden rounded-xl sm:h-[260px] md:h-[300px] ${
-                  'media' in screen ? 'bg-[#F6F5F1]' : 'bg-[#E8E8E8]/80'
+                  'fit' in screen ? 'bg-[#F6F5F1]' : 'bg-[#E8E8E8]/80'
                 }`}
               >
-                {'media' in screen && screen.media === 'video' ? (
+                {'fit' in screen ? (
                   <video
-                    src={screen.imageSrc}
+                    src={playMotion ? screen.imageSrc : undefined}
                     aria-label={screen.imageAlt}
                     muted
                     playsInline
                     loop
-                    autoPlay
-                    preload="metadata"
-                    className="h-full w-full object-cover"
-                  />
-                ) : 'media' in screen && screen.media === 'gif' ? (
-                  <img
-                    src={screen.imageSrc}
-                    alt={screen.imageAlt}
-                    className="h-full w-full object-contain"
+                    autoPlay={playMotion}
+                    preload={playMotion ? 'metadata' : 'none'}
+                    onPlay={(event) => {
+                      if (
+                        window.matchMedia('(prefers-reduced-motion: reduce)')
+                          .matches
+                      ) {
+                        event.currentTarget.pause();
+                      }
+                    }}
+                    className={`h-full w-full ${
+                      screen.fit === 'cover' ? 'object-cover' : 'object-contain'
+                    }`}
                   />
                 ) : (
                   <Image
