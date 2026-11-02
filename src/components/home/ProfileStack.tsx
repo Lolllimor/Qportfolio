@@ -5,15 +5,15 @@ import { motion } from 'framer-motion';
 
 const profileImages = [
   {
-    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LYPLKCpofS2I805isUVR9oqgHn1AxXKTBwpOQ',
+    src: '/profile/quadri-1.png',
     alt: 'Quadri Morin, product designer — portrait',
   },
   {
-    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0L9BUQtWRV0IcDOVBPZeanA1YxTq5zwSf6bmHC',
+    src: '/profile/quadri-2.png',
     alt: 'Quadri Morin — close-up portrait',
   },
   {
-    src: 'https://6k5tmago9w.ufs.sh/f/HFzCBJpycq0LeEwdXoEiS0sOMNfCv9l5IEQRXhinyBV8dptT',
+    src: '/profile/quadri-3.png',
     alt: 'Quadri Morin — profile photo',
   },
 ];
