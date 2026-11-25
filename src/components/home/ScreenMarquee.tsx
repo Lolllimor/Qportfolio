@@ -5,6 +5,23 @@ import { useLayoutEffect, useRef, useState } from 'react';
 
 import { screens } from '@/components/data';
 
+const gifSlides = [
+  {
+    imageSrc: '/home/motion/coin.gif',
+    imageAlt: 'Instant Payouts',
+    title: 'Fintech',
+    fit: 'contain' as const,
+    background: '#EFE2CF',
+  },
+  {
+    imageSrc: '/home/motion/status.gif',
+    imageAlt: 'Status states',
+    title: 'Interaction',
+    fit: 'contain' as const,
+    background: '#FFFFFF',
+  },
+];
+
 const motionSlides = [
   {
     imageSrc: '/home/motion/pay-button.mp4',
@@ -39,31 +56,34 @@ const motionSlides = [
 ];
 
 const slideOrder = [
-  '/home/motion/frost-grow.mp4',
-  '/screens/frame-4627.png',
-  '/screens/frame-4623.png',
+  '/home/motion/coin.gif',
+  '/screens/frame-4617.png',
+  '/home/motion/status.gif',
+  '/screens/frame-4620.png',
   '/home/motion/pay-melt.mp4',
   '/screens/pink-aura.png',
-  '/screens/frame-4617.png',
-  '/screens/frame-4620.png',
+  '/screens/frame-2095586295.png',
   '/home/motion/upload.mp4',
   '/screens/frame-4615.png',
-  '/screens/frame-4825543.png',
-  '/home/motion/pay-button.mp4',
-  '/screens/frame-4614.png',
-  '/screens/frame-2095586295.png',
+  '/screens/frame-4627.png',
   '/screens/screenshot-2026-05-10.png',
-  '/home/motion/pay-roll.mp4',
+  '/home/motion/frost-grow.mp4',
   '/screens/frame-4626.png',
   '/screens/frame-4619.png',
+  '/home/motion/pay-button.mp4',
   '/screens/frame-4616.png',
+  '/screens/frame-4623.png',
+  '/home/motion/pay-roll.mp4',
+  '/screens/cede.png',
   '/screens/frame-4621.png',
   '/screens/frame-4618.png',
-  '/screens/cede.png',
 ];
 
 const slidesBySrc = new Map(
-  [...motionSlides, ...screens].map((slide) => [slide.imageSrc, slide])
+  [...gifSlides, ...motionSlides, ...screens].map((slide) => [
+    slide.imageSrc,
+    slide,
+  ])
 );
 const slides = slideOrder.map((src) => {
   const slide = slidesBySrc.get(src);
@@ -168,10 +188,32 @@ export default function ScreenMarquee() {
             >
               <div
                 className={`relative h-[200px] w-full overflow-hidden rounded-xl sm:h-[260px] md:h-[300px] ${
-                  'fit' in screen ? 'bg-[#F6F5F1]' : 'bg-[#E8E8E8]/80'
+                  'background' in screen
+                    ? ''
+                    : screen.imageSrc.endsWith('.mp4') ||
+                        screen.imageSrc.endsWith('.gif')
+                      ? 'bg-[#F6F5F1]'
+                      : 'bg-[#E8E8E8]/80'
                 }`}
+                style={
+                  'background' in screen
+                    ? { backgroundColor: screen.background }
+                    : undefined
+                }
               >
-                {'fit' in screen ? (
+                {screen.imageSrc.endsWith('.gif') ? (
+                  // Plain img so the browser plays the GIF. next/image flattens it.
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={playMotion ? screen.imageSrc : undefined}
+                    alt={screen.imageAlt}
+                    className={`h-full w-full ${
+                      'fit' in screen && screen.fit === 'cover'
+                        ? 'object-cover'
+                        : 'object-contain'
+                    }`}
+                  />
+                ) : screen.imageSrc.endsWith('.mp4') ? (
                   <video
                     src={playMotion ? screen.imageSrc : undefined}
                     aria-label={screen.imageAlt}
@@ -198,7 +240,11 @@ export default function ScreenMarquee() {
                     alt={screen.imageAlt}
                     fill
                     sizes="480px"
-                    className="object-cover object-top"
+                    className={
+                      'fit' in screen && screen.fit === 'contain'
+                        ? 'object-contain'
+                        : 'object-cover object-top'
+                    }
                     loading="lazy"
                   />
                 )}
