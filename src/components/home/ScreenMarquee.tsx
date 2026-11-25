@@ -181,25 +181,29 @@ export default function ScreenMarquee() {
         }
       >
         <div className="screen-marquee flex w-max gap-4 sm:gap-5">
-          {strip.map((screen, index) => (
+          {strip.map((screen, index) => {
+            const background =
+              'background' in screen && typeof screen.background === 'string'
+                ? screen.background
+                : undefined;
+            const fit =
+              'fit' in screen && screen.fit === 'contain' ? 'contain' : 'cover';
+
+            return (
             <div
               key={`${screen.imageSrc}-${index}`}
               className="flex w-[320px] shrink-0 flex-col gap-2 sm:w-[420px] md:w-[480px]"
             >
               <div
                 className={`relative h-[200px] w-full overflow-hidden rounded-xl sm:h-[260px] md:h-[300px] ${
-                  'background' in screen
+                  background
                     ? ''
                     : screen.imageSrc.endsWith('.mp4') ||
                         screen.imageSrc.endsWith('.gif')
                       ? 'bg-[#F6F5F1]'
                       : 'bg-[#E8E8E8]/80'
                 }`}
-                style={
-                  'background' in screen
-                    ? { backgroundColor: screen.background }
-                    : undefined
-                }
+                style={background ? { backgroundColor: background } : undefined}
               >
                 {screen.imageSrc.endsWith('.gif') ? (
                   // Plain img so the browser plays the GIF. next/image flattens it.
@@ -208,9 +212,7 @@ export default function ScreenMarquee() {
                     src={playMotion ? screen.imageSrc : undefined}
                     alt={screen.imageAlt}
                     className={`h-full w-full ${
-                      'fit' in screen && screen.fit === 'cover'
-                        ? 'object-cover'
-                        : 'object-contain'
+                      fit === 'cover' ? 'object-cover' : 'object-contain'
                     }`}
                   />
                 ) : screen.imageSrc.endsWith('.mp4') ? (
@@ -231,7 +233,7 @@ export default function ScreenMarquee() {
                       }
                     }}
                     className={`h-full w-full ${
-                      screen.fit === 'cover' ? 'object-cover' : 'object-contain'
+                      fit === 'cover' ? 'object-cover' : 'object-contain'
                     }`}
                   />
                 ) : (
@@ -241,7 +243,7 @@ export default function ScreenMarquee() {
                     fill
                     sizes="480px"
                     className={
-                      'fit' in screen && screen.fit === 'contain'
+                      fit === 'contain'
                         ? 'object-contain'
                         : 'object-cover object-top'
                     }
@@ -258,7 +260,8 @@ export default function ScreenMarquee() {
                 </p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
